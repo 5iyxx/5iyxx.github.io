@@ -125,7 +125,9 @@
 <meta property="og:image" content="http://yoursite.com/images/mysql/mysql_timehanshu.png">
 <meta property="og:image" content="http://yoursite.com/images/mysql/mysql_timeq.png">
 <meta property="og:image" content="http://yoursite.com/images/mysql/mysql_xq.png">
-<meta property="og:updated_time" content="2017-02-20T10:11:56.097Z">
+<meta property="og:image" content="http://yoursite.com/images/mysql/mysql_timedate.png">
+<meta property="og:image" content="http://yoursite.com/images/mysql/mysql_caozuoriqi.png">
+<meta property="og:updated_time" content="2017-02-20T11:08:11.681Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL数据库应用从入门到精通">
 <meta name="twitter:description" content="最近在看《MySQL数据库应用从入门到精通》这本书是基于MySQL5.5版本的，下面是看书过程记录下来的笔记。">
@@ -592,6 +594,7 @@
 <h4 id="使用日期和时间函数"><a href="#使用日期和时间函数" class="headerlink" title="使用日期和时间函数"></a>使用日期和时间函数</h4><p>常用的时间日期函数：<br><img src="/images/mysql/mysql_timehanshu.png" alt=""></p>
 <h5 id="获取当前时间"><a href="#获取当前时间" class="headerlink" title="获取当前时间"></a>获取当前时间</h5><p><strong>当前时间</strong><br><code>NOW(),CURRENT_TIMESTAMP(),LOCALTIME(),SYSDATE();</code>2017-03-20 17:38:50<br><code>CURDATE(),CURRENT_DATE();</code>2017-05-02<br><code>CURTIME(),CURRENT_TIME();</code>16:29:59<br><code>UNIX_TIMESTAMP(NOW());</code>unix格式，可以不用参数表示当前时间，从1970年1月1号开始计算，以秒为单位。<br><code>FROM_UNIXTIME(UNIX_TIMESTAMP(NOW()));</code>把NUIX格式转换为普通格式同NOW()格式。<br><code>UTC_DATE();</code>UTC日期 2012-05-22<br><code>UTC_TIME();</code>UTC时间 13:00:01</p>
 <p><strong>获取时间和日期的各个部分</strong><br>获取时间和日期的各个部分的功能如下：<br><img src="/images/mysql/mysql_timeq.png" alt=""><br>关于月份：<br><code>MONTH(NOW());</code>月<br><code>MONTHNAME(NOW());</code>月<br>关于星期：<br><img src="/images/mysql/mysql_xq.png" alt=""><br>关于天的函数：<br><code>DAYOFYEAR(NOW());</code>年中第几天<br><code>DAYOFMONTH(NOW());</code>月中第几天<br><strong>获取指定值得EXTRACT()函数</strong><br><code>EXTRACT(tye FROM date);</code>函数会从时间和日期参数中获取指定类型type的值。关于type参数的值可以是YEAR、MONTH、DAY、HOUR、MINUTE和SECOND。</p>
+<p><strong>计算日期和时间函数</strong><br><code>TO_DAYS(date);</code>从0000年1月1日开始算起多少天。<br><code>FROM_DAYS(TO_DAYS(NOW()));</code>一段时间后日期和时间。<br><code>DATEDIFF(DATE1,DATE2);</code>日期参数之间的相隔天数。<br><code>ADDTIME(DATE,n);</code>date加上n秒后的时间。<br><code>SUBTIME(DATE,n);</code>date减上n秒后的时间。<br><code>ADDDATE(DATE,n);</code>date加上n天后的日期。<br><code>SUBDATE(DATE,n);</code>date减上n天后的日期。<br>关于ADDDATE()和SUBDATE()函数另外用法：<br><code>ADDDATE(d,INTERVAL expr type);</code>日期d加上一段时间后的日期，expr决定时间的长度，type决定了操作对象。<br><code>SUBDATE(d,INTERVAL expr type);</code>日期d减去一段时间后的日期，expr决定时间的长度，type决定了操作对象。<br>参数type类型：<br><img src="/images/mysql/mysql_timedate.png" alt=""><br>例子如下：<br><img src="/images/mysql/mysql_caozuoriqi.png" alt=""></p>
 
       
     </div>
