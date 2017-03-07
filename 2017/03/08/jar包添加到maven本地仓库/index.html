@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Mybatis," />
+  <meta name="keywords" content="blog," />
 
 
 
@@ -87,16 +87,16 @@
 
 
 
-<meta name="description" content="初学mybatis。">
+<meta name="description" content="maven在应用的过程中，有 maven在应用的过程中，有些jar包在仓库上面是没法找到的，这需要我们自己手动导入到仓库中，些jar包在仓库上面是没法找到的，这需要我们自己手动导入到仓库中。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mybatis">
-<meta property="og:url" content="http://yoursite.com/2017/02/12/Mybatis入门/index.html">
+<meta property="og:title" content="jar包添加到maven本地仓库">
+<meta property="og:url" content="http://yoursite.com/2017/03/08/jar包添加到maven本地仓库/index.html">
 <meta property="og:site_name" content="5IYXX">
-<meta property="og:description" content="初学mybatis。">
-<meta property="og:updated_time" content="2017-02-22T10:46:11.101Z">
+<meta property="og:description" content="maven在应用的过程中，有 maven在应用的过程中，有些jar包在仓库上面是没法找到的，这需要我们自己手动导入到仓库中，些jar包在仓库上面是没法找到的，这需要我们自己手动导入到仓库中。">
+<meta property="og:updated_time" content="2017-03-07T17:29:04.218Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mybatis">
-<meta name="twitter:description" content="初学mybatis。">
+<meta name="twitter:title" content="jar包添加到maven本地仓库">
+<meta name="twitter:description" content="maven在应用的过程中，有 maven在应用的过程中，有些jar包在仓库上面是没法找到的，这需要我们自己手动导入到仓库中，些jar包在仓库上面是没法找到的，这需要我们自己手动导入到仓库中。">
 
 
 
@@ -124,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/02/12/Mybatis入门/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/03/08/jar包添加到maven本地仓库/"/>
 
 
 
 
 
-  <title> Mybatis | 5IYXX </title>
+  <title> jar包添加到maven本地仓库 | 5IYXX </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="">
@@ -267,7 +267,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/12/Mybatis入门/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/08/jar包添加到maven本地仓库/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Eric Chen">
@@ -291,7 +291,7 @@
             
             
               
-                Mybatis
+                jar包添加到maven本地仓库
               
             
           </h1>
@@ -306,8 +306,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-12T21:02:25+08:00">
-                2017-02-12
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-08T00:33:00+08:00">
+                2017-03-08
               </time>
             
 
@@ -329,8 +329,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mybatis/" itemprop="url" rel="index">
-                    <span itemprop="name">Mybatis</span>
+                  <a href="/categories/maven/" itemprop="url" rel="index">
+                    <span itemprop="name">maven</span>
                   </a>
                 </span>
 
@@ -347,8 +347,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/02/12/Mybatis入门/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/02/12/Mybatis入门/" itemprop="commentCount"></span>
+                <a href="/2017/03/08/jar包添加到maven本地仓库/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/03/08/jar包添加到maven本地仓库/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -374,21 +374,21 @@
       
 
       
-        <p>   初学mybatis。</p>
+        <p> maven在应用的过程中，有 maven在应用的过程中，有些jar包在仓库上面是没法找到的，这需要我们自己手动导入到仓库中，些jar包在仓库上面是没法找到的，这需要我们自己手动导入到仓库中。</p>
 <a id="more"></a>
-<h2 id="SqlSession"><a href="#SqlSession" class="headerlink" title="SqlSession"></a>SqlSession</h2><p>SqlSession的作用：</p>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>zxing-3.21.jar是根据github上面项目<a href="https://github.com/zxing" target="_blank" rel="external">ZXing Project</a>自己生成的jar包，该包主要应用于二维码生成，下面讲述怎么把怎么把zxing-3.21.jar添加到本地的maven仓库中。</p>
+<h3 id="环境要求"><a href="#环境要求" class="headerlink" title="环境要求"></a>环境要求</h3><p>需要配置JDK和maven环境，完成后以管理员身份打开命令提示符窗口(cmd),再输入下面相关的语法。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">mvn install:install-file -Dfile=jar包的位置(参数一) -DgroupId=groupId(参数二) -DartifactId=artifactId(参数三) -Dversion=version(参数四) -Dpackaging=jar</div><div class="line"></div><div class="line">eg:</div><div class="line">mvn install:install-file -Dfile=&quot;C:\Users\eric\Desktop\zxing\3.21\zxing-3.21.jar&quot; -DgroupId=com.eric -DartifactId=zxing -Dversion=3.21 -Dpackaging=jar</div><div class="line"></div><div class="line">result：</div><div class="line">[INFO] Scanning for projects...</div><div class="line">[INFO]</div><div class="line">[INFO] ------------------------------------------------------------------------</div><div class="line">[INFO] Building Maven Stub Project (No POM) 1</div><div class="line">[INFO] ------------------------------------------------------------------------</div><div class="line">[INFO]</div><div class="line">[INFO] --- maven-install-plugin:2.4:install-file (default-cli) @ standalone-pom ---</div><div class="line">[INFO] Installing C:\Users\eric\Desktop\zxing\3.21\zxing-3.21.jar to C:\Users\eric\.m2\repository\com\eric\zxing\3.21\zxing-3.21.jar</div><div class="line">[INFO] Installing C:\Users\eric\AppData\Local\Temp\mvninstall6543969167446403883.pom to C:\Users\eric\.m2\repository\com\eric\zxing\3.21\zxing-3.21.pom</div><div class="line">[INFO] ------------------------------------------------------------------------</div><div class="line">[INFO] BUILD SUCCESS</div><div class="line">[INFO] ------------------------------------------------------------------------</div><div class="line">[INFO] Total time: 0.836 s</div><div class="line">[INFO] Finished at: 2017-03-08T00:24:12+08:00</div><div class="line">[INFO] Final Memory: 7M/117M</div><div class="line">[INFO] ------------------------------------------------------------------------</div><div class="line">(添加成功！)</div></pre></td></tr></table></figure>
+<p><strong>注意：地址+jar包名,即C:\Users\eric\Desktop\zxing\3.21\zxing-3.21.jar要加引号””,</strong></p>
+<h3 id="查看生成的依赖"><a href="#查看生成的依赖" class="headerlink" title="查看生成的依赖"></a>查看生成的依赖</h3><p>查看添加的zxing-3.21.jar的dependency</p>
 <ul>
-<li>向SQL语句传入参数</li>
-<li>执行SQL语句</li>
-<li>获取执行SQL语句的结果</li>
-<li>事务的控制</li>
+<li>通过设置的对应参数获取.即</li>
 </ul>
-<p>如何得到SqlSession:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-DgroupId=groupId(参数二) -DartifactId=artifactId(参数三) -Dversion=version(参数四)</div></pre></td></tr></table></figure>
 <ul>
-<li>通过配置文件获取数据库连接相关信息</li>
-<li>通过配置信息构建SqlSessionFactory</li>
-<li>通过SqlSessionFactory打开数据库会话<h2 id="各层分工"><a href="#各层分工" class="headerlink" title="各层分工"></a>各层分工</h2>servlet 负责接收页面的值，向页面传值，如果有相应的业务逻辑需要处理，则调用相应service层。<br>service 负责接收servlet传过来的值，并做执行处理，业务的操作、算法等等，如果有需要要调用相应的dao层。<br>dao 完成与数据库的交互，执行相应的sql语句<br>bean 对象</li>
+<li>参看本地仓库中pom文件C:\Users\eric.m2\repository\com\eric\zxing\3.21\zxing-3.21.pom，可以看到:</li>
 </ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;groupId&gt;com.eric&lt;/groupId&gt;</div><div class="line">&lt;artifactId&gt;zxing&lt;/artifactId&gt;</div><div class="line">&lt;version&gt;3.21&lt;/version&gt;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -412,7 +412,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Mybatis/" rel="tag"># Mybatis</a>
+            <a href="/tags/blog/" rel="tag"># blog</a>
           
         </div>
       
@@ -425,8 +425,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/11/nginx/" rel="next" title="Nginx">
-                <i class="fa fa-chevron-left"></i> Nginx
+              <a href="/2017/03/06/Java核心技术/" rel="next" title="Java核心技术">
+                <i class="fa fa-chevron-left"></i> Java核心技术
               </a>
             
           </div>
@@ -434,10 +434,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/02/20/MySQL常见面试题目/" rel="prev" title="MySQL数据库常见面试题目">
-                MySQL数据库常见面试题目 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -578,7 +574,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SqlSession"><span class="nav-number">1.</span> <span class="nav-text">SqlSession</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#各层分工"><span class="nav-number">2.</span> <span class="nav-text">各层分工</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">1.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#环境要求"><span class="nav-number">2.</span> <span class="nav-text">环境要求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法"><span class="nav-number">3.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看生成的依赖"><span class="nav-number">4.</span> <span class="nav-text">查看生成的依赖</span></a></li></ol></div>
             
 
           </div>
@@ -703,9 +699,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = '5iyxx';
-      var disqus_identifier = '2017/02/12/Mybatis入门/';
+      var disqus_identifier = '2017/03/08/jar包添加到maven本地仓库/';
 
-      var disqus_title = "Mybatis";
+      var disqus_title = "jar包添加到maven本地仓库";
 
 
       function run_disqus_script(disqus_script) {
