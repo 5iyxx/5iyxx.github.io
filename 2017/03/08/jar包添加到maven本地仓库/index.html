@@ -93,7 +93,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/03/08/Jar包添加到maven本地仓库/index.html">
 <meta property="og:site_name" content="5IYXX">
 <meta property="og:description" content="maven在应用的过程中，有 maven在应用的过程中，有些jar包在仓库上面是没法找到的，这需要我们自己手动导入到仓库中，些jar包在仓库上面是没法找到的，这需要我们自己手动导入到仓库中。">
-<meta property="og:updated_time" content="2017-03-08T09:23:48.805Z">
+<meta property="og:updated_time" content="2017-03-08T09:31:31.136Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jar包添加到maven本地仓库">
 <meta name="twitter:description" content="maven在应用的过程中，有 maven在应用的过程中，有些jar包在仓库上面是没法找到的，这需要我们自己手动导入到仓库中，些jar包在仓库上面是没法找到的，这需要我们自己手动导入到仓库中。">
@@ -204,7 +204,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Home
+            Startseite
           </a>
         </li>
       
@@ -214,7 +214,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
-            Categories
+            Kategorien
           </a>
         </li>
       
@@ -224,7 +224,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archives
+            Archiv
           </a>
         </li>
       
@@ -304,7 +304,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-08T23:02:25+08:00">
                 2017-03-08
@@ -325,7 +325,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -376,19 +376,6 @@
       
         <p> maven在应用的过程中，有 maven在应用的过程中，有些jar包在仓库上面是没法找到的，这需要我们自己手动导入到仓库中，些jar包在仓库上面是没法找到的，这需要我们自己手动导入到仓库中。</p>
 <a id="more"></a>
-<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>zxing-3.21.jar是根据github上面项目<a href="https://github.com/zxing" target="_blank" rel="external">ZXing Project</a>自己生成的jar包，该包主要应用于二维码生成，下面讲述怎么把怎么把zxing-3.21.jar添加到本地的maven仓库中。</p>
-<h3 id="环境要求"><a href="#环境要求" class="headerlink" title="环境要求"></a>环境要求</h3><p>需要配置JDK和maven环境，完成后以管理员身份打开命令提示符窗口(cmd),再输入下面相关的语法。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">mvn install:install-file -Dfile=jar包的位置(参数一) -DgroupId=groupId(参数二) -DartifactId=artifactId(参数三) -Dversion=version(参数四) -Dpackaging=jar</div><div class="line"></div><div class="line">eg:</div><div class="line">mvn install:install-file -Dfile=&quot;C:\Users\eric\Desktop\zxing\3.21\zxing-3.21.jar&quot; -DgroupId=com.eric -DartifactId=zxing -Dversion=3.21 -Dpackaging=jar</div><div class="line"></div><div class="line">result：</div><div class="line">[INFO] Scanning for projects...</div><div class="line">[INFO]</div><div class="line">[INFO] ------------------------------------------------------------------------</div><div class="line">[INFO] Building Maven Stub Project (No POM) 1</div><div class="line">[INFO] ------------------------------------------------------------------------</div><div class="line">[INFO]</div><div class="line">[INFO] --- maven-install-plugin:2.4:install-file (default-cli) @ standalone-pom ---</div><div class="line">[INFO] Installing C:\Users\eric\Desktop\zxing\3.21\zxing-3.21.jar to C:\Users\eric\.m2\repository\com\eric\zxing\3.21\zxing-3.21.jar</div><div class="line">[INFO] Installing C:\Users\eric\AppData\Local\Temp\mvninstall6543969167446403883.pom to C:\Users\eric\.m2\repository\com\eric\zxing\3.21\zxing-3.21.pom</div><div class="line">[INFO] ------------------------------------------------------------------------</div><div class="line">[INFO] BUILD SUCCESS</div><div class="line">[INFO] ------------------------------------------------------------------------</div><div class="line">[INFO] Total time: 0.836 s</div><div class="line">[INFO] Finished at: 2017-03-08T00:24:12+08:00</div><div class="line">[INFO] Final Memory: 7M/117M</div><div class="line">[INFO] ------------------------------------------------------------------------</div><div class="line">(添加成功！)</div></pre></td></tr></table></figure>
-<p><strong>注意：地址+jar包名,即C:\Users\eric\Desktop\zxing\3.21\zxing-3.21.jar要加引号””,”参数二\参数三\参数四”这也是jar包在仓库中的地址。</strong></p>
-<h3 id="查看生成的依赖"><a href="#查看生成的依赖" class="headerlink" title="查看生成的依赖"></a>查看生成的依赖</h3><p>查看添加的zxing-3.21.jar的dependency</p>
-<ul>
-<li>通过设置的对应参数获取.即</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-DgroupId=groupId(参数二) -DartifactId=artifactId(参数三) -Dversion=version(参数四)</div></pre></td></tr></table></figure>
-<ul>
-<li>参看本地仓库中pom文件C:\Users\eric.m2\repository\com\eric\zxing\3.21\zxing-3.21.pom，可以看到:</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;groupId&gt;com.eric&lt;/groupId&gt;</div><div class="line">&lt;artifactId&gt;zxing&lt;/artifactId&gt;</div><div class="line">&lt;version&gt;3.21&lt;/version&gt;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -487,17 +474,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/psbe.jpg"
@@ -511,7 +489,7 @@
             <div class="site-state-item site-state-posts">
               <a href="/archives">
                 <span class="site-state-item-count">9</span>
-                <span class="site-state-item-name">posts</span>
+                <span class="site-state-item-name">Artikel</span>
               </a>
             </div>
           
@@ -520,7 +498,7 @@
             <div class="site-state-item site-state-categories">
               <a href="/categories">
                 <span class="site-state-item-count">7</span>
-                <span class="site-state-item-name">categories</span>
+                <span class="site-state-item-name">Kategorien</span>
               </a>
             </div>
           
@@ -529,7 +507,7 @@
             <div class="site-state-item site-state-tags">
               <a href="/tags">
                 <span class="site-state-item-count">7</span>
-                <span class="site-state-item-name">tags</span>
+                <span class="site-state-item-name">Tags</span>
               </a>
             </div>
           
@@ -565,22 +543,6 @@
       </section>
 
       
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">1.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#环境要求"><span class="nav-number">2.</span> <span class="nav-text">环境要求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法"><span class="nav-number">3.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看生成的依赖"><span class="nav-number">4.</span> <span class="nav-text">查看生成的依赖</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
 
     </div>
   </aside>
@@ -604,7 +566,7 @@
 
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
