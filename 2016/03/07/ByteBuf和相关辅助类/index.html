@@ -87,11 +87,8 @@
 <meta property="og:image" content="http://yoursite.com/images/netty/158.jpg">
 <meta property="og:image" content="http://yoursite.com/images/netty/159.jpg">
 <meta property="og:image" content="http://yoursite.com/images/netty/1510.jpg">
-<meta property="og:image" content="http://yoursite.com/images/netty/b151a.jpg">
-<meta property="og:image" content="http://yoursite.com/images/netty/b151b.jpg">
-<meta property="og:image" content="http://yoursite.com/images/netty/b151c.jpg">
-<meta property="og:image" content="http://yoursite.com/images/netty/b151d.jpg">
-<meta property="og:updated_time" content="2017-09-26T15:13:05.330Z">
+<meta property="og:image" content="http://yoursite.com/images/netty/b151.jpg">
+<meta property="og:updated_time" content="2017-09-26T15:32:40.668Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ByteBuf和相关辅助类">
 <meta name="twitter:description" content="当我们进行数据传输的时候，往往需要使用到缓冲区，常用的缓冲区就是JDK NIO类库提供的java.nio.Buffer。但是ByteBuffer的API功能有限，一些高级和实用的特性它不支持，需要使用者自己编程实现。为了弥补这些不足，Netty提供了自己的ByteBuffer实现——ByteBuf。">
@@ -426,9 +423,10 @@
 <h5 id="ByteBuf与ByteBuffer转换"><a href="#ByteBuf与ByteBuffer转换" class="headerlink" title="ByteBuf与ByteBuffer转换"></a>ByteBuf与ByteBuffer转换</h5><p>由于NIO的Channel读写的参数都是ByteBuffer，因此，Netty的ByteBuf接口必须提供API，以方便地将ByteBuf转换成ByteBuffer，或者将ByteBuffer包装成ByteBuf。考虑到性能，应该尽量避免缓冲区的复制，内部实现的时候可以<strong>考虑聚合一个ByteBuffer的私有指针用来代表ByteBuffer</strong>。在后面的源代码分析章节我们将详细介绍它的实现原理。</p>
 <h4 id="ByteBuf的功能介绍"><a href="#ByteBuf的功能介绍" class="headerlink" title="ByteBuf的功能介绍"></a>ByteBuf的功能介绍</h4><p>对ByteBuffer的常用的API进行分类说明，讲解它的主要功能。</p>
 <h5 id="顺序读操作（read）"><a href="#顺序读操作（read）" class="headerlink" title="顺序读操作（read）"></a>顺序读操作（read）</h5><p>ByteBuf的read操作类似于ByteBuf的get操作，主要的API功能说明如表1所示。<br>表1 ByteBuf的读操作API列表</p>
-<div align="center"><br><img src="/images/netty/b151a.jpg" alt=""><br><img src="/images/netty/b151b.jpg" alt=""><br><img src="/images/netty/b151c.jpg" alt=""><br><img src="/images/netty/b151d.jpg" alt=""><br></div>
+<div align="center"><br><img src="/images/netty/b151.jpg" alt=""><br></div>
 
-<h5 id="顺序读写操作（write）"><a href="#顺序读写操作（write）" class="headerlink" title="顺序读写操作（write）"></a>顺序读写操作（write）</h5>
+<h5 id="顺序读写操作（write）"><a href="#顺序读写操作（write）" class="headerlink" title="顺序读写操作（write）"></a>顺序读写操作（write）</h5><p>ByteBuf的write操作类似于ByteBuffer的put操作，主要的API功能说明如下表</p>
+
       
     </div>
     
