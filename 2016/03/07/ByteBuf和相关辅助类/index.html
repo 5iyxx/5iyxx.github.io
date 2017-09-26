@@ -87,7 +87,11 @@
 <meta property="og:image" content="http://yoursite.com/images/netty/158.jpg">
 <meta property="og:image" content="http://yoursite.com/images/netty/159.jpg">
 <meta property="og:image" content="http://yoursite.com/images/netty/1510.jpg">
-<meta property="og:updated_time" content="2017-09-26T14:49:32.268Z">
+<meta property="og:image" content="http://yoursite.com/images/netty/b151a.jpg">
+<meta property="og:image" content="http://yoursite.com/images/netty/b151b.jpg">
+<meta property="og:image" content="http://yoursite.com/images/netty/b151c.jpg">
+<meta property="og:image" content="http://yoursite.com/images/netty/b151d.jpg">
+<meta property="og:updated_time" content="2017-09-26T15:13:05.330Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ByteBuf和相关辅助类">
 <meta name="twitter:description" content="当我们进行数据传输的时候，往往需要使用到缓冲区，常用的缓冲区就是JDK NIO类库提供的java.nio.Buffer。但是ByteBuffer的API功能有限，一些高级和实用的特性它不支持，需要使用者自己编程实现。为了弥补这些不足，Netty提供了自己的ByteBuffer实现——ByteBuf。">
@@ -416,13 +420,15 @@
 
 <h5 id="ByteBuf如何实现动态扩展"><a href="#ByteBuf如何实现动态扩展" class="headerlink" title="ByteBuf如何实现动态扩展"></a>ByteBuf如何实现动态扩展</h5><p>下面我们继续分析ByteBuf是如何实现动态扩展的。通常情况下，当我们对ByteBuffer进行put操作的时候，如果缓冲区剩余可写空间不够，就会发生BufferOverflowException异常。为了避免发生这个问题，通常在进行put操作的时候会对剩余可用空间进行校验，如果剩余空间不足，<strong>需要重新创建一个新的ByteBuffer，并将之前的ByteBuffer复制到新创建的ByteBuffer中，最后释放老的ByteBuffer</strong>，代码示例如下。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">if(this.buffer.remaining() &lt; needSize) &#123;</div><div class="line">   int toBeExtSize = needSize &lt; 128 ? needSize : 128;</div><div class="line">   ByteBuffer tmpBuffer =ByteBuffer.allocate(this.buffer.capacity() +toBeExtSize);</div><div class="line">   this.buffer.flip();</div><div class="line">   tmpBuffer.put(this.buffer);</div><div class="line">   this.buffer = tmpBuffer;</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
 <p>从示例代码可以看出，为了防止ByteBuffer溢出，每进行一次put操作，都需要对可用空间进行校验，这导致了代码冗余，稍有不慎，就可能引入其他问题。为了解决这个问题，ByteBuf对write操作进行了封装，由ByteBuf的write操作负责进行剩余可用空间的校验，如果可用缓冲区不足，ByteBuf会自动进行动态扩展，对于使用者而言，不需要关心底层的校验和扩展细节，只要不超过设置的最大缓冲区容量即可。当可用空间不足时，ByteBuf会帮助我们实现自动扩展。对于使用者而言，不需要关系底层的校验和扩展细节，只要不超过设置的最大缓冲区容量即可。当可用空间不足时，ByteBuf会帮我们实现自动扩展，这极大地降低了ByteBuf的学习和使用成本，提升了开发效率。校验和扩展的相关代码如图9、10所示。</p>
-<div align="center"><br><img src="/images/netty/159.jpg" alt=""><br>图9 ByteBuf写入字节<br><img src="/images/netty/1510.jpg" alt=""><br>图10 ByteBuf写入字节</div>
+<div align="center"><br><img src="/images/netty/159.jpg" alt=""><br>图9 ByteBuf写入字节<br><br><img src="/images/netty/1510.jpg" alt=""><br>图10 ByteBuf写入字节</div>
 
 <p>通过源码分析，我们发现当进行write操作时会对需要write的字节进行校验，如果可写的字节数小于需要写入的字节数，并且需要写入的字节数小于可写的最大字节数时，对缓冲区进行动态扩展。无论缓冲区是否进行了动态扩展，从功能角度看使用者并不感知，这样就简化了上层的应用。</p>
 <h5 id="ByteBuf与ByteBuffer转换"><a href="#ByteBuf与ByteBuffer转换" class="headerlink" title="ByteBuf与ByteBuffer转换"></a>ByteBuf与ByteBuffer转换</h5><p>由于NIO的Channel读写的参数都是ByteBuffer，因此，Netty的ByteBuf接口必须提供API，以方便地将ByteBuf转换成ByteBuffer，或者将ByteBuffer包装成ByteBuf。考虑到性能，应该尽量避免缓冲区的复制，内部实现的时候可以<strong>考虑聚合一个ByteBuffer的私有指针用来代表ByteBuffer</strong>。在后面的源代码分析章节我们将详细介绍它的实现原理。</p>
 <h4 id="ByteBuf的功能介绍"><a href="#ByteBuf的功能介绍" class="headerlink" title="ByteBuf的功能介绍"></a>ByteBuf的功能介绍</h4><p>对ByteBuffer的常用的API进行分类说明，讲解它的主要功能。</p>
-<h5 id="顺序读操作（read）"><a href="#顺序读操作（read）" class="headerlink" title="顺序读操作（read）"></a>顺序读操作（read）</h5><p>ByteBuf的read操作类似于ByteBuf的get操作，主要的API功能说明如表1所示。<br>表1 ByteBuf的读操作API列表<br>|方法名称|返回值|功能说明|<br>|——–|——–|——–|<br>|readBoolean|boolean|从readerIndex开始读取boolean值，readerIndex增加1|<br>| column | column |1|<br>|   1     |      1  |1|</p>
+<h5 id="顺序读操作（read）"><a href="#顺序读操作（read）" class="headerlink" title="顺序读操作（read）"></a>顺序读操作（read）</h5><p>ByteBuf的read操作类似于ByteBuf的get操作，主要的API功能说明如表1所示。<br>表1 ByteBuf的读操作API列表</p>
+<div align="center"><br><img src="/images/netty/b151a.jpg" alt=""><br><img src="/images/netty/b151b.jpg" alt=""><br><img src="/images/netty/b151c.jpg" alt=""><br><img src="/images/netty/b151d.jpg" alt=""><br></div>
 
+<h5 id="顺序读写操作（write）"><a href="#顺序读写操作（write）" class="headerlink" title="顺序读写操作（write）"></a>顺序读写操作（write）</h5>
       
     </div>
     
@@ -648,7 +654,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ByteBuf功能说明"><span class="nav-number">1.</span> <span class="nav-text">ByteBuf功能说明</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ByteBuf的工作原理"><span class="nav-number">1.1.</span> <span class="nav-text">ByteBuf的工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ByteBuf读写操作"><span class="nav-number">1.1.1.</span> <span class="nav-text">ByteBuf读写操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ByteBuf如何实现动态扩展"><span class="nav-number">1.1.2.</span> <span class="nav-text">ByteBuf如何实现动态扩展</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ByteBuf与ByteBuffer转换"><span class="nav-number">1.1.3.</span> <span class="nav-text">ByteBuf与ByteBuffer转换</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ByteBuf的功能介绍"><span class="nav-number">1.2.</span> <span class="nav-text">ByteBuf的功能介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#顺序读操作（read）"><span class="nav-number">1.2.1.</span> <span class="nav-text">顺序读操作（read）</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ByteBuf功能说明"><span class="nav-number">1.</span> <span class="nav-text">ByteBuf功能说明</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ByteBuf的工作原理"><span class="nav-number">1.1.</span> <span class="nav-text">ByteBuf的工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ByteBuf读写操作"><span class="nav-number">1.1.1.</span> <span class="nav-text">ByteBuf读写操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ByteBuf如何实现动态扩展"><span class="nav-number">1.1.2.</span> <span class="nav-text">ByteBuf如何实现动态扩展</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ByteBuf与ByteBuffer转换"><span class="nav-number">1.1.3.</span> <span class="nav-text">ByteBuf与ByteBuffer转换</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ByteBuf的功能介绍"><span class="nav-number">1.2.</span> <span class="nav-text">ByteBuf的功能介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#顺序读操作（read）"><span class="nav-number">1.2.1.</span> <span class="nav-text">顺序读操作（read）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#顺序读写操作（write）"><span class="nav-number">1.2.2.</span> <span class="nav-text">顺序读写操作（write）</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
