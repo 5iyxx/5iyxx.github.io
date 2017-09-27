@@ -98,10 +98,11 @@
 <meta property="og:image" content="http://yoursite.com/images/netty/1517.jpg">
 <meta property="og:image" content="http://yoursite.com/images/netty/1518.jpg">
 <meta property="og:image" content="http://yoursite.com/images/netty/1519.jpg">
+<meta property="og:image" content="http://yoursite.com/images/netty/1520.jpg">
 <meta property="og:image" content="http://yoursite.com/images/netty/1521.jpg">
 <meta property="og:image" content="http://yoursite.com/images/netty/1522.jpg">
 <meta property="og:image" content="http://yoursite.com/images/netty/1523.jpg">
-<meta property="og:updated_time" content="2017-09-27T05:42:28.645Z">
+<meta property="og:updated_time" content="2017-09-27T06:40:49.027Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ByteBuf和相关辅助类">
 <meta name="twitter:description" content="当我们进行数据传输的时候，往往需要使用到缓冲区，常用的缓冲区就是JDK NIO类库提供的java.nio.Buffer。但是ByteBuffer的API功能有限，一些高级和实用的特性它不支持，需要使用者自己编程实现。为了弥补这些不足，Netty提供了自己的ByteBuffer实现——ByteBuf。">
@@ -477,31 +478,35 @@
 <p>相关的代码实现如图19所示。</p>
 <div align="center"><br><img src="/images/netty/1519.jpg" alt=""><br>图19 mark和rest操作前后的缓冲区位置指针</div>
 
-<h5 id="查找操作"><a href="#查找操作" class="headerlink" title="查找操作"></a>查找操作</h5><p>很多时候，需要从ByteBuf中查找某个字符，例如通过”\r\n”作为文本字符串的换行符，利用“NUL（0x00)”作为分隔符。<br>ByteBuf提供了查找方法用于满足不同的应用场景，详细分类如下.</p>
+<h5 id="查找操作"><a href="#查找操作" class="headerlink" title="查找操作"></a>查找操作</h5><p>很多时候，需要从ByteBuf中查找某个字符，例如通过”\r\n”作为文本字符串的换行符，利用”NUL（0x00)”作为分隔符。<br>ByteBuf提供了查找方法用于满足不同的应用场景，详细分类如下.</p>
 <ol>
-<li>indexOf(int fromIndex, int toIndex, byte value)：从from到to查找value的值</li>
-<li>bytesBefore(byte value): readerIndex到writerIndex中查找value的值</li>
-<li>bytesBefore(int length, byte value)：从readerIndex到readerIndex+length</li>
-<li>bytesBefore(int index, int length, byte value): 从index到Index+length</li>
-<li>forEachByte(ByteBufProcessor processor): 遍历可读字节数组，与ByteBufProcessor 设置的条件进行对比</li>
-<li>forEachByte(int index, int length, ByteBufProcessor processor): 类似上面</li>
-<li>forEachByteDesc(ByteBufProcessor processor): 同上，采用逆序</li>
-<li>forEachByteDesc(int index, int length, ByteBufProcessor processor)：逆序</li>
+<li>indexOf(int fromIndex, int toIndex, byte value)：从当前ByteBuf中定位出首次出现value的位置。起始索引为fromIndex，终点是toIndex。如果没有查找到则返回-1，否则返回第一条满足搜索条件的位置索引。</li>
+<li>bytesBefore(byte value): 从当前ByteBuf中定位出首次出现value的位置。起始索引为readIndex，终点是writeIndex。如果没有查找到返回-1，否则返回第一条满足搜索条件的位置索引。该方法不会修改readIndex和writeIndex。</li>
+<li>bytesBefore(int length, byte value)： 从当前ByteBuf中定位出首次出现value的位置。起始索引为readIndex，终点是readerIndex+length。如果没有查找到返回-1，否则返回第一条满足搜索条件的位置索引。如果length大于当前字节缓冲区的可读字节数，怎抛出IndexOutOfBoundException异常。</li>
+<li>bytesBefore(int index, int length, byte value): 从当前ByteBuf中定位出首次出现value的位置。起始索引为index，终点是index+length。如果没有查找到返回-1，否则返回第一条满足搜索条件的位置索引。如果index+length大于当前字节缓冲区的可读字节数，怎抛出IndexOutOfBoundException异常。</li>
+<li>forEachByte(ByteBufProcessor processor): 遍历当前ByteBuf的可读字节数值，与ByteBufProcessor设置的查找条件进行对比。如果满足条件，则返回位置索引，否则返回-1.</li>
+<li>forEachByte(int index, int length, ByteBufProcessor processor): 以index为起始位置，index+length为终止位置进行遍历，与ByteBufProcessor设置的查找条件进行对比。如果满足条件，则返回位置索引，否则返回-1.</li>
+<li>forEachByteDesc(ByteBufProcessor processor):  遍历当前ByteBuf的可读字节数值，与ByteBufProcessor设置的查找条件进行对比。如果满足条件，则返回位置索引，否则返回-1.注意对字节数组进行迭代的时候采用逆序的方式，也就是从writeIndex-1开始迭代，直到readerIndex。</li>
+<li>forEachByteDesc(int index, int length, ByteBufProcessor processor)：以index为起始位置，index+length为终止位置进行遍历，与ByteBufProcessor设置的查找条件进行对比。如果满足条件，则返回位置索引，否则返回-1.采用逆序的方式，也就是从index+length-1开始迭代，直到index。</li>
 </ol>
-<p>对于被查询的字节，Netty在ByteBufProcessor中做好了抽象，定义如下：</p>
+<p>对于查找的字节而言，存在一些常用值，例如回车换行符、常用的分隔符等，Netty为了减少业务的重复定义，在ByteBufProcessor接口中对这些常用的查找字节进行了抽象，定义如下.</p>
 <ul>
 <li>FIND_NUL: NUL(0x00)</li>
-<li>FIND_CR</li>
-<li>FIND_LF</li>
-<li>FIND_CRLF</li>
-<li>FIND_LINER_WHITESPACE</li>
+<li>FIND_CR: CR(‘\r’)</li>
+<li>FIND_LF:LF(‘\n’)</li>
+<li>FIND_CRLF:CR(‘\r’)或者LF(‘\n’)</li>
+<li>FIND_LINER_WHITESPACE:’ ‘或者‘\t’<br>使用者也可以自定义查找规则，实现如图20所示接口即可。<div align="center"><br><img src="/images/netty/1520.jpg" alt=""><br>图20 字节查找接口</div>
+
+</li>
 </ul>
-<h5 id="Derived-buffers"><a href="#Derived-buffers" class="headerlink" title="Derived buffers"></a>Derived buffers</h5><p>类似于数据库的视图。以下方法用于创建视图或者恢复ByteBuf。</p>
-<p>(1) duplicate: 返回当前ByteBuf的复制对象，二者共享缓冲区内容，但是读写索引独立，即修改内容内容会变，索引变化不影响原ByteBuf。</p>
-<p>(2) copy: 复制一个对象，不共享，内容和索引都是独立的;</p>
-<p>(3) copy(int index, int length)</p>
-<p>(4) slice: 返回当前ByteBuf的可读子缓冲区，即从readerIndex到writerIndex的部分，共享内容，索引独立。</p>
-<p>(5) slice(int index, int length)：共享内容，索引独立。</p>
+<h5 id="Derived-buffers"><a href="#Derived-buffers" class="headerlink" title="Derived buffers"></a>Derived buffers</h5><p>类似于数据库的视图。ByteBuf提供了多个接口用于创建某个ByteBuf视图或者恢复ByteBuf，具体方法如下。</p>
+<ul>
+<li>duplicate: 返回当前ByteBuf的复制对象，复制后返回的ByteBuf与操作的ByteBuf共享缓冲区内容，但是维护自己独立的读写索引，当修改复制后的ByteBuf内容后，之前原ByteBuf的内容也随之改变，双方持有的是同一个指针引用。</li>
+<li>copy: 复制一个新的ByteBuf对象，它的内容和索引都是独立的，复制操作本身并不修改原ByteBuf的读写索引。</li>
+<li>copy(int index, int length):从指定的索引开始复制，复制的字节长度为length，复制后的ByteBuf内容和读写索引都与之前的独立。</li>
+<li>slice: 返回当前ByteBuf的可读子缓冲区，即从readerIndex到writerIndex的部分，返回后的ByteBuf与原ByteBuf共享内容，但是读写索引独立维护。该操作并不修改原ByteBuf的readerIndex和writeIndex。</li>
+<li>slice(int index, int length)：返回当前ByteBuf的可读子缓冲区，即从index到index+length的部分，返回后的ByteBuf与原ByteBuf共享内容，但是读写索引独立维护。该操作并不修改原ByteBuf的readerIndex和writeIndex。</li>
+</ul>
 <h5 id="转换为ByteBuffer"><a href="#转换为ByteBuffer" class="headerlink" title="转换为ByteBuffer"></a>转换为ByteBuffer</h5><p>我们知道，当通过NIO的SocketChannel进行网络读写时，操作的对象是JDK标准的java.nio.ByteBuffer,由于Netty统一使用ByteBuf替代JDK原生的java.nio.ByteBuffer,所以必须从接口层面支持两者的相互转换，下面就一起看下如何将ByteBuffer转换成java.nio.ByteBuffer.<br>将ByteBuf转换成java.nio.ByteBuffer的方法有两个，详细说明如下。</p>
 <ul>
 <li>ByteBuffer nioBuffer(): 将当前ByteBuf可读的缓冲区转换成ByteBuffer，两者共享同一个缓冲区内容引用，对ByteBuffer的读写操作并不会修改原ByteBuf的读写索引。需要指出的是，返回后的ByteBuffer无法感知原Byte的动态扩展操作。</li>
