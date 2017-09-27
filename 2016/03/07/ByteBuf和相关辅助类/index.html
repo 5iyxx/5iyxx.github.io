@@ -101,7 +101,7 @@
 <meta property="og:image" content="http://yoursite.com/images/netty/1521.jpg">
 <meta property="og:image" content="http://yoursite.com/images/netty/1522.jpg">
 <meta property="og:image" content="http://yoursite.com/images/netty/1523.jpg">
-<meta property="og:updated_time" content="2017-09-27T04:53:10.444Z">
+<meta property="og:updated_time" content="2017-09-27T05:21:15.933Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ByteBuf和相关辅助类">
 <meta name="twitter:description" content="当我们进行数据传输的时候，往往需要使用到缓冲区，常用的缓冲区就是JDK NIO类库提供的java.nio.Buffer。但是ByteBuffer的API功能有限，一些高级和实用的特性它不支持，需要使用者自己编程实现。为了弥补这些不足，Netty提供了自己的ByteBuffer实现——ByteBuf。">
@@ -502,8 +502,11 @@
 <p>(3) copy(int index, int length)</p>
 <p>(4) slice: 返回当前ByteBuf的可读子缓冲区，即从readerIndex到writerIndex的部分，共享内容，索引独立。</p>
 <p>(5) slice(int index, int length)：共享内容，索引独立。</p>
-<h5 id="转换为ByteBuffer"><a href="#转换为ByteBuffer" class="headerlink" title="转换为ByteBuffer"></a>转换为ByteBuffer</h5><p>(1) ByteBuffer nioBuffer(): 当前可读缓冲区转换为ByteBuffer，共享内容，索引独立，且无法感知动态扩容;</p>
-<p>(2) ByteBuffer nioBuffer(int index, int length)</p>
+<h5 id="转换为ByteBuffer"><a href="#转换为ByteBuffer" class="headerlink" title="转换为ByteBuffer"></a>转换为ByteBuffer</h5><p>我们知道，当通过NIO的SocketChannel进行网络读写时，操作的对象是JDK标准的java.nio.ByteBuffer,由于Netty统一使用ByteBuf替代JDK原生的java.nio.ByteBuffer,所以必须从接口层面支持两者的相互转换，下面就一起看下如何将ByteBuffer转换成java.nio.ByteBuffer.<br>将ByteBuf转换成java.nio.ByteBuffer的方法有两个，详细说明如下。</p>
+<ul>
+<li>ByteBuffer nioBuffer(): 将当前ByteBuf可读的缓冲区转换成ByteBuffer，两者共享同一个缓冲区内容引用，对ByteBuffer的读写操作并不会修改原ByteBuf的读写索引。需要指出的是，返回后的ByteBuffer无法感知原Byte的动态扩展操作。</li>
+<li>ByteBuffer nioBuffer(int index, int length):将当前ByteBuf从index开始长度为length的缓冲区转换成ByteBuffer，两者共享同一个缓冲区内容引用，对ByteBuffer的读写操作并不会修改原ByteBuf的读写索引。需要指出的是，返回后的ByteBuffer无法感知原Byte的动态扩展操作。</li>
+</ul>
 <h5 id="随机读写-set和get"><a href="#随机读写-set和get" class="headerlink" title="随机读写 (set和get)"></a>随机读写 (set和get)</h5><p>除了顺序读写之外，ByteBuf还支持随机读写，它与顺序读写的最大差别在于可以随机指定读写的索引位置。<br>读写操作的API列表如图21所示。</p>
 <div align="center"><br><img src="/images/netty/1521.jpg" alt=""><br>图21 ByteBuf随机读操作API列表</div>
 
