@@ -137,7 +137,8 @@
         <category>Netty</category>
       </categories>
       <tags>
-        <tag>NIO 《Netty权威指南》</tag>
+        <tag>NIO</tag>
+        <tag>《Netty权威指南》</tag>
       </tags>
   </entry>
 </search>
