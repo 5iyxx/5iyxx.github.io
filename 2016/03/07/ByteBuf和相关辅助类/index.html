@@ -89,7 +89,16 @@
 <meta property="og:image" content="http://yoursite.com/images/netty/1510.jpg">
 <meta property="og:image" content="http://yoursite.com/images/netty/b151.jpg">
 <meta property="og:image" content="http://yoursite.com/images/netty/b152.jpg">
-<meta property="og:updated_time" content="2017-09-27T00:31:01.547Z">
+<meta property="og:image" content="http://yoursite.com/images/netty/1511.jpg">
+<meta property="og:image" content="http://yoursite.com/images/netty/1512.jpg">
+<meta property="og:image" content="http://yoursite.com/images/netty/1513.jpg">
+<meta property="og:image" content="http://yoursite.com/images/netty/1514.jpg">
+<meta property="og:image" content="http://yoursite.com/images/netty/1515.jpg">
+<meta property="og:image" content="http://yoursite.com/images/netty/1516.jpg">
+<meta property="og:image" content="http://yoursite.com/images/netty/1517.jpg">
+<meta property="og:image" content="http://yoursite.com/images/netty/1518.jpg">
+<meta property="og:image" content="http://yoursite.com/images/netty/1519.jpg">
+<meta property="og:updated_time" content="2017-09-27T03:27:45.924Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ByteBuf和相关辅助类">
 <meta name="twitter:description" content="当我们进行数据传输的时候，往往需要使用到缓冲区，常用的缓冲区就是JDK NIO类库提供的java.nio.Buffer。但是ByteBuffer的API功能有限，一些高级和实用的特性它不支持，需要使用者自己编程实现。为了弥补这些不足，Netty提供了自己的ByteBuffer实现——ByteBuf。">
@@ -429,8 +438,43 @@
 <h5 id="顺序读写操作（write）"><a href="#顺序读写操作（write）" class="headerlink" title="顺序读写操作（write）"></a>顺序读写操作（write）</h5><p>ByteBuf的write操作类似于ByteBuffer的put操作，主要的API功能说明如下表2所示。<br>表2 ByteBuf的写操作API列表</p>
 <div align="center"><br><img src="/images/netty/b152.jpg" alt=""><br></div>
 
-<h5 id="readerIndex和writerIndex"><a href="#readerIndex和writerIndex" class="headerlink" title="readerIndex和writerIndex"></a>readerIndex和writerIndex</h5><p>Netty提供了两个指针变量用于支持顺序读取和写入操作：</p>
+<h5 id="readerIndex和writerIndex"><a href="#readerIndex和writerIndex" class="headerlink" title="readerIndex和writerIndex"></a>readerIndex和writerIndex</h5><p>Netty提供了两个指针变量用于支持顺序读取和写入操作：readerIndex用于标识读取索引，writeIndex用于标识写入索引。两个位置指针将ByteBuf缓冲区分割成三个区域，如图11所示。</p>
+<div align="center"><br><img src="/images/netty/1511.jpg" alt=""><br>图11 ByteBuf的readIndex和writeIndex</div>
 
+<p>调用ByteBuf的read操作时，从readIndex处开始读取。readerIndex到writeIndex之间的空间为可读的字节缓冲区；writeIndex到capacity之间为可写的字节缓冲区；0到readerIndex之间是已经读取过的缓冲区，可以调用discardReadBytes操作来重用这部分空间，以节约内存，防止ByteBuf的动态扩张。这在私有协议栈消息解码的时候非常有用，因为TCP底层可能粘包，几百个整包消息被TCP粘包后作为一个整包发送。这样，<strong>通过discardReadBytes操作可以重用之前已经解码过的缓冲区</strong>，从而防止接收缓冲区因为容量不足导致的扩张。但是，discardReadByte操作是把双刃剑，不能滥用，关于这一点在后面续章节会进行详细说明。</p>
+<h5 id="Discardable-byte"><a href="#Discardable-byte" class="headerlink" title="Discardable byte"></a>Discardable byte</h5><p>相对于其他Java对象，缓冲区的分配和释放是个耗时的操作，因此，我们需要尽量重用它们，由于缓冲区的动态扩张需要进行字节数值的复制，它是个耗时的操作，因此，为了最大程度地提高性能，往往需要尽最大努力提升缓冲区的重复率。<br>假如缓冲区包含了N个整包消息，每个消息的长度为L,消息的可写字节数为R.当读取M个整合包消息后，如果不对ByteBuf做压缩或者discardReadBytes操作，则可写的缓冲区长度依然为R.如果调用discardReadBytes操作，则可写字节数会变为R=(R+M*L),之前已经读取的M个整包的空间会被重用。假如此时ByteBuf需要写入R+1个字节，则不需要动态扩张ByteBuf。<br>ByteBuf的discardReadBytes操作效果图如图。<br>操作之前如图12所示。</p>
+<div align="center"><br><img src="/images/netty/1512.jpg" alt=""><br>图12 discardReadBytes操作之前的ByteBuf</div>
+
+<p>操作之后如图13所示。</p>
+<div align="center"><br><img src="/images/netty/1513.jpg" alt=""><br>图13 discardReadBytes操作之后的ByteBuf</div>
+
+<p>需要指出的是，调用discardReadBytes会发生字节数组的内存复用，所以，频繁调用将会导致性能下降，因此在调用它之前要确认你确定需要这样做，例如牺牲性能来换取更多的可用内存。discardReadBytes的相关源码如图14所示。<br>需要指出的是，调用discardReadBytes操作之后的write bytes 内容处理策略跟ByteBuf接口的具体实现有关。</p>
+<div align="center"><br><img src="/images/netty/1514.jpg" alt=""><br>图14 discardReadBytes操作会导致内存复制</div>
+
+<h5 id="Readable-bytes-和Writeable-bytes"><a href="#Readable-bytes-和Writeable-bytes" class="headerlink" title="Readable bytes 和Writeable bytes"></a>Readable bytes 和Writeable bytes</h5><p>可读空间段是数据实际存储的区域，以read或者skip开头的任何操作都将会从readerIndex开始读取或者跳过指定的数据，操作完成之后readIndex增加了读取或者跳过的字节数长度。如果读取的字节数长度大于实际可读的字节数，则抛出IndexOutOfBoundsException。当新分配、包装或者复制一个新的ByteBuf对象时，它的readerIndex为0。<br>可写空间段是尚未被使用可以填充的空闲空间，任何以write开头的操作都会从writeIndex开始向空闲空间开始写入字节操作完成之后writeIndex增加了写入的字节数长度。如果写入字节数大于可写的字节数，也会抛出IndexOutOfBoundsException异常。新分配一个ByteBuf对象时，它的readIndex为0.通过包装或者复制的方式创建一个新的ByteBuf对象时，它的writeIndex是ByteBuf的容量。</p>
+<h5 id="Clear操作"><a href="#Clear操作" class="headerlink" title="Clear操作"></a>Clear操作</h5><p>正如JDK ByteBuffer的clear操作，它并不会清空缓冲区内容本身，例如填充为NUL（0X00)。它主要用来操作位置指针，例如position、limit和mark。对于ByteBuf，它也是用来操作readIndex和writeIndex,将它们还原为初始分配值。具体的处理示例图如下。<br>Clear()操作之前如图15所示。</p>
+<div align="center"><br><img src="/images/netty/1515.jpg" alt=""><br>图15 clear操作之前的缓冲区</div>
+
+<p>Clear()操作之后如图16所示。</p>
+<div align="center"><br><img src="/images/netty/1516.jpg" alt=""><br>图16 clear操作之后的缓冲区</div>
+
+<h5 id="Mark和Rest"><a href="#Mark和Rest" class="headerlink" title="Mark和Rest"></a>Mark和Rest</h5><p>当对缓冲区进行读操作时，由于某种原因，可能需要对之前的操作进行回滚。读操作并不会改变缓冲区的内容，回滚操作主要就是重新设置索引信息。<br>对于JDK的ByteBuffer，调用mark操作会将当前的位置指针备份到mark变量中，当调用rest操作之后，重新将指针的当前位置恢复为备份在mark中的值，源代码如图17所示。</p>
+<div align="center"><br><img src="/images/netty/1517.jpg" alt=""><br>图17 mark操作之后的缓冲区位置指针</div>
+
+<p>调用reset操作之后如图18所示。</p>
+<div align="center"><br><img src="/images/netty/1518.jpg" alt=""><br>图18 rest操作之后的缓冲区位置指针</div>
+
+<p>Netty的ByteBuf也有类似的rest和mark接口，因为ByteBuf有读索引和写索引，因此，它总共有4个相关的方法，分别如下。</p>
+<ul>
+<li>markReaderIndex：将当前的readerIndex备份到markedReaderIndex中；</li>
+<li>resetReaderIndex：将当前的readerIndex设置为mardedReaderIndex；</li>
+<li>markWriterIndex：将当前的readerIndex备份到markedWriterIndex中；</li>
+<li>resetWriterIndex：将当前的readerIndex设置为mardedWriterIndex；</li>
+</ul>
+<p>相关的代码实现如图19所示。</p>
+<div align="center"><br><img src="/images/netty/1519.jpg" alt=""><br>图19 mark和rest操作前后的缓冲区位置指针</div>
+
+<h5 id="查找操作"><a href="#查找操作" class="headerlink" title="查找操作"></a>查找操作</h5>
       
     </div>
     
@@ -656,7 +700,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ByteBuf功能说明"><span class="nav-number">1.</span> <span class="nav-text">ByteBuf功能说明</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ByteBuf的工作原理"><span class="nav-number">1.1.</span> <span class="nav-text">ByteBuf的工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ByteBuf读写操作"><span class="nav-number">1.1.1.</span> <span class="nav-text">ByteBuf读写操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ByteBuf如何实现动态扩展"><span class="nav-number">1.1.2.</span> <span class="nav-text">ByteBuf如何实现动态扩展</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ByteBuf与ByteBuffer转换"><span class="nav-number">1.1.3.</span> <span class="nav-text">ByteBuf与ByteBuffer转换</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ByteBuf的功能介绍"><span class="nav-number">1.2.</span> <span class="nav-text">ByteBuf的功能介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#顺序读操作（read）"><span class="nav-number">1.2.1.</span> <span class="nav-text">顺序读操作（read）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#顺序读写操作（write）"><span class="nav-number">1.2.2.</span> <span class="nav-text">顺序读写操作（write）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#readerIndex和writerIndex"><span class="nav-number">1.2.3.</span> <span class="nav-text">readerIndex和writerIndex</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ByteBuf功能说明"><span class="nav-number">1.</span> <span class="nav-text">ByteBuf功能说明</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ByteBuf的工作原理"><span class="nav-number">1.1.</span> <span class="nav-text">ByteBuf的工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ByteBuf读写操作"><span class="nav-number">1.1.1.</span> <span class="nav-text">ByteBuf读写操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ByteBuf如何实现动态扩展"><span class="nav-number">1.1.2.</span> <span class="nav-text">ByteBuf如何实现动态扩展</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ByteBuf与ByteBuffer转换"><span class="nav-number">1.1.3.</span> <span class="nav-text">ByteBuf与ByteBuffer转换</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ByteBuf的功能介绍"><span class="nav-number">1.2.</span> <span class="nav-text">ByteBuf的功能介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#顺序读操作（read）"><span class="nav-number">1.2.1.</span> <span class="nav-text">顺序读操作（read）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#顺序读写操作（write）"><span class="nav-number">1.2.2.</span> <span class="nav-text">顺序读写操作（write）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#readerIndex和writerIndex"><span class="nav-number">1.2.3.</span> <span class="nav-text">readerIndex和writerIndex</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Discardable-byte"><span class="nav-number">1.2.4.</span> <span class="nav-text">Discardable byte</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Readable-bytes-和Writeable-bytes"><span class="nav-number">1.2.5.</span> <span class="nav-text">Readable bytes 和Writeable bytes</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Clear操作"><span class="nav-number">1.2.6.</span> <span class="nav-text">Clear操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Mark和Rest"><span class="nav-number">1.2.7.</span> <span class="nav-text">Mark和Rest</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查找操作"><span class="nav-number">1.2.8.</span> <span class="nav-text">查找操作</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
