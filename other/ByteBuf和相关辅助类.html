@@ -53,7 +53,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="《Netty权威指南》,Netty," />
+  <meta name="keywords" content=",," />
 
 
 
@@ -72,9 +72,10 @@
 
 
 <meta name="description" content="当我们进行数据传输的时候，往往需要使用到缓冲区，常用的缓冲区就是JDK NIO类库提供的java.nio.Buffer。但是ByteBuffer的API功能有限，一些高级和实用的特性它不支持，需要使用者自己编程实现。为了弥补这些不足，Netty提供了自己的ByteBuffer实现——ByteBuf。">
-<meta property="og:type" content="article">
+<meta name="keywords">
+<meta property="og:type" content="website">
 <meta property="og:title" content="ByteBuf和相关辅助类">
-<meta property="og:url" content="http://yoursite.com/2016/03/07/ByteBuf和相关辅助类/index.html">
+<meta property="og:url" content="http://yoursite.com/other/ByteBuf和相关辅助类.html">
 <meta property="og:site_name" content="5IYXX">
 <meta property="og:description" content="当我们进行数据传输的时候，往往需要使用到缓冲区，常用的缓冲区就是JDK NIO类库提供的java.nio.Buffer。但是ByteBuffer的API功能有限，一些高级和实用的特性它不支持，需要使用者自己编程实现。为了弥补这些不足，Netty提供了自己的ByteBuffer实现——ByteBuf。">
 <meta property="og:image" content="http://yoursite.com/images/netty/151.jpg">
@@ -106,7 +107,16 @@
 <meta property="og:image" content="http://yoursite.com/images/netty/1525.jpg">
 <meta property="og:image" content="http://yoursite.com/images/netty/1526.jpg">
 <meta property="og:image" content="http://yoursite.com/images/netty/1527.jpg">
+<meta property="og:image" content="http://yoursite.com/images/netty/1528.jpg">
+<meta property="og:image" content="http://yoursite.com/images/netty/1555.jpg">
+<meta property="og:image" content="http://yoursite.com/images/netty/1556.jpg">
+<meta property="og:image" content="http://yoursite.com/images/netty/1557.jpg">
 <meta property="og:image" content="http://yoursite.com/images/netty/1558.jpg">
+<meta property="og:image" content="http://yoursite.com/images/netty/1559.jpg">
+<meta property="og:image" content="http://yoursite.com/images/netty/1560.jpg">
+<meta property="og:image" content="http://yoursite.com/images/netty/1561.jpg">
+<meta property="og:image" content="http://yoursite.com/images/netty/1562.jpg">
+<meta property="og:image" content="http://yoursite.com/images/netty/1563.jpg">
 <meta property="og:image" content="http://yoursite.com/images/netty/1564.jpg">
 <meta property="og:image" content="http://yoursite.com/images/netty/1565.jpg">
 <meta property="og:image" content="http://yoursite.com/images/netty/b153.jpg">
@@ -116,7 +126,7 @@
 <meta property="og:image" content="http://yoursite.com/images/netty/1569.jpg">
 <meta property="og:image" content="http://yoursite.com/images/netty/1570.jpg">
 <meta property="og:image" content="http://yoursite.com/images/netty/1571.jpg">
-<meta property="og:updated_time" content="2017-09-28T03:08:25.470Z">
+<meta property="og:updated_time" content="2017-09-28T06:07:55.209Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ByteBuf和相关辅助类">
 <meta name="twitter:description" content="当我们进行数据传输的时候，往往需要使用到缓冲区，常用的缓冲区就是JDK NIO类库提供的java.nio.Buffer。但是ByteBuffer的API功能有限，一些高级和实用的特性它不支持，需要使用者自己编程实现。为了弥补这些不足，Netty提供了自己的ByteBuffer实现——ByteBuf。">
@@ -150,7 +160,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/03/07/ByteBuf和相关辅助类/"/>
+  <link rel="canonical" href="http://yoursite.com/other/ByteBuf和相关辅助类.html"/>
 
 
 
@@ -285,119 +295,24 @@
 
   <div id="posts" class="posts-expand">
     
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/03/07/ByteBuf和相关辅助类/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eric Chen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/psbe.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="5IYXX">
-    </span>
-
     
+    
+    <div class="post-block page">
       <header class="post-header">
 
-        
-        
-          <h1 class="post-title" itemprop="name headline">ByteBuf和相关辅助类</h1>
-        
+	<h1 class="post-title" itemprop="name headline">ByteBuf和相关辅助类</h1>
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-03-07T23:02:25+08:00">
-                2016-03-07
-              </time>
-            
 
-            
 
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/NIO/" itemprop="url" rel="index">
-                    <span itemprop="name">NIO</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2016/03/07/ByteBuf和相关辅助类/" class="leancloud_visitors" data-flag-title="ByteBuf和相关辅助类">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+</header>
 
       
       
-
       
-        <p>当我们进行数据传输的时候，往往需要使用到缓冲区，常用的缓冲区就是JDK NIO类库提供的java.nio.Buffer。但是ByteBuffer的API功能有限，一些高级和实用的特性它不支持，需要使用者自己编程实现。<br>为了弥补这些不足，Netty提供了自己的ByteBuffer实现——ByteBuf。<br><a id="more"></a></p>
+      <div class="post-body">
+        
+        
+          <p>当我们进行数据传输的时候，往往需要使用到缓冲区，常用的缓冲区就是JDK NIO类库提供的java.nio.Buffer。但是ByteBuffer的API功能有限，一些高级和实用的特性它不支持，需要使用者自己编程实现。<br>为了弥补这些不足，Netty提供了自己的ByteBuffer实现——ByteBuf。<br><a id="more"></a></p>
 <h3 id="ByteBuf功能说明"><a href="#ByteBuf功能说明" class="headerlink" title="ByteBuf功能说明"></a>ByteBuf功能说明</h3><p>实际上，7种基础类型（Boolean除外）都有自己的缓冲区实现，对于NIO编程而言，我们主要使用的是ByteBuffer。ByteBuffer的实现类如图1所示。</p>
 <div align="center"><br><img src="/images/netty/151.jpg" alt=""><br>图1 ByteBuffer的实现类</div>
 
@@ -556,13 +471,37 @@
 <p>其中readByte(byte[] dst,int dstIndex,int length)方法进行分析，源码如下27图。</p>
 <div align="center"><br><img src="/images/netty/1527.jpg" alt=""><br>图27 readByte(byte[] dst,int dstIndex,int length)方法源码</div>
 
-<p>如果读取成功，需要对索引进行递增：readerIndex+=length。其他类型的读取操作与之类似，不再展开介绍。</p>
-<h4 id="UnPooledHeapByteBuf源码分析"><a href="#UnPooledHeapByteBuf源码分析" class="headerlink" title="UnPooledHeapByteBuf源码分析"></a>UnPooledHeapByteBuf源码分析</h4><h4 id="PooledDirectByteBuf源码分析"><a href="#PooledDirectByteBuf源码分析" class="headerlink" title="PooledDirectByteBuf源码分析"></a>PooledDirectByteBuf源码分析</h4><p>PooledDirectByteBuf基于内存池实现，与UnPooledDirectByteBuf的唯一不同就是缓冲区的分配是销毁策略不同，其他功能都是等同的，也就是说，两者唯一的不同就是内存分配策略不同。</p>
+<p>在读之前，首先对缓冲区的可用空间进行校验，校验的代码如图28所示。</p>
+<div align="center"><br><img src="/images/netty/1528.jpg" alt=""><br>图28 readByte(byte[] dst,int dstIndex,int length)方法源码</div>
+
+<p>如果读取的长度小于0，则抛出IllegalArgumentException异常提示参数非法；如果可写的字节数小于需要读取的长度，则抛出IndexOutBoundsException异常。由于异常中封装了详细的异常信息，所以使用者可以非常方便地进行问题定位。</p>
+<h4 id="AbstractReferenceCountedByteBuf源码分析"><a href="#AbstractReferenceCountedByteBuf源码分析" class="headerlink" title="AbstractReferenceCountedByteBuf源码分析"></a>AbstractReferenceCountedByteBuf源码分析</h4><h4 id="UnPooledHeapByteBuf源码分析"><a href="#UnPooledHeapByteBuf源码分析" class="headerlink" title="UnPooledHeapByteBuf源码分析"></a>UnPooledHeapByteBuf源码分析</h4><h4 id="PooledByteBuf内存池原理分析"><a href="#PooledByteBuf内存池原理分析" class="headerlink" title="PooledByteBuf内存池原理分析"></a>PooledByteBuf内存池原理分析</h4><p>由于ByteBuf内存池的实现涉及到的类和数据结构非常多，从设计原理角度来讲解内存池的实现。</p>
+<h5 id="PoolArena"><a href="#PoolArena" class="headerlink" title="PoolArena"></a>PoolArena</h5><p>Arena本身是指一块区域，在内存管理中，Memory Arena是指内存中的一大块连续的区域，PoolArena就是Netty的内存池实现类。<br>为了集中管理内存的分配和释放，同时提高分配和释放内存时候的性能，很多框架和应用都会通过预先申请一大块内存，然后通过提供相应的分配和释放接口来使用内存。这样一来，对内存的管理就被集中到几个类或者函数中，由于不再频繁使用系统调用来申请和释放内存，应用或者系统的性能也会大大提高。在这种设计思路下，预先申请的那一大块内存就被称为Memory Arena。</p>
+<p>不同的框架，Memory Arena的实现不同，Netty的PoolArena是由多个Chunk组成的大块内存区域，而每个Chunk则由一个或者多个Page组成，因此，对内存的组织和管理也就主要集中在如何管理和组织Chunk和Page了。<br>PoolArena中的内存Chunk定义如图55所示。<br><img src="/images/netty/1555.jpg" alt=""><br>图55 Netty的Memory Arena实现</p>
+<h5 id="PoolChunk"><a href="#PoolChunk" class="headerlink" title="PoolChunk"></a>PoolChunk</h5><p>Chunk主要用来组织和管理多个Page的内存分配和释放，在Netty中，Chunk中的Page被构建成一棵二叉树。假设一个Chunk由16个Page组成，那么这些Page将会被按照图56所示的形式组织起来。<br><img src="/images/netty/1556.jpg" alt=""><br>图56 Chunk的数据结构</p>
+<p>Page的大小是4个字节，Chunk的大小是64个字节(4×16)。整棵树有5层，第1层（也就是叶子节点所在的层）用来分配所有Page的内存，第4层用来分配2个Page的内存，依次类推。<br>每个节点都记录了自己在整个Memory Arena中的偏移地址，当一个节点代表的内存区域被分配出去之后，这个节点就会被标记为已分配，自这个节点以下的所有节点在后面的内存分配请求中都会被忽略。举例来说，当我们请求一个16字节的存储区域时，上面这个树中的第3层中的4个节点中的一个就会被标记为已分配，这就表示整个Memroy Arena中有16个字节被分配出去了，新的分配请求只能从剩下的3个节点及其子树中寻找合适的节点。<br>对树的遍历采用深度优先的算法，但是在选择哪个子节点继续遍历时则是随机的，并不像通常的深度优先算法中那样总是访问左边的子节点。</p>
+<h5 id="PoolSubpage"><a href="#PoolSubpage" class="headerlink" title="PoolSubpage"></a>PoolSubpage</h5><p>对于小于一个Page的内存，Netty在Page中完成分配。每个Page会被切分成大小相等的多个存储块，存储块的大小由第一次申请的内存块大小决定。假如一个Page是8个字节，如果第一次申请的块大小是4个字节，那么这个Page就包含2个存储块；如果第一次申请的是8个字节，那么这个Page就被分成1个存储块。<br>一个Page只能用于分配与第一次申请时大小相同的内存，比如，一个4字节的Page，如果第一次分配了1字节的内存，那么后面这个Page只能继续分配1字节的内存，如果有一个申请2字节内存的请求，就需要在一个新的Page中进行分配。<br>Page中存储区域的使用状态通过一个long数组来维护，数组中每个long的每一位表示一个块存储区域的占用情况：0表示未占用，1表示以占用。对于一个4字节的Page来说，如果这个Page用来分配1个字节的存储区域，那么long数组中就只有一个long类型的元素，这个数值的低4位用来指示各个存储区域的占用情况。对于一个128字节的Page来说，如果这个Page也是用来分配1个字节的存储区域，那么long数组中就会包含2个元素，总共128位，每一位代表一个区域的占用情况。<br>相关代码如图57.</p>
+<div align="center"><br><img src="/images/netty/1557.jpg" alt=""><br>图57 PoolSubpage的变量定义</div>
+
+<h5 id="内存回收策略"><a href="#内存回收策略" class="headerlink" title="内存回收策略"></a>内存回收策略</h5><p>无论是Chunk还是Page，都通过状态位来标识内存是否可用，不同之处是Chunk通过在二叉树上对节点进行标识实现，Page是通过维护块的使用状态标识来实现。<br>对于使用者来说，不需要关心内存池的实现细节，也不需要与这些类库打交道，只需要按照API说明正常使用即可。</p>
+<h4 id="PooledDirectByteBuf源码分析"><a href="#PooledDirectByteBuf源码分析" class="headerlink" title="PooledDirectByteBuf源码分析"></a>PooledDirectByteBuf源码分析</h4><p>PooledDirectByteBuf基于内存池实现，与UnPooledDirectByteBuf的唯一不同就是缓冲区的分配是销毁策略不同，其他功能都是等同的，也就是说，两者唯一的不同就是内存分配策略不同。</p>
 <h5 id="创建字节缓冲区实例"><a href="#创建字节缓冲区实例" class="headerlink" title="创建字节缓冲区实例"></a>创建字节缓冲区实例</h5><p>由于采用内存池实现，所以新创建PooledDirectByteBuf对象时不能直接new一个实例，而是从内存池中获取，然后设置引用计数器的值，代码如图58所示。</p>
-<div align="center"><br><img src="/images/netty/1558.jpg" alt=""><br>图58 PoolDirectByteBuf的创建</div>
+<div align="center"><br><img src="/images/netty/1558.jpg" alt=""><br>图58 PooledDirectByteBuf的创建</div>
 
 <p>直接从内存池Recycler<pooleddirectbytebuf>中获取PooledDirectByteBuf对象，然后设置他的引用计数器为1，设置缓冲区最大容量后返回。</pooleddirectbytebuf></p>
-<h4 id="复制新的字节缓冲区实例"><a href="#复制新的字节缓冲区实例" class="headerlink" title="复制新的字节缓冲区实例"></a>复制新的字节缓冲区实例</h4><p>如果使用者确实需要复制一个新的实例，与原来的</p>
+<h5 id="复制新的字节缓冲区实例"><a href="#复制新的字节缓冲区实例" class="headerlink" title="复制新的字节缓冲区实例"></a>复制新的字节缓冲区实例</h5><p>如果使用者确实需要复制一个新的实例，与原来的PooledDirectByteBuf独立，则调用它的copy（int index，int length）可以达到上述目标，代码如图59所示。</p>
+<div align="center"><br><img src="/images/netty/1559.jpg" alt=""><br>图59 PooledDirectByteBuf的copy方法</div>
+
+<p>首先对索引和长度进行合法性校验，通过之后调用PooledByteBufAllocator分配一个新的ByteBuf,由于PooledByteBufAllocator没有实现directBuffer方法，所以最终会调用到AbstractByteAllocator的directBuffer方法，相关代码如图60所示。</p>
+<div align="center"><br><img src="/images/netty/1560.jpg" alt=""><br>图60 AbstractByteAllocator的缓冲区分配</div>
+
+<p>newDirectBuffer方法对于不同的子类有不同的实现策略，如果是基于内存池的分配器，它会从内存池中获取可用的ByteBuf，如果是非池，则直接创建新的ByteBuf，相关代码实现如图61、62所示。</p>
+<div align="center"><br><img src="/images/netty/1561.jpg" alt=""><br>图61 基于内存池的缓冲区分配<br><img src="/images/netty/1562.jpg" alt=""><br>图62 非内存池实现直接创建新的缓冲区</div>
+
+<p>通过上述代码对比我们可以看出，基于内存池的实现直接从缓存中获取ByteBuf而不是创建一个新的对象。</p>
+<h5 id="子类实现相关的方法"><a href="#子类实现相关的方法" class="headerlink" title="子类实现相关的方法"></a>子类实现相关的方法</h5><p>正如UnpooledHeapByteBuf,PooledDirectByteBuf也有子类实现相关的功能，这些方法如图63所示。<br>从上述代码可以看出，当我们操作子类实现相关的方法时，需要对是否支持这些操作进行判断，否则会导致异常。</p>
+<div align="center"><br><img src="/images/netty/1563.jpg" alt=""><br>图63 PooledDireactByteBuf</div>
+
 <h3 id="ByteBuf相关的辅助类功能介绍"><a href="#ByteBuf相关的辅助类功能介绍" class="headerlink" title="ByteBuf相关的辅助类功能介绍"></a>ByteBuf相关的辅助类功能介绍</h3><h4 id="ByteBufHolder"><a href="#ByteBufHolder" class="headerlink" title="ByteBufHolder"></a>ByteBufHolder</h4><p>ByteBufHolder是byteBuf的容器，在Netty中，它非常有用。例如HTTP协议的请求消息和应答消息都可以携带消息体，这个消息体在NIO ByteBuffer中就是个ByteBuffer对象，在Netty中就是Bytebuf对象。由于不同的协议消息体可以包含不同的协议字段和功能，因此，需要对ByteBuf进行包装和抽象，不同的子类可以有不同的实现。<br>为了满足这些定制化的需求，Netty抽象出了ByteBufHolder对象，它包含了一个ByteBuf，另外还提供了一些其他实用的方法，使用者继承ByteBufHolder接口后可以按需封装自己的实现。相关类库的继承关系如图64所示。</p>
 <div align="center"><br><img src="/images/netty/1564.jpg" alt=""><br>图64 ByteBufHolder继承关系图</div>
 
@@ -602,94 +541,15 @@
 </ul>
 <p>还有一个非常有用的方法就是hexDump，它能够将参数ByteBuf的内容以十六进制字符串的方式打印出来，用于输出日志或者打印码流，方便问题定位，提升系统的可维护性。hexDump包含了一系列的方法，参数不同，输出的结果也不同。如图71所示。</p>
 <div align="center"><br><img src="/images/netty/1571.jpg" alt=""><br>图71 hexDump方法</div>
+        
+      </div>
+      
+      
       
     </div>
     
     
     
-
-    
-
-    
-      <div>
-        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-  <div><p style="color:225,225,225;font-weight:bold;font-size:10px;">Adhere to the original technology to share, your support will encourage me to continue to create!</p></div>
-  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-    <span>Donate</span>
-  </button>
-  <div id="QR" style="display: none;">
-
-    
-      <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/images/pay/wx.png" alt="Eric Chen WeChat Pay"/>
-        <p>WeChat Pay</p>
-      </div>
-    
-
-    
-      <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="/images/pay/zfb.png" alt="Eric Chen Alipay"/>
-        <p>Alipay</p>
-      </div>
-    
-
-    
-
-  </div>
-</div>
-
-      </div>
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/《Netty权威指南》/" rel="tag"># 《Netty权威指南》</a>
-          
-            <a href="/tags/Netty/" rel="tag"># Netty</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/04/07/设计模式--Facade(外观模式)/" rel="prev" title="设计模式--Facade(外观模式)">
-                设计模式--Facade(外观模式) <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
   </div>
 
 
@@ -757,7 +617,7 @@
             
               <a href="/archives">
             
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -829,7 +689,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ByteBuf功能说明"><span class="nav-number">1.</span> <span class="nav-text">ByteBuf功能说明</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ByteBuf的工作原理"><span class="nav-number">1.1.</span> <span class="nav-text">ByteBuf的工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ByteBuf读写操作"><span class="nav-number">1.1.1.</span> <span class="nav-text">ByteBuf读写操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ByteBuf如何实现动态扩展"><span class="nav-number">1.1.2.</span> <span class="nav-text">ByteBuf如何实现动态扩展</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ByteBuf与ByteBuffer转换"><span class="nav-number">1.1.3.</span> <span class="nav-text">ByteBuf与ByteBuffer转换</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ByteBuf的功能介绍"><span class="nav-number">1.2.</span> <span class="nav-text">ByteBuf的功能介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#顺序读操作（read）"><span class="nav-number">1.2.1.</span> <span class="nav-text">顺序读操作（read）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#顺序读写操作（write）"><span class="nav-number">1.2.2.</span> <span class="nav-text">顺序读写操作（write）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#readerIndex和writerIndex"><span class="nav-number">1.2.3.</span> <span class="nav-text">readerIndex和writerIndex</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Discardable-byte"><span class="nav-number">1.2.4.</span> <span class="nav-text">Discardable byte</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Readable-bytes-和Writeable-bytes"><span class="nav-number">1.2.5.</span> <span class="nav-text">Readable bytes 和Writeable bytes</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Clear操作"><span class="nav-number">1.2.6.</span> <span class="nav-text">Clear操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Mark和Rest"><span class="nav-number">1.2.7.</span> <span class="nav-text">Mark和Rest</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查找操作"><span class="nav-number">1.2.8.</span> <span class="nav-text">查找操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Derived-buffers"><span class="nav-number">1.2.9.</span> <span class="nav-text">Derived buffers</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#转换为ByteBuffer"><span class="nav-number">1.2.10.</span> <span class="nav-text">转换为ByteBuffer</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#随机读写-set和get"><span class="nav-number">1.2.11.</span> <span class="nav-text">随机读写 (set和get)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ByteBuf-源码分析"><span class="nav-number">2.</span> <span class="nav-text">ByteBuf 源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ByteBuf的主要类继承关系"><span class="nav-number">2.1.</span> <span class="nav-text">ByteBuf的主要类继承关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AbstractByteBuf源码分析"><span class="nav-number">2.2.</span> <span class="nav-text">AbstractByteBuf源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#主要成员变量"><span class="nav-number">2.2.1.</span> <span class="nav-text">主要成员变量</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#读操作簇"><span class="nav-number">2.2.2.</span> <span class="nav-text">读操作簇</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UnPooledHeapByteBuf源码分析"><span class="nav-number">2.3.</span> <span class="nav-text">UnPooledHeapByteBuf源码分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PooledDirectByteBuf源码分析"><span class="nav-number">2.4.</span> <span class="nav-text">PooledDirectByteBuf源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#创建字节缓冲区实例"><span class="nav-number">2.4.1.</span> <span class="nav-text">创建字节缓冲区实例</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#复制新的字节缓冲区实例"><span class="nav-number">2.5.</span> <span class="nav-text">复制新的字节缓冲区实例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ByteBuf相关的辅助类功能介绍"><span class="nav-number">3.</span> <span class="nav-text">ByteBuf相关的辅助类功能介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ByteBufHolder"><span class="nav-number">3.1.</span> <span class="nav-text">ByteBufHolder</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ByteBufAllocator"><span class="nav-number">3.2.</span> <span class="nav-text">ByteBufAllocator</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CompositeByteBuf"><span class="nav-number">3.3.</span> <span class="nav-text">CompositeByteBuf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ByteBufUtil"><span class="nav-number">3.4.</span> <span class="nav-text">ByteBufUtil</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ByteBuf功能说明"><span class="nav-number">1.</span> <span class="nav-text">ByteBuf功能说明</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ByteBuf的工作原理"><span class="nav-number">1.1.</span> <span class="nav-text">ByteBuf的工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ByteBuf读写操作"><span class="nav-number">1.1.1.</span> <span class="nav-text">ByteBuf读写操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ByteBuf如何实现动态扩展"><span class="nav-number">1.1.2.</span> <span class="nav-text">ByteBuf如何实现动态扩展</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ByteBuf与ByteBuffer转换"><span class="nav-number">1.1.3.</span> <span class="nav-text">ByteBuf与ByteBuffer转换</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ByteBuf的功能介绍"><span class="nav-number">1.2.</span> <span class="nav-text">ByteBuf的功能介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#顺序读操作（read）"><span class="nav-number">1.2.1.</span> <span class="nav-text">顺序读操作（read）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#顺序读写操作（write）"><span class="nav-number">1.2.2.</span> <span class="nav-text">顺序读写操作（write）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#readerIndex和writerIndex"><span class="nav-number">1.2.3.</span> <span class="nav-text">readerIndex和writerIndex</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Discardable-byte"><span class="nav-number">1.2.4.</span> <span class="nav-text">Discardable byte</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Readable-bytes-和Writeable-bytes"><span class="nav-number">1.2.5.</span> <span class="nav-text">Readable bytes 和Writeable bytes</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Clear操作"><span class="nav-number">1.2.6.</span> <span class="nav-text">Clear操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Mark和Rest"><span class="nav-number">1.2.7.</span> <span class="nav-text">Mark和Rest</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查找操作"><span class="nav-number">1.2.8.</span> <span class="nav-text">查找操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Derived-buffers"><span class="nav-number">1.2.9.</span> <span class="nav-text">Derived buffers</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#转换为ByteBuffer"><span class="nav-number">1.2.10.</span> <span class="nav-text">转换为ByteBuffer</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#随机读写-set和get"><span class="nav-number">1.2.11.</span> <span class="nav-text">随机读写 (set和get)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ByteBuf-源码分析"><span class="nav-number">2.</span> <span class="nav-text">ByteBuf 源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ByteBuf的主要类继承关系"><span class="nav-number">2.1.</span> <span class="nav-text">ByteBuf的主要类继承关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AbstractByteBuf源码分析"><span class="nav-number">2.2.</span> <span class="nav-text">AbstractByteBuf源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#主要成员变量"><span class="nav-number">2.2.1.</span> <span class="nav-text">主要成员变量</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#读操作簇"><span class="nav-number">2.2.2.</span> <span class="nav-text">读操作簇</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AbstractReferenceCountedByteBuf源码分析"><span class="nav-number">2.3.</span> <span class="nav-text">AbstractReferenceCountedByteBuf源码分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UnPooledHeapByteBuf源码分析"><span class="nav-number">2.4.</span> <span class="nav-text">UnPooledHeapByteBuf源码分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PooledByteBuf内存池原理分析"><span class="nav-number">2.5.</span> <span class="nav-text">PooledByteBuf内存池原理分析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#PoolArena"><span class="nav-number">2.5.1.</span> <span class="nav-text">PoolArena</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#PoolChunk"><span class="nav-number">2.5.2.</span> <span class="nav-text">PoolChunk</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#PoolSubpage"><span class="nav-number">2.5.3.</span> <span class="nav-text">PoolSubpage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#内存回收策略"><span class="nav-number">2.5.4.</span> <span class="nav-text">内存回收策略</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PooledDirectByteBuf源码分析"><span class="nav-number">2.6.</span> <span class="nav-text">PooledDirectByteBuf源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#创建字节缓冲区实例"><span class="nav-number">2.6.1.</span> <span class="nav-text">创建字节缓冲区实例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#复制新的字节缓冲区实例"><span class="nav-number">2.6.2.</span> <span class="nav-text">复制新的字节缓冲区实例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#子类实现相关的方法"><span class="nav-number">2.6.3.</span> <span class="nav-text">子类实现相关的方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ByteBuf相关的辅助类功能介绍"><span class="nav-number">3.</span> <span class="nav-text">ByteBuf相关的辅助类功能介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ByteBufHolder"><span class="nav-number">3.1.</span> <span class="nav-text">ByteBufHolder</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ByteBufAllocator"><span class="nav-number">3.2.</span> <span class="nav-text">ByteBufAllocator</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CompositeByteBuf"><span class="nav-number">3.3.</span> <span class="nav-text">CompositeByteBuf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ByteBufUtil"><span class="nav-number">3.4.</span> <span class="nav-text">ByteBufUtil</span></a></li></ol></li></ol></div>
             
 
           </div>
