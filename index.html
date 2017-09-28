@@ -514,25 +514,14 @@
 
       
         
-          
-            <p>在使用Socket来连接服务器时最简单的方式就是直接使用IP和端口，但Socket类中的connect方法并未提供这种方式，而是使用SocketAddress类来向connect方法传递服务器的IP和端口。虽然这种方式从表面上看要麻烦一些，但它会给我们带来另外一个好处，那就是网络地址的重用。</p>
-<p><strong>所谓网络地址的重用表现在两个方面：</strong></p>
-<ul>
-<li>通过建立一个SocketAddress对象，可以在多次连接同一个服务器时使用这个SocketAddress对象。</li>
-<li>在Socket类中提供了两个方法：getRemoteSocketAddress和getLocalSocketAddress，通过这两个方法可以得到服务器和本机的网络地址。而且所得到的网络地址在相应的Socket对象关闭后任然可以使用。下面是这两个方法的声明：</li>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">public SocketAddress getRemoteSocketAddress()</div><div class="line">public SocketAddress getLocalSocketAddress()</div></pre></td></tr></table></figure>
-<p> 不管在使用Socket类连接服务器时是直接使用IP和端口，还是使用SocketAddress，这两个方法都返回SocketAddress形式的网络地址。当Socket对象未连接时这两个方法返回null，但要注意的是只有在Socket对象未连接时这两个方法才返回null，而当已经连接成功的Socket对象关闭后仍可使用这两个方法得到相应的网络地址。<br> 虽然上面曾多次提到SocketAddress，但SocketAddress只是个抽象类，它除了有一个默认的构造方法外，其它的方法都是abstract的，因此，我们必须使用SocketAddress的子类来建立SocketAddress对象。在JDK1.4中J只为我们提供了IP网络地址的实现类：java.net.InetSocketAddress。这个类是从SocketAddress继承的，我们可以通过如下的方法来建立SocketAddress对象。</p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SocketAddress socketAddress = new InetSocketAddress(host, ip);</div></pre></td></tr></table></figure>
-<p>下面的代码演示了如何通过SocketAddress来共享网络地址：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">package mynet;</div><div class="line"></div><div class="line">import java.net.*;</div><div class="line"></div><div class="line">public class MySocketAddress</div><div class="line">&#123;</div><div class="line">    public static void main(String[] args)</div><div class="line">    &#123;</div><div class="line">        try</div><div class="line">        &#123;</div><div class="line">            Socket socket1 = new Socket(&quot;www.ptpress.com.cn&quot;, 80);</div><div class="line">            SocketAddress socketAddress = socket1.getRemoteSocketAddress();</div><div class="line">            socket1.close();</div><div class="line">            Socket socket2 = new Socket();</div><div class="line">            // socket2.bind(new InetSocketAddress(&quot;192.168.18.252&quot;, 0));</div><div class="line">            socket2.connect(socketAddress);</div><div class="line">            socket2.close();</div><div class="line">            InetSocketAddress inetSocketAddress1 = (InetSocketAddress) socketAddress;</div><div class="line">            System.out.println(&quot;服务器域名:&quot;</div><div class="line">                            + inetSocketAddress1.getAddress().getHostName());</div><div class="line">            System.out.println(&quot;服务器IP:&quot;</div><div class="line">                            + inetSocketAddress1.getAddress().getHostAddress());</div><div class="line">            System.out.println(&quot;服务器端口:&quot; + inetSocketAddress1.getPort());</div><div class="line">            InetSocketAddress inetSocketAddress2 = (InetSocketAddress) socket2</div><div class="line">                            .getLocalSocketAddress();</div><div class="line">            System.out.println(&quot;本地IP:&quot;</div><div class="line">                            + inetSocketAddress2.getAddress().getLocalHost()</div><div class="line">                                            .getHostAddress());</div><div class="line">            System.out.println(&quot;本地端口:&quot; + inetSocketAddress2.getPort());</div><div class="line">        &#125;</div><div class="line">        catch (Exception e)</div><div class="line">        &#123;</div><div class="line">            System.out.println(e.getMessage());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>输出结果：</p>
-<p>服务器域名:www.ptpress.com.cn<br>服务器IP:219.238.168.74<br>服务器端口:80<br>本地IP:192.168.18.253<br>本地端口:4250</p>
-<p>如果多次运行后，本地端口的值可能在每次都不一样。这是因为在socket2在连接时并未使用bind来绑定本地的端口，而这个本地端口是由系统在1024至65，535中随机选取的，因此，在每次运行程序时这个本地端口不一定相同。</p>
-<p>本文出自 “<a href="http://androidguy.blog.51cto.com/974126/214448" target="_blank" rel="external">李宁的极客世界</a>”博客， <a href="http://androidguy.blog.51cto.com/974126/214448" target="_blank" rel="external">http://androidguy.blog.51cto.com/974126/214448</a></p>
-
-          
+          <p>在使用Socket来连接服务器时最简单的方式就是直接使用IP和端口，但Socket类中的connect方法并未提供这种方式，而是使用SocketAddress类来向connect方法传递服务器的IP和端口。虽然这种方式从表面上看要麻烦一些，但它会给我们带来另外一个好处，那就是网络地址的重用。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/10/为什么要使用SocketAddress来管理网络地址/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -924,7 +913,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-07T23:02:25+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-07T21:02:25+08:00">
                 2017-03-07
               </time>
             
