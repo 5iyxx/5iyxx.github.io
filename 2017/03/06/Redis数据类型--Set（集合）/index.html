@@ -53,7 +53,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="设计模式," />
+  <meta name="keywords" content="Redis," />
 
 
 
@@ -71,18 +71,16 @@
 
 
 
-<meta name="description" content="为子系统中的一组接口提供一个一致的界面，Facade模式定义了一个高层接口，这个接口使得这一子系统更加容易使用。   将一个系统划分成为若干个子系统有利于降低系统的复杂性。一个常见的设计目标是使子系统间的通信和相互依赖关系达到最小。   达到该目标的途径之一是就是引入一个外观（Facade）对象，它为子系统中较一般的设施提供了一个单一而简单的界面。">
+<meta name="description" content="Redis的集合和列表都可以存储多个字符串，它们之间的不同在于，列表可以存储多个不同的字符串，而集合则通过使用散列来保证自己存储的每个字符串都是各不相同的。包含字符串的无序收集器（unordered collection）,并且被包含的每个字符串都是独一无二、各不相同的。结构的读写： 添加、读取、移除单个元素 检查一个元素是否存在于集合中 计算交集、并集、差集 从集合中随机获取元素">
 <meta property="og:type" content="article">
-<meta property="og:title" content="设计模式--Facade(外观模式)">
-<meta property="og:url" content="http://yoursite.com/2016/04/07/设计模式--Facade(外观模式)/index.html">
+<meta property="og:title" content="Redis数据类型--Set（集合）">
+<meta property="og:url" content="http://yoursite.com/2017/03/06/Redis数据类型--Set（集合）/index.html">
 <meta property="og:site_name" content="5IYXX">
-<meta property="og:description" content="为子系统中的一组接口提供一个一致的界面，Facade模式定义了一个高层接口，这个接口使得这一子系统更加容易使用。   将一个系统划分成为若干个子系统有利于降低系统的复杂性。一个常见的设计目标是使子系统间的通信和相互依赖关系达到最小。   达到该目标的途径之一是就是引入一个外观（Facade）对象，它为子系统中较一般的设施提供了一个单一而简单的界面。">
-<meta property="og:image" content="http://yoursite.com/images/Patterns/1.png">
-<meta property="og:updated_time" content="2017-09-26T13:51:41.258Z">
+<meta property="og:description" content="Redis的集合和列表都可以存储多个字符串，它们之间的不同在于，列表可以存储多个不同的字符串，而集合则通过使用散列来保证自己存储的每个字符串都是各不相同的。包含字符串的无序收集器（unordered collection）,并且被包含的每个字符串都是独一无二、各不相同的。结构的读写： 添加、读取、移除单个元素 检查一个元素是否存在于集合中 计算交集、并集、差集 从集合中随机获取元素">
+<meta property="og:updated_time" content="2017-09-28T09:23:44.905Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="设计模式--Facade(外观模式)">
-<meta name="twitter:description" content="为子系统中的一组接口提供一个一致的界面，Facade模式定义了一个高层接口，这个接口使得这一子系统更加容易使用。   将一个系统划分成为若干个子系统有利于降低系统的复杂性。一个常见的设计目标是使子系统间的通信和相互依赖关系达到最小。   达到该目标的途径之一是就是引入一个外观（Facade）对象，它为子系统中较一般的设施提供了一个单一而简单的界面。">
-<meta name="twitter:image" content="http://yoursite.com/images/Patterns/1.png">
+<meta name="twitter:title" content="Redis数据类型--Set（集合）">
+<meta name="twitter:description" content="Redis的集合和列表都可以存储多个字符串，它们之间的不同在于，列表可以存储多个不同的字符串，而集合则通过使用散列来保证自己存储的每个字符串都是各不相同的。包含字符串的无序收集器（unordered collection）,并且被包含的每个字符串都是独一无二、各不相同的。结构的读写： 添加、读取、移除单个元素 检查一个元素是否存在于集合中 计算交集、并集、差集 从集合中随机获取元素">
 
 
 
@@ -112,13 +110,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/04/07/设计模式--Facade(外观模式)/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/03/06/Redis数据类型--Set（集合）/"/>
 
 
 
 
 
-  <title>设计模式--Facade(外观模式) | 5IYXX</title>
+  <title>Redis数据类型--Set（集合） | 5IYXX</title>
   
 
 
@@ -259,7 +257,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/04/07/设计模式--Facade(外观模式)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/06/Redis数据类型--Set（集合）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Eric Chen">
@@ -276,7 +274,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">设计模式--Facade(外观模式)</h1>
+          <h1 class="post-title" itemprop="name headline">Redis数据类型--Set（集合）</h1>
         
 
         <div class="post-meta">
@@ -288,8 +286,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-04-07T23:02:25+08:00">
-                2016-04-07
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-06T21:02:25+08:00">
+                2017-03-06
               </time>
             
 
@@ -311,8 +309,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Patterns/" itemprop="url" rel="index">
-                    <span itemprop="name">Patterns</span>
+                  <a href="/categories/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
                   </a>
                 </span>
 
@@ -328,7 +326,7 @@
 
           
           
-             <span id="/2016/04/07/设计模式--Facade(外观模式)/" class="leancloud_visitors" data-flag-title="设计模式--Facade(外观模式)">
+             <span id="/2017/03/06/Redis数据类型--Set（集合）/" class="leancloud_visitors" data-flag-title="Redis数据类型--Set（集合）">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -359,13 +357,86 @@
       
 
       
-        <p>   为子系统中的一组接口提供一个一致的界面，Facade模式定义了一个高层接口，这个接口使得这一子系统更加容易使用。<br>   将一个系统划分成为若干个子系统有利于降低系统的复杂性。一个常见的设计目标是使子系统间的通信和相互依赖关系达到最小。<br>   达到该目标的途径之一是就是引入一个外观（Facade）对象，它为子系统中较一般的设施提供了一个单一而简单的界面。<br><a id="more"></a></p>
-<h3 id="Facade模式概述"><a href="#Facade模式概述" class="headerlink" title="Facade模式概述"></a>Facade模式概述</h3><p>   实际应用中，我们在对付一些老旧的code（尤其是将C的代码转成C++代码）或者即便不是老旧code，但涉及多个子系统时，除了重写全部代码<br>   （对于老旧code而言），我们还可能采用这样一种策略：重新进行类的设计，将原来分散在源码中的类/结构及方法重新组合，形成新的、统一的接口，供上层应用使用。<br>这在某种意义上与Adapter及Proxy有类似之处，但是，Proxy（代理）注重在为Client-Subject提供一个访问的中间层，如CORBA可为应用程序提供透明访问支持，使应用程序无需去考虑平台及网络造成的差异及其它诸多技术细节；Adapter（适配器）注重对接口的转换与调整；而Facade所面对的往往是多个类或其它程序单元，通过重新组合各类及程序单元，对外提供统一的接口/界面。</p>
-<h3 id="Facade模式应用"><a href="#Facade模式应用" class="headerlink" title="Facade模式应用"></a>Facade模式应用</h3><p>在遇到以下情况使用Facade模式：<br>1、当你要为一个复杂子系统提供一个简单接口时。子系统往往因为不断演化而变得越来越复杂。大多数模式使用时都会产生更多更小的类。这使得子系统更具可重用性，也更容易对子系统进行定制，但这也给那些不需要定制子系统的用户带来一些使用上的困难。Facade可以提供一个简单的缺省视图，这一视图对大多数用户来说已经足够，而那些需要更多的可定制性的用户可以越过Facade层。<br>2、客户程序与抽象类的实现部分之间存在着很大的依赖性。引入Facade将这个子系统与客户以及其他的子系统分离，可以提高子系统的独立性和可移植性。<br>3、当你需要构建一个层次结构的子系统时，使用Facade模式定义子系统中每层的入口点，如果子系统之间是相互依赖的，你可以让它们仅通过Facade进行通讯，从而简化了它们之间的依赖关系。</p>
-<h3 id="Facade模式优缺点"><a href="#Facade模式优缺点" class="headerlink" title="Facade模式优缺点"></a>Facade模式优缺点</h3><p>Facade模式有下面一些优点：<br>1、它对客户屏蔽子系统组件，因而减少了客户处理的对象的数目并使得子系统使用起来更加方便。<br>2、它实现了子系统与客户之间的松耦合关系，而子系统内部的功能组件往往是紧耦合的。<br>松耦合关系使得子系统的组件变化不会影响到它的客户。Facade模式有助于建立层次结构系统，也有助于对对象之间的依赖关系分层。Facade模式可以消除复杂的循环依赖关系。这一点在客户程序与子系统是分别实现的时候尤为重要。在大型软件系统中降低编译依赖性至关重要。在子系统类改变时，希望尽量减少重编译工作以节省时间。用Facade可以降低编译依赖性，限制重要系统中较小的变化所需的重编译工作。Facade模式同样也有利于简化系统在不同平台之间的移植过程，因为编译一个子系统一般不需要编译所有其他的子系统。<br>3、如果应用需要，它并不限制它们使用子系统类。因此你可以在系统易用性和通用性之间加以选择。<br><strong>图实例：</strong></p>
-<div align="center"><br><img src="/images/Patterns/1.png" alt=""><br></div>
-
-<p><strong>举例代码：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">package design.facade;  </div><div class="line"></div><div class="line">public interface ServiceA &#123;  </div><div class="line">    /** </div><div class="line">     * ServiceA 的A方法  </div><div class="line">     * */  </div><div class="line">    public void methodA() ;  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line">  </div><div class="line">  </div><div class="line">package design.facade;  </div><div class="line"></div><div class="line">public class ServiceAImpl implements ServiceA &#123;  </div><div class="line">  </div><div class="line">    /* (non-Javadoc) </div><div class="line">     * @see design.facade.ServiceA#methodA() </div><div class="line">     */  </div><div class="line">    @Override  </div><div class="line">    public void methodA() &#123;  </div><div class="line">        System.out.println( &quot;methodA--&gt; is runing&quot; );   </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line">  </div><div class="line">  </div><div class="line">package design.facade;  </div><div class="line">  </div><div class="line">public interface ServiceB &#123;  </div><div class="line">    /** </div><div class="line">     * ServiceB 的B方法 </div><div class="line">     * */  </div><div class="line">    public void methodB() ;  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line">  </div><div class="line">  </div><div class="line">package design.facade;  </div><div class="line">  </div><div class="line">public class ServiceBImpl implements ServiceB &#123;  </div><div class="line">      </div><div class="line">  </div><div class="line">    /* (non-Javadoc) </div><div class="line">     * @see design.facade.ServiceA#methodA() </div><div class="line">     */  </div><div class="line">    @Override  </div><div class="line">    public void methodB() &#123;  </div><div class="line">        System.out.println( &quot;methodB--&gt; is runing&quot; );   </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line">  </div><div class="line">  </div><div class="line">package design.facade;  </div><div class="line">  </div><div class="line">public interface ServiceC &#123;  </div><div class="line">    /** </div><div class="line">     * ServiceC 的C方法 </div><div class="line">     * */  </div><div class="line">    public void methodC() ;    </div><div class="line">&#125;  </div><div class="line">  </div><div class="line">  </div><div class="line">  </div><div class="line">package design.facade;  </div><div class="line">   </div><div class="line">public class ServiceCImpl implements ServiceC &#123;  </div><div class="line">      </div><div class="line">  </div><div class="line">    /* (non-Javadoc) </div><div class="line">     * @see design.facade.ServiceA#methodA() </div><div class="line">     */  </div><div class="line">    @Override  </div><div class="line">    public void methodC() &#123;  </div><div class="line">        System.out.println( &quot;methodC--&gt; is runing&quot; );    </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line">  </div><div class="line">  </div><div class="line">package design.facade;  </div><div class="line"> </div><div class="line">public class Facade &#123;  </div><div class="line">    ServiceA sa;  </div><div class="line">    ServiceB sb;  </div><div class="line">    ServiceC sc;  </div><div class="line">  </div><div class="line">    public Facade() &#123;  </div><div class="line">        sa = new ServiceAImpl();  </div><div class="line">        sb = new ServiceBImpl();  </div><div class="line">        sc = new ServiceCImpl();  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">    public void methodA() &#123;  </div><div class="line">        sa.methodA();  </div><div class="line">        sb.methodB();  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">    public void methodB() &#123;  </div><div class="line">        sb.methodB();  </div><div class="line">        sc.methodC();  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">    public void methodC() &#123;  </div><div class="line">        sc.methodC();  </div><div class="line">        sa.methodA();  </div><div class="line">    &#125;  </div><div class="line">      </div><div class="line">&#125;  </div><div class="line">  </div><div class="line">  </div><div class="line">  </div><div class="line">package design.facade;  </div><div class="line"></div><div class="line">public class Client &#123;  </div><div class="line">  </div><div class="line">    /** </div><div class="line">     * @param args </div><div class="line">     */  </div><div class="line">    public static void main(String[] args) &#123;  </div><div class="line">        ServiceA sa = new ServiceAImpl();  </div><div class="line">          ServiceB sb = new ServiceBImpl();  </div><div class="line">          sa.methodA();  </div><div class="line">          sb.methodB();  </div><div class="line">          System.out.println(&quot;=====================&quot;);  </div><div class="line">          Facade f = new Facade();  </div><div class="line">          f.methodA();  </div><div class="line">          f.methodB();  </div><div class="line">          f.methodC() ;  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+        <p>Redis的集合和列表都可以存储多个字符串，它们之间的不同在于，列表可以存储多个不同的字符串，而集合则通过使用散列来保证自己存储的每个字符串都是各不相同的。包含字符串的无序收集器（unordered collection）,并且被包含的每个字符串都是独一无二、各不相同的。<br>结构的读写：<br> 添加、读取、移除单个元素<br> 检查一个元素是否存在于集合中<br> 计算交集、并集、差集<br> 从集合中随机获取元素<br><a id="more"></a></p>
+<p>###<strong>SADD</strong><br><strong>SADD key member [member …]</strong><br> 将一个或多个 member 元素加入到集合 key 当中，已经存在于集合的 member 元素将被忽略。<br> 假如 key 不存在，则创建一个只包含 member 元素作成员的集合。<br> 当 key 不是集合类型时，返回一个错误。<br> 在Redis2.4版本以前， SADD 只接受单个 member 值。</p>
+<p>####可用版本<br>版本&gt;= 1.0.0</p>
+<p>####时间复杂度<br>O(N)， N 是被添加的元素的数量。</p>
+<p>####返回值<br>被添加到集合中的新元素的数量，不包括被忽略的元素。</p>
+<p>####示例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"># 添加单个元素</div><div class="line">redis&gt; SADD bbs &quot;discuz.net&quot;</div><div class="line">(integer) 1</div><div class="line"># 添加重复元素</div><div class="line">redis&gt; SADD bbs &quot;discuz.net&quot;</div><div class="line">(integer) 0</div><div class="line"># 添加多个元素</div><div class="line">redis&gt; SADD bbs &quot;tianya.cn&quot; &quot;groups.google.com&quot;</div><div class="line">(integer) 2</div><div class="line">redis&gt; SMEMBERS bbs</div><div class="line">1) &quot;discuz.net&quot;</div><div class="line">2) &quot;groups.google.com&quot;</div><div class="line">3) &quot;tianya.cn&quot;</div></pre></td></tr></table></figure></p>
+<p>###<strong>SCARD</strong><br><strong>SCARD key</strong><br> 返回集合 key 的基数(集合中元素的数量)。</p>
+<p>####可用版本<br>版本&gt;= 1.0.0</p>
+<p>####时间复杂度<br>O(1)</p>
+<p>####返回值<br>集合的基数。<br>当 key 不存在时，返回 0 。</p>
+<p>####示例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">redis&gt; SADD tool pc printer phone</div><div class="line">(integer) 3</div><div class="line">redis&gt; SCARD tool   # 非空集合</div><div class="line">(integer) 3</div><div class="line">redis&gt; DEL tool</div><div class="line">(i</div><div class="line">redis&gt; SCARD tool   # 空集合</div><div class="line">(integer) 0</div></pre></td></tr></table></figure></p>
+<p>###<strong>SDIFF</strong><br><strong>SDIFF key [key …]</strong><br> 返回一个集合的全部成员，该集合是所有给定集合之间的差集。<br> 不存在的 key 被视为空集。</p>
+<p>####可用版本<br>版本&gt;= 1.0.0</p>
+<p>####时间复杂度<br>O(N)， N 是所有给定集合的成员数量之和。</p>
+<p>####返回值<br>交集成员的列表。</p>
+<p>####示例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">redis&gt; SMEMBERS peter&apos;s_movies</div><div class="line">1) &quot;bet man&quot;</div><div class="line">2) &quot;start war&quot;</div><div class="line">3) &quot;2012&quot;</div><div class="line">redis&gt; SMEMBERS joe&apos;s_movies</div><div class="line">1) &quot;hi, lady&quot;</div><div class="line">2) &quot;Fast Five&quot;</div><div class="line">3) &quot;2012&quot;</div><div class="line">redis&gt; SDIFF peter&apos;s_movies joe&apos;s_movies</div><div class="line">1) &quot;bet man&quot;</div><div class="line">2) &quot;start war&quot;</div></pre></td></tr></table></figure></p>
+<p>###<strong>SDIFFSTORE</strong><br><strong>SDIFFSTORE destination key [key …]</strong><br> 这个命令的作用和 SDIFF 类似，但它将结果保存到 destination 集合，而不是简单地返回结果集。<br> 如果 destination 集合已经存在，则将其覆盖。<br> destination 可以是 key 本身。</p>
+<p>####可用版本<br>版本&gt;= 1.0.0</p>
+<p>####时间复杂度<br>O(N)， N 是所有给定集合的成员数量之和。</p>
+<p>####返回值<br>结果集中的元素数量。</p>
+<p>####示例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">redis&gt; SMEMBERS joe&apos;s_movies</div><div class="line">1) &quot;hi, lady&quot;</div><div class="line">2) &quot;Fast Five&quot;</div><div class="line">3) &quot;2012&quot;</div><div class="line">redis&gt; SMEMBERS peter&apos;s_movies</div><div class="line">1) &quot;bet man&quot;</div><div class="line">2) &quot;start war&quot;</div><div class="line">3) &quot;2012&quot;</div><div class="line">redis&gt; SDIFFSTORE joe_diff_peter joe&apos;s_movies peter&apos;s_movies</div><div class="line">(integer) 2</div><div class="line">redis&gt; SMEMBERS joe_diff_peter</div><div class="line">1) &quot;hi, lady&quot;</div><div class="line">2) &quot;Fast Five&quot;</div></pre></td></tr></table></figure></p>
+<p>###<strong>SINTER</strong><br><strong>SINTER key [key …]</strong><br> 返回一个集合的全部成员，该集合是所有给定集合的交集。<br> 不存在的 key 被视为空集。<br> 当给定集合当中有一个空集时，结果也为空集(根据集合运算定律)。</p>
+<p>####可用版本<br>版本&gt;= 1.0.0</p>
+<p>####时间复杂度<br>O(N * M)， N 为给定集合当中基数最小的集合， M 为给定集合的个数。</p>
+<p>####返回值<br>交集成员的列表。</p>
+<p>####示例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">redis&gt; SMEMBERS group_1</div><div class="line">1) &quot;LI LEI&quot;</div><div class="line">2) &quot;TOM&quot;</div><div class="line">3) &quot;JACK&quot;</div><div class="line">redis&gt; SMEMBERS group_2</div><div class="line">1) &quot;HAN MEIMEI&quot;</div><div class="line">2) &quot;JACK&quot;</div><div class="line">redis&gt; SINTER group_1 group_2</div><div class="line">1) &quot;JACK&quot;</div></pre></td></tr></table></figure></p>
+<p>###<strong>SINTERSTORE</strong><br><strong>SINTERSTORE destination key [key …]</strong></p>
+<p> 这个命令类似于 SINTER 命令，但它将结果保存到 destination 集合，而不是简单地返回结果集。<br> 如果 destination 集合已经存在，则将其覆盖。<br> destination 可以是 key 本身。</p>
+<p>####可用版本<br>版本&gt;= 1.0.0</p>
+<p>####时间复杂度<br>O(N * M)， N 为给定集合当中基数最小的集合， M 为给定集合的个数。</p>
+<p>####返回值<br>结果集中的成员数量。</p>
+<p>####示例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">redis&gt; SMEMBERS songs</div><div class="line">1) &quot;good bye joe&quot;</div><div class="line">2) &quot;hello,peter&quot;</div><div class="line">redis&gt; SMEMBERS my_songs</div><div class="line">1) &quot;good bye joe&quot;</div><div class="line">2) &quot;falling&quot;</div><div class="line">redis&gt; SINTERSTORE song_interset songs my_songs</div><div class="line">(integer) 1</div><div class="line">redis&gt; SMEMBERS song_interset</div><div class="line">1) &quot;good bye joe&quot;</div></pre></td></tr></table></figure></p>
+<p>###<strong>SISMEMBER</strong><br><strong>SISMEMBER key member</strong><br> 判断 member 元素是否集合 key 的成员。</p>
+<p>####可用版本<br>版本&gt;= 1.0.0</p>
+<p>####时间复杂度<br>O(1)</p>
+<p>####返回值<br>如果 member 元素是集合的成员，返回 1 。<br>如果 member 元素不是集合的成员，或 key 不存在，返回 0 。</p>
+<p>####示例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">redis&gt; SMEMBERS joe&apos;s_movies</div><div class="line">1) &quot;hi, lady&quot;</div><div class="line">2) &quot;Fast Five&quot;</div><div class="line">3) &quot;2012&quot;</div><div class="line">redis&gt; SISMEMBER joe&apos;s_movies &quot;bet man&quot;</div><div class="line">(integer) 0</div><div class="line">redis&gt; SISMEMBER joe&apos;s_movies &quot;Fast Five&quot;</div><div class="line">(integer) 1</div></pre></td></tr></table></figure></p>
+<p>###<strong>SMEMBERS</strong><br><strong>SMEMBERS key</strong><br> 返回集合 key 中的所有成员。<br> 不存在的 key 被视为空集合。</p>
+<p>####可用版本<br>版本&gt;= 1.0.0</p>
+<p>####时间复杂度<br>O(N)， N 为集合的基数。</p>
+<p>####返回值<br>集合中的所有成员。</p>
+<p>####示例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"># key 不存在或集合为空</div><div class="line">redis&gt; EXISTS not_exists_key</div><div class="line">(integer) 0</div><div class="line">redis&gt; SMEMBERS not_exists_key</div><div class="line">(empty list or set)</div><div class="line"># 非空集合</div><div class="line">redis&gt; SADD language Ruby Python Clojure</div><div class="line">(integer) 3</div><div class="line">redis&gt; SMEMBERS language</div><div class="line">1) &quot;Python&quot;</div><div class="line">2) &quot;Ruby&quot;</div><div class="line">3) &quot;Clojure&quot;</div></pre></td></tr></table></figure></p>
+<p>###<strong>SMOVE</strong><br><strong>SMOVE source destination member</strong><br> 将 member 元素从 source 集合移动到 destination 集合。<br> SMOVE 是原子性操作。<br> 如果 source 集合不存在或不包含指定的 member 元素，则 SMOVE 命令不执行任何操作，仅返回 0 。否则， member 元素从 source 集合中被移除，并添加到 destination 集合中去。<br> 当 destination 集合已经包含 member 元素时， SMOVE 命令只是简单地将 source 集合中的 member 元素删除。<br> 当 source 或 destination 不是集合类型时，返回一个错误。</p>
+<p>####可用版本<br>版本&gt;= 1.0.0</p>
+<p>####时间复杂度<br>O(1)</p>
+<p>####返回值<br>如果 member 元素被成功移除，返回 1 。<br>如果 member 元素不是 source 集合的成员，并且没有任何操作对 destination 集合执行，那么返回 0 。</p>
+<p>####示例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">redis&gt; SMEMBERS songs</div><div class="line">1) &quot;Billie Jean&quot;</div><div class="line">2) &quot;Believe Me&quot;</div><div class="line">redis&gt; SMEMBERS my_songs</div><div class="line">(empty list or set)</div><div class="line">redis&gt; SMOVE songs my_songs &quot;Believe Me&quot;</div><div class="line">(integer) 1</div><div class="line">redis&gt; SMEMBERS songs</div><div class="line">1) &quot;Billie Jean&quot;</div><div class="line">redis&gt; SMEMBERS my_songs</div><div class="line">1) &quot;Believe Me&quot;</div></pre></td></tr></table></figure></p>
+<p>###<strong>SPOP</strong><br><strong>SPOP key</strong><br> 移除并返回集合中的一个随机元素。<br> 如果只想获取一个随机元素，但不想该元素从集合中被移除的话，可以使用 SRANDMEMBER 命令。</p>
+<p>####可用版本<br>版本&gt;= 1.0.0</p>
+<p>####时间复杂度<br>O(1)</p>
+<p>####返回值<br>被移除的随机元素。<br>当 key 不存在或 key 是空集时，返回 nil 。</p>
+<p>####示例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">redis&gt; SMEMBERS db</div><div class="line">1) &quot;MySQL&quot;</div><div class="line">2) &quot;MongoDB&quot;</div><div class="line">3) &quot;Redis&quot;</div><div class="line">redis&gt; SPOP db</div><div class="line">&quot;Redis&quot;</div><div class="line">redis&gt; SMEMBERS db</div><div class="line">1) &quot;MySQL&quot;</div><div class="line">2) &quot;MongoDB&quot;</div><div class="line">redis&gt; SPOP db</div><div class="line">&quot;MySQL&quot;</div><div class="line">redis&gt; SMEMBERS db</div><div class="line">1) &quot;MongoDB&quot;</div></pre></td></tr></table></figure></p>
+<p>###<strong>SRANDMEMBER</strong><br><strong>SRANDMEMBER key [count]</strong></p>
+<p> 如果命令执行时，只提供了 key 参数，那么返回集合中的一个随机元素。</p>
+<p> 从 Redis 2.6 版本开始， SRANDMEMBER 命令接受可选的 count 参数：</p>
+<ul>
+<li>如果 count 为正数，且小于集合基数，那么命令返回一个包含 count 个元素的数组，数组中的元素各不相同。如果 count大于等于集合基数，那么返回整个集合。</li>
+<li>如果 count 为负数，那么命令返回一个数组，数组中的元素可能会重复出现多次，而数组的长度为 count 的绝对值。</li>
+</ul>
+<p> 该操作和 SPOP 相似，但 SPOP 将随机元素从集合中移除并返回，而 SRANDMEMBER 则仅仅返回随机元素，而不对集合进行任何改动。</p>
+<p>####可用版本<br>版本&gt;= 1.0.0</p>
+<p>####时间复杂度<br>只提供 key 参数时为 O(1) 。<br>如果提供了 count 参数，那么为 O(N) ，N 为返回数组的元素个数。</p>
+<p>####返回值<br>只提供 key 参数时，返回一个元素；如果集合为空，返回 nil 。<br>如果提供了 count 参数，那么返回一个数组；如果集合为空，返回空数组。</p>
+<p>####示例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"># 添加元素</div><div class="line">redis&gt; SADD fruit apple banana cherry</div><div class="line">(integer) 3</div><div class="line"># 只给定 key 参数，返回一个随机元素</div><div class="line">redis&gt; SRANDMEMBER fruit</div><div class="line">&quot;cherry&quot;</div><div class="line">redis&gt; SRANDMEMBER fruit</div><div class="line">&quot;apple&quot;</div><div class="line"># 给定 3 为 count 参数，返回 3 个随机元素</div><div class="line"># 每个随机元素都不相同</div><div class="line">redis&gt; SRANDMEMBER fruit 3</div><div class="line">1) &quot;apple&quot;</div><div class="line">2) &quot;banana&quot;</div><div class="line">3) &quot;cherry&quot;</div><div class="line"># 给定 -3 为 count 参数，返回 3 个随机元素</div><div class="line"># 元素可能会重复出现多次</div><div class="line">redis&gt; SRANDMEMBER fruit -3</div><div class="line">1) &quot;banana&quot;</div><div class="line">2) &quot;cherry&quot;</div><div class="line">3) &quot;apple&quot;</div><div class="line">redis&gt; SRANDMEMBER fruit -3</div><div class="line">1) &quot;apple&quot;</div><div class="line">2) &quot;apple&quot;</div><div class="line">3) &quot;cherry&quot;</div><div class="line"># 如果 count 是整数，且大于等于集合基数，那么返回整个集合</div><div class="line">redis&gt; SRANDMEMBER fruit 10</div><div class="line">1) &quot;apple&quot;</div><div class="line">2) &quot;banana&quot;</div><div class="line">3) &quot;cherry&quot;</div><div class="line"># 如果 count 是负数，且 count 的绝对值大于集合的基数</div><div class="line"># 那么返回的数组的长度为 count 的绝对值</div><div class="line">redis&gt; SRANDMEMBER fruit -10</div><div class="line">1) &quot;banana&quot;</div><div class="line">2) &quot;apple&quot;</div><div class="line">3) &quot;banana&quot;</div><div class="line">4) &quot;cherry&quot;</div><div class="line">5) &quot;apple&quot;</div><div class="line">6) &quot;apple&quot;</div><div class="line">7) &quot;cherry&quot;</div><div class="line">8) &quot;apple&quot;</div><div class="line">9) &quot;apple&quot;</div><div class="line">10) &quot;banana&quot;</div><div class="line"># SRANDMEMBER 并不会修改集合内容</div><div class="line">redis&gt; SMEMBERS fruit</div><div class="line">1) &quot;apple&quot;</div><div class="line">2) &quot;cherry&quot;</div><div class="line">3) &quot;banana&quot;</div><div class="line"># 集合为空时返回 nil 或者空数组</div><div class="line">redis&gt; SRANDMEMBER not-exists</div><div class="line">(nil)</div><div class="line">redis&gt; SRANDMEMBER not-eixsts 10</div><div class="line">(empty list or set)</div></pre></td></tr></table></figure></p>
+<p>###<strong>SREM</strong><br><strong>SREM key member [member …]</strong><br> 移除集合 key 中的一个或多个 member 元素，不存在的 member 元素会被忽略。<br> 当 key 不是集合类型，返回一个错误。<br> 在 Redis 2.4 版本以前， SREM 只接受单个 member 值。</p>
+<p>####可用版本<br>版本&gt;= 1.0.0</p>
+<p>####时间复杂度<br>O(N)， N 为给定 member 元素的数量。</p>
+<p>####返回值<br>被成功移除的元素的数量，不包括被忽略的元素。</p>
+<p>####示例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"># 测试数据</div><div class="line">redis&gt; SMEMBERS languages</div><div class="line">1) &quot;c&quot;</div><div class="line">2) &quot;lisp&quot;</div><div class="line">3) &quot;python&quot;</div><div class="line">4) &quot;ruby&quot;</div><div class="line"># 移除单个元素</div><div class="line">redis&gt; SREM languages ruby</div><div class="line">(integer) 1</div><div class="line"># 移除不存在元素</div><div class="line">redis&gt; SREM languages non-exists-language</div><div class="line">(integer) 0</div><div class="line"># 移除多个元素</div><div class="line">redis&gt; SREM languages lisp python c</div><div class="line">(integer) 3</div><div class="line">redis&gt; SMEMBERS languages</div><div class="line">(empty list or set)</div></pre></td></tr></table></figure></p>
+<p>###<strong>SUNION</strong><br><strong>SUNION key [key …]</strong><br> 返回一个集合的全部成员，该集合是所有给定集合的并集。<br> 不存在的 key 被视为空集。</p>
+<p>####可用版本<br>版本&gt;= 1.0.0</p>
+<p>####时间复杂度<br>O(N)， N 是所有给定集合的成员数量之和。</p>
+<p>####返回值<br>并集成员的列表。</p>
+<p>####示例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">redis&gt; SMEMBERS songs</div><div class="line">1) &quot;Billie Jean&quot;</div><div class="line">redis&gt; SMEMBERS my_songs</div><div class="line">1) &quot;Believe Me&quot;</div><div class="line">redis&gt; SUNION songs my_songs</div><div class="line">1) &quot;Billie Jean&quot;</div><div class="line">2) &quot;Believe Me&quot;</div></pre></td></tr></table></figure></p>
+<p>###<strong>SUNIONSTORE</strong><br><strong>SUNIONSTORE destination key [key …]</strong><br> 这个命令类似于 SUNION 命令，但它将结果保存到 destination 集合，而不是简单地返回结果集。<br> 如果 destination 已经存在，则将其覆盖。<br> destination 可以是 key 本身。</p>
+<p>####可用版本<br>版本&gt;= 1.0.0</p>
+<p>####时间复杂度<br>O(N)， N 是所有给定集合的成员数量之和。</p>
+<p>####返回值<br>结果集中的元素数量。</p>
+<p>####示例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">redis&gt; SMEMBERS NoSQL</div><div class="line">1) &quot;MongoDB&quot;</div><div class="line">2) &quot;Redis&quot;</div><div class="line">redis&gt; SMEMBERS SQL</div><div class="line">1) &quot;sqlite&quot;</div><div class="line">2) &quot;MySQL&quot;</div><div class="line">redis&gt; SUNIONSTORE db NoSQL SQL</div><div class="line">(integer) 4</div><div class="line">redis&gt; SMEMBERS db</div><div class="line">1) &quot;MySQL&quot;</div><div class="line">2) &quot;sqlite&quot;</div><div class="line">3) &quot;MongoDB&quot;</div><div class="line">4) &quot;Redis&quot;</div></pre></td></tr></table></figure></p>
+<p>###<strong>SSCAN</strong><br><strong>SSCAN key cursor [MATCH pattern] [COUNT count]</strong><br> 详细信息请参考 SCAN 命令。</p>
 
       
     </div>
@@ -412,7 +483,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/设计模式/" rel="tag"># 设计模式</a>
+            <a href="/tags/Redis/" rel="tag"># Redis</a>
           
         </div>
       
@@ -425,8 +496,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/08/Nginx的一些基本功能/" rel="next" title="Nginx的一些基本功能">
-                <i class="fa fa-chevron-left"></i> Nginx的一些基本功能
+              <a href="/2017/03/06/Redis数据类型--SortedSet（有序集合）/" rel="next" title="Redis数据类型--SortedSet（有序集合）">
+                <i class="fa fa-chevron-left"></i> Redis数据类型--SortedSet（有序集合）
               </a>
             
           </div>
@@ -435,8 +506,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/12/11/了解如何搭建自己的hexo博客/" rel="prev" title="了解如何搭建自己的hexo博客">
-                了解如何搭建自己的hexo博客 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/03/07/Jar包添加到maven本地仓库/" rel="prev" title="Jar包添加到maven本地仓库">
+                Jar包添加到maven本地仓库 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -496,17 +567,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           
             <img class="site-author-image" itemprop="image"
@@ -586,22 +648,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Facade模式概述"><span class="nav-number">1.</span> <span class="nav-text">Facade模式概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Facade模式应用"><span class="nav-number">2.</span> <span class="nav-text">Facade模式应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Facade模式优缺点"><span class="nav-number">3.</span> <span class="nav-text">Facade模式优缺点</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
