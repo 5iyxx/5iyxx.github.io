@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-09-28T08:26:46.042Z</updated>
+  <updated>2017-09-29T01:49:19.192Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,17 +17,17 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Nginx</title>
+    <title>Red Hat 7 安装后环境配置</title>
     <link href="http://yoursite.com/2017/06/22/Red%20Hat%207%20%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
     <id>http://yoursite.com/2017/06/22/Red Hat 7 环境配置/</id>
     <published>2017-06-22T12:04:50.000Z</published>
-    <updated>2017-09-28T08:26:46.042Z</updated>
+    <updated>2017-09-29T01:49:19.192Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="Red-Hat-7-安装后环境配置"><a href="#Red-Hat-7-安装后环境配置" class="headerlink" title="Red Hat 7 安装后环境配置"></a>Red Hat 7 安装后环境配置</h2><a id="more"></a><h3 id="配置静态的ip地址"><a href="#配置静态的ip地址" class="headerlink" title="配置静态的ip地址"></a>配置静态的ip地址</h3><ul><li>查看系统的使用的网卡<br><code>ifconfig</code> 我本地网卡为eno16777736</li><li>打开配置文件<br><code>vi /etc/sysconfig/network-scripts/ifcfg-eno16777736</code></li><li>静态ip设置，需要根据自己的网络参数修改配置文件<br><code>BOOTPROTO=static</code> 指定地址的获取方式<br><code>IPADDR=192.168.0.225</code> ip地址<br><code>NETMASK=255.255.255.0</code> 子网掩码<br><code>GATEWAY=192.168.0.1</code> 网关</li><li>重启服务<br><code>systemctl  restart network</code></li><li>ping测试<br><code>ping 8.8.8.8</code><br><code>PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.</code><br><code>64 bytes from 8.8.8.8: icmp_seq=1 ttl=45 time=241 ms</code><br>测试如上结果，成功！</li></ul>]]></content>
+    <content type="html"><![CDATA[<p>Red Hat 7 安装后环境配置<br><a id="more"></a></p><h3 id="配置静态的ip地址"><a href="#配置静态的ip地址" class="headerlink" title="配置静态的ip地址"></a>配置静态的ip地址</h3><ul><li>查看系统的使用的网卡<br><code>ifconfig</code> 我本地网卡为eno16777736</li><li>打开配置文件<br><code>vi /etc/sysconfig/network-scripts/ifcfg-eno16777736</code></li><li>静态ip设置，需要根据自己的网络参数修改配置文件<br><code>BOOTPROTO=static</code> 指定地址的获取方式<br><code>IPADDR=192.168.0.225</code> ip地址<br><code>NETMASK=255.255.255.0</code> 子网掩码<br><code>GATEWAY=192.168.0.1</code> 网关</li><li>重启服务<br><code>systemctl  restart network</code></li><li>ping测试<br><code>ping 8.8.8.8</code><br><code>PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.</code><br><code>64 bytes from 8.8.8.8: icmp_seq=1 ttl=45 time=241 ms</code><br>测试如上结果，成功！</li></ul>]]></content>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;Red-Hat-7-安装后环境配置&quot;&gt;&lt;a href=&quot;#Red-Hat-7-安装后环境配置&quot; class=&quot;headerlink&quot; title=&quot;Red Hat 7 安装后环境配置&quot;&gt;&lt;/a&gt;Red Hat 7 安装后环境配置&lt;/h2&gt;
+      &lt;p&gt;Red Hat 7 安装后环境配置&lt;br&gt;
     
     </summary>
     
