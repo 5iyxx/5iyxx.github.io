@@ -84,7 +84,7 @@
 <meta property="og:image" content="http://yoursite.com/images/NIO/10.jpg">
 <meta property="og:image" content="http://yoursite.com/images/NIO/11.jpg">
 <meta property="og:image" content="http://yoursite.com/images/NIO/12.jpg">
-<meta property="og:updated_time" content="2017-09-29T05:26:32.863Z">
+<meta property="og:updated_time" content="2017-09-29T05:31:44.940Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ByteBuf工作原理">
 <meta name="twitter:description" content="ByteBuf依然是个Byte数组的缓冲区，它的基本功能与JDK的ByteBuffer一致。">
@@ -366,23 +366,27 @@
 
       
         <p>ByteBuf依然是个Byte数组的缓冲区，它的基本功能与JDK的ByteBuffer一致。<br><a id="more"></a></p>
-<h3 id="功能分析"><a href="#功能分析" class="headerlink" title="功能分析"></a>功能分析</h3><p>ByteBuffer完全可以满足NIO编程的需要，但是由于NIO编程的复杂性，ByteBuffer也有其局限性，它的主要缺点如下。</p>
+<h4 id="功能分析"><a href="#功能分析" class="headerlink" title="功能分析"></a>功能分析</h4><p>ByteBuffer完全可以满足NIO编程的需要，但是由于NIO编程的复杂性，ByteBuffer也有其局限性，它的主要缺点如下。</p>
 <ul>
 <li>ByteBuffer长度固定，一旦分配完成，它的容量不能动态扩展和收缩，当需要编码的POJO对象大于ByteBuffer的容量时，会发生索引越界异常；</li>
 <li>ByteBuffer只有一个标识位置的指针position，读写的时候需要手工调用flip()和rewind()等，使用者必须小心谨慎地处理这些API，否则很容易导致程序处理失败；</li>
 <li>ByteBuffer的API功能有限，一些高级和实用的特性它不支持，需要使用者自己编程实现。</li>
 </ul>
+<p>为弥补这些不足，Netty提供了自己的ByteBuffer实现——ByteBuf。ByteBuf依然是个Byte数组的缓冲区，它的基本功能应该与JDK的ByteBuffer一致，提供以下几类基本功能：</p>
+<ol>
+<li>7种Java基础类型、byte数组、ByteBuffer等的读写；</li>
+<li>缓冲区自身的copy和slice等；</li>
+<li>设置网络字节序；</li>
+<li>构造缓冲区实例；</li>
+<li>操作位置指针等方法。</li>
+</ol>
 <p>由于JDK的ByteBuffer已经提供了这些基础能力的实现，因此，Netty ByteBuf的实现可以有两种策略。</p>
 <ul>
 <li>参考JDK ByteBuffer的实现，增加额外的功能，解决原ByteBuffer的缺点。</li>
-<li><p>聚合JDK ByteBuffer，通过Facade模式对其进行包装，可以减少自身的代码量，减低实现的成本。</p>
-<h3 id="缓冲区工作过程"><a href="#缓冲区工作过程" class="headerlink" title="缓冲区工作过程"></a>缓冲区工作过程</h3><p>JDK ByteBuffer由于<strong>只有一个位置指针用于处理读写操作</strong>，因此每次进行读写的时候都需要额外调用filp()和clear()等方法，否则功能将出错，他的典型用法如下。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">ByteBuffer buffer=ByteBuffer.allocate(88);</div><div class="line">String value =&quot;Netty 权威指南&quot;;</div><div class="line">buffer.put(value.getByte());</div><div class="line">buffer.filp();</div><div class="line">byte[] vArray=new byte[buffer.remaining];</div><div class="line">buffer.get(vArray);</div><div class="line">String decodeValue=new String(vArray);</div></pre></td></tr></table></figure>
-<p>我们看下调用filp()操作前后的对比。</p>
-<div align="center"><br><img src="/images/NIO/6.jpg" alt=""><br>图2 ByteBuffer filp()操作之前</div>
-
-</li>
+<li>聚合JDK ByteBuffer，通过Facade模式对其进行包装，可以减少自身的代码量，减低实现的成本。</li>
 </ul>
+<h4 id="缓冲区工作过程"><a href="#缓冲区工作过程" class="headerlink" title="缓冲区工作过程"></a>缓冲区工作过程</h4><p>JDK ByteBuffer由于<strong>只有一个位置指针用于处理读写操作</strong>，因此每次进行读写的时候都需要额外调用filp()和clear()等方法，否则功能将出错，他的典型用法如下。<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">ByteBuffer buffer=ByteBuffer.allocate(88);</div><div class="line">String value =&quot;Netty 权威指南&quot;;</div><div class="line">buffer.put(value.getByte());</div><div class="line">buffer.filp();</div><div class="line">byte[] vArray=new byte[buffer.remaining];</div><div class="line">buffer.get(vArray);</div><div class="line">String decodeValue=new String(vArray);</div></pre></td></tr></table></figure></p>
+<p> 我们看下调用filp()操作前后的对比。<br> <div align="center"><br><img src="/images/NIO/6.jpg" alt=""><br>图2 ByteBuffer filp()操作之前</div></p>
 <p>如图2 所示，如果不做filp操作，读取到的将是position到capacity之间的错误内容。<br>当执行filp()操作之后，他的limit被设置为position,position设置为0，capacity不变。由于读取的内容是从position到limit之间，因此，他能够正确地读到之前写入缓冲区的内容。如图3所示<br> <div align="center"><br><img src="/images/NIO/7.jpg" alt=""><br>图3 ByteBuffer filp()操作之后</div></p>
 <p><strong>ByteBuf通过两个位置指针来协助缓冲区的读写操作</strong>，读操作使用readerIndex，写操作使用writeIndex。</p>
 <p>readerIndex和writeIndex的取值一开始都是0，随着数据的写入writeIndex会增加，读取数据会使readIndex增加，但是它不会超过writeIndex。在读取之后，0~readerIndex被视为discard的，调用discardReadBytes方法，可以释放这部分空间，它的作用类似ByteBuffer的compact方法。ReaderIndex与writeIndex之间的数据是可读取的，等价于ByteBuffer position 和limit之间的数据。writeIndex与capacity之间的空间是可写的，等价于ByteBuffer limit和capacity之间的可用空间<em>**</em>。<br>由于写操作不修改readerIndex指针，读操作不修改writeIndex指针，因此读写之间不再需要调整位置指针，这极大低简化了缓冲区的读写操作，避免了由于遗漏或者，不熟悉filp()操作导致的功能异常。<br>初始分配的ByteBuf如图4所示。</p>
@@ -626,7 +630,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#功能分析"><span class="nav-number">1.</span> <span class="nav-text">功能分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓冲区工作过程"><span class="nav-number">2.</span> <span class="nav-text">缓冲区工作过程</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#功能分析"><span class="nav-number">1.</span> <span class="nav-text">功能分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缓冲区工作过程"><span class="nav-number">2.</span> <span class="nav-text">缓冲区工作过程</span></a></li></ol></div>
             
 
           </div>
