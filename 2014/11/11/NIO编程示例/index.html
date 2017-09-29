@@ -82,7 +82,7 @@
 <meta property="og:image" content="http://yoursite.com/images/NIO/16.jpg">
 <meta property="og:image" content="http://yoursite.com/images/NIO/17.jpg">
 <meta property="og:image" content="http://yoursite.com/images/NIO/18.jpg">
-<meta property="og:updated_time" content="2017-09-29T10:21:06.444Z">
+<meta property="og:updated_time" content="2017-09-29T10:26:03.104Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NIO编程示例">
 <meta name="twitter:description" content="通过NIO编程的序列图和源代码分析来熟悉相关的概念。">
@@ -428,7 +428,7 @@
 <p>(1) 8-19行构造函数用于初始化NIO的多路复用器和SocketChannel对象，需要注意的是创建SocketChannel之后，需要将其设置为异步非阻塞模式。就像在2.3.3章节中所讲的，我们可以设置SocketChannel的TCP参数，例如接收和发送的TCP缓冲区大小<br>(2) 28-33行用于发送连接请求，作为示例，连接是成功的，所以不需要做重连操作，因此将其放到循环之前。下面我们具体看看doConnect的实现，代码跳到第116-123行，首先对SocketChannel的connect()操作进行判断，如果连接成功，则将SocketChannel注册到多路复用器Selector上，注册SelectionKey.OP_READ，如果没有直接连接成功，说明服务端没有返回TCP握手应答消息，这并不代表连接失败，我们需要将SocketChannel注册到多路复用器Selector上，注册SelectionKey.OP_CONNECT，当服务端返回TCP syn-ack消息后，Selector就能够轮询到这个SocketChannel处于连接就绪状态<br>(3) 34-67行在循环体中轮询多路复用器Selector，当有就绪的Channel时，执行第59行的handleInput(key)方法，下面我们就对handleInput方法进行分析。</p>
 <p>(4) 跳到第68行，我们首先对SelectionKey进行判断，看它处于什么状态。如果是处于连接状态，说明服务端已经返回ACK应答消息，我们需要对连接结果进行判断，调用SocketChannel的finishConnect()方法，如果返回值为true，说明客户端连接成功，如果返回值为false或者直接抛出IOException,说明连接失败。在本例程中，返回值为true，说明连接成功。将SocketChannel注册到多路复用器上，注册SelectionKey.OP_READ操作位，监听网络读操作。然后发送请求消息给服务端，下面我们对doWrite(sc)进行分析。代码跳到110行，我们构造请求消息体，然后对其编码，写入到发送缓冲区中，最后调用SocketChannel的write方法进行发送，由于发送是异步的，所以会存在“半包写”问题，此处不再赘述。最后通过hasRemaining()方法对发送结果进行判断，如果缓冲区中的消息全部发送完成，打印”Send order 2 server succeed.</p>
 <p>(5) 代码返回第80行，我们继续分析下客户端是如何读取时间服务器应答消息的。如果客户端接收到了服务端的应答消息，则SocketChannel是可读的，由于无法事先判断应答码流的大小，我们就预分配1M的接收缓冲区用于读取应答消息，调用SocketChannel的read()方法进行异步读取操作，由于是异步操作，所以必须对读取的结果进行判断，这部分的处理逻辑已经在2.3.3章节详细介绍过，此处不再赘述。如果读取到了消息，则对消息进行解码，最后打印结果。执行完成后将stop置为true，线程退出循环<br>(6) 线程退出循环后，我们需要对连接资源进行释放，以实现“优雅退出”。60-66行用于多路复用器的资源释放，由于多路复用器上可能注册成千上万的Channel或者pipe，如果一一对这些资源进行释放显然不合适。因此，JDK底层会自动释放所有跟此多路复用器关联的资源，JDK的API DOC如下：</p>
-<div align="center"><br><img src="/images/NIO/16.jpg" alt=""><br>图3 多路复用器Selector的资源释放</div><br>到此为止，我们已经将时间服务器通过NIO完成了改造，并对源码进行了分析和解读，下面分别执行时间服务器的服务端和客户端，看执行结果。<br><br>服务端执行结果：<br><div align="center"><br><img src="/images/NIO/17.jpg" alt=""><br>图4 NIO时间服务器客户端执行结果</div>
+<div align="center"><br><img src="/images/NIO/16.jpg" alt=""><br>图3 多路复用器Selector的资源释放</div><br>到此为止，我们已经将时间服务器通过NIO完成了改造，并对源码进行了分析和解读。<br>#### 运行结果<br>下面分别执行时间服务器的服务端和客户端，看执行结果。<br><br>服务端执行结果：<br><div align="center"><br><img src="/images/NIO/17.jpg" alt=""><br>图4 NIO时间服务器客户端执行结果</div>
 
 <p>客户端执行结果：</p>
 <div align="center"><br><img src="/images/NIO/18.jpg" alt=""><br>图5 NIO时间服务器客户端执行结果</div>
