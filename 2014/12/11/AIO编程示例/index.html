@@ -53,7 +53,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="NIO," />
 
 
 
@@ -71,12 +71,28 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="5IYXX">
-<meta property="og:url" content="http://yoursite.com/tags/Mybatis/index.html">
+<meta name="description" content="NIO 2.0引进了新的异步通道的概念，并提升了异步文件通道和异步套接字通道的实现。异步通道提供了以下两种方式获取操作结果。
+
+通过java.util.concurrent.Future类来表示异步操作的结果。
+在执行异步操作的时候传入一个java.nio.channels。
+CompletionHandler接口的实现类作为操作完成的回调。NIO 2.0的异步套接字通道是真正的异步非阻塞I/O，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AIO编程示例">
+<meta property="og:url" content="http://yoursite.com/2014/12/11/AIO编程示例/index.html">
 <meta property="og:site_name" content="5IYXX">
+<meta property="og:description" content="NIO 2.0引进了新的异步通道的概念，并提升了异步文件通道和异步套接字通道的实现。异步通道提供了以下两种方式获取操作结果。
+
+通过java.util.concurrent.Future类来表示异步操作的结果。
+在执行异步操作的时候传入一个java.nio.channels。
+CompletionHandler接口的实现类作为操作完成的回调。NIO 2.0的异步套接字通道是真正的异步非阻塞I/O，">
+<meta property="og:updated_time" content="2017-09-29T15:19:07.996Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="5IYXX">
+<meta name="twitter:title" content="AIO编程示例">
+<meta name="twitter:description" content="NIO 2.0引进了新的异步通道的概念，并提升了异步文件通道和异步套接字通道的实现。异步通道提供了以下两种方式获取操作结果。
+
+通过java.util.concurrent.Future类来表示异步操作的结果。
+在执行异步操作的时候传入一个java.nio.channels。
+CompletionHandler接口的实现类作为操作完成的回调。NIO 2.0的异步套接字通道是真正的异步非阻塞I/O，">
 
 
 
@@ -106,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/Mybatis/"/>
+  <link rel="canonical" href="http://yoursite.com/2014/12/11/AIO编程示例/"/>
 
 
 
 
 
-  <title>Tag: Mybatis | 5IYXX</title>
+  <title>AIO编程示例 | 5IYXX</title>
   
 
 
@@ -131,7 +147,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -239,54 +255,219 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>Mybatis<small>Tag</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/12/11/AIO编程示例/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eric Chen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/psbe.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="5IYXX">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2017/02/12/Mybatis入门/" itemprop="url">
-              
-                <span itemprop="name">Mybatis</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">AIO编程示例</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-02-12T21:02:25+08:00"
-              content="2017-02-12" >
-          02-12
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-12-11T09:43:50+08:00">
+                2014-12-11
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NIO/" itemprop="url" rel="index">
+                    <span itemprop="name">NIO</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2014/12/11/AIO编程示例/" class="leancloud_visitors" data-flag-title="AIO编程示例">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    </div>
+      
 
+      
+        <p>NIO 2.0引进了新的异步通道的概念，并提升了<strong>异步文件通道</strong>和<strong>异步套接字通道</strong>的实现。异步通道提供了以下两种方式获取操作结果。</p>
+<ul>
+<li>通过java.util.concurrent.Future类来表示异步操作的结果。</li>
+<li>在执行异步操作的时候传入一个java.nio.channels。</li>
+<li>CompletionHandler接口的实现类作为操作完成的回调。<br>NIO 2.0的异步套接字通道是真正的异步非阻塞I/O，对应于UNIX网络编程中的事件驱动I/O（AIO）。它不需要通过多路复用器（Seletor)对注册的通道进行轮询操作即可实现异步读写，从而简化了NIO的编程模型。</li>
+</ul>
+<a id="more"></a>
+<h4 id="AIO服务端源码分析"><a href="#AIO服务端源码分析" class="headerlink" title="AIO服务端源码分析"></a>AIO服务端源码分析</h4>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div><p style="color:225,225,225;font-weight:bold;font-size:10px;">Adhere to the original technology to share, your support will encourage me to continue to create!</p></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/pay/wx.png" alt="Eric Chen WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/pay/zfb.png" alt="Eric Chen Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/NIO/" rel="tag"># NIO</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/11/11/Selector全面深入理解/" rel="next" title="Selector全面深入理解">
+                <i class="fa fa-chevron-left"></i> Selector全面深入理解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/08/Nginx的一些基本功能/" rel="prev" title="Nginx的一些基本功能">
+                Nginx的一些基本功能 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -294,6 +475,17 @@
 
 
           
+  <div class="comments" id="comments">
+    
+       
+         <div onclick="ShowGitment()" id="gitment-display-button">Show comments from Gitment</div>
+         <div id="gitment-container" style="display:none"></div>
+       
+	  
+	  
+    
+  </div>
+
 
         </div>
         
@@ -314,8 +506,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           
             <img class="site-author-image" itemprop="image"
@@ -395,6 +596,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#AIO服务端源码分析"><span class="nav-number">1.</span> <span class="nav-text">AIO服务端源码分析</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
