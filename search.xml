@@ -8,7 +8,6 @@
         <category>NIO</category>
       </categories>
       <tags>
-        <tag>Netty</tag>
         <tag>NIO</tag>
       </tags>
   </entry>
@@ -243,6 +242,17 @@
       </categories>
       <tags>
         <tag>Netty</tag>
+        <tag>NIO</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[通道Channel]]></title>
+    <url>%2F2013%2F10%2F11%2F%E9%80%9A%E9%81%93Channel%2F</url>
+    <content type="text"><![CDATA[Channel 是一个对象，可以通过它读取和写入数据。 Channel概述Channel就是一个通道，它就像自来水管一样，网络数据通过Channel读取和写入。通道与流的不同之处在于通道是双向的，流只是一个方向上移动（一个流必须是InputStream或者OutPutStream的子类），而通道可以用于读、写或者二者同时进行。因为Channel是双向工的，所以它可以比流更好地映射底层操作系统的API。特别是UNIX网络编程模型中，底层操作系统的通道都是全双工的，同时支持读写操作。 Channel的类继承关系Channel的类图继承关系如图1所示。 图1 Channel的类图继承关系 自顶向下看，前三层主要是Channel接口，用于定义它的功能，后面是一些具体的功能类（抽象类）。从类图可以看出，实际上Channel可以分为两大类：用于网络读写SelectableChannel和用于文件操作的FileChannel。ServerSocketChannel和SocketChannel都是SelectableChannel的子类。 Channel的方法通道可处于打开或关闭状态。创建通道时它处于打开状态，一旦将其关闭，则保持关闭状态。一旦关闭了某个通道，试图对其调用 I/O 操作就会导致 ClosedChannelException 被抛出。通过调用通道的 isOpen 方法可测试通道是否处于打开状态。 方法 描述 void close() 关闭此通道。 boolean isOpen() 判断此通道是否处于打开状态。]]></content>
+      <categories>
+        <category>NIO</category>
+      </categories>
+      <tags>
         <tag>NIO</tag>
       </tags>
   </entry>
