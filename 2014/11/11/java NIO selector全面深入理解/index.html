@@ -73,13 +73,13 @@
 
 <meta name="description" content="最近在学习java NIO，发现java nio selector 相对 channel ,buffer 这两个概念是比较难理解的 ,把学习理解的东西以文字的东西记录下来，就像从内存落地到硬盘，把内存中内容换成该知识点的索引。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java NIO selector全面深入理解">
-<meta property="og:url" content="http://yoursite.com/2014/11/11/java NIO selector全面深入理解/index.html">
+<meta property="og:title" content="Java NIO selector全面深入理解">
+<meta property="og:url" content="http://yoursite.com/2014/11/11/Java NIO selector全面深入理解/index.html">
 <meta property="og:site_name" content="5IYXX">
 <meta property="og:description" content="最近在学习java NIO，发现java nio selector 相对 channel ,buffer 这两个概念是比较难理解的 ,把学习理解的东西以文字的东西记录下来，就像从内存落地到硬盘，把内存中内容换成该知识点的索引。">
-<meta property="og:updated_time" content="2017-09-29T07:25:17.369Z">
+<meta property="og:updated_time" content="2017-09-29T07:29:15.032Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="java NIO selector全面深入理解">
+<meta name="twitter:title" content="Java NIO selector全面深入理解">
 <meta name="twitter:description" content="最近在学习java NIO，发现java nio selector 相对 channel ,buffer 这两个概念是比较难理解的 ,把学习理解的东西以文字的东西记录下来，就像从内存落地到硬盘，把内存中内容换成该知识点的索引。">
 
 
@@ -110,13 +110,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2014/11/11/java NIO selector全面深入理解/"/>
+  <link rel="canonical" href="http://yoursite.com/2014/11/11/Java NIO selector全面深入理解/"/>
 
 
 
 
 
-  <title>java NIO selector全面深入理解 | 5IYXX</title>
+  <title>Java NIO selector全面深入理解 | 5IYXX</title>
   
 
 
@@ -257,7 +257,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/11/11/java NIO selector全面深入理解/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/11/11/Java NIO selector全面深入理解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Eric Chen">
@@ -274,7 +274,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">java NIO selector全面深入理解</h1>
+          <h1 class="post-title" itemprop="name headline">Java NIO selector全面深入理解</h1>
         
 
         <div class="post-meta">
@@ -326,7 +326,7 @@
 
           
           
-             <span id="/2014/11/11/java NIO selector全面深入理解/" class="leancloud_visitors" data-flag-title="java NIO selector全面深入理解">
+             <span id="/2014/11/11/Java NIO selector全面深入理解/" class="leancloud_visitors" data-flag-title="Java NIO selector全面深入理解">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -368,9 +368,9 @@
 <li>服务端接收客户端连接事件   SelectionKey.OP_ACCEPT</li>
 <li>客户端连接服务端事件  SelectionKey.OP_CONNECT</li>
 <li>读事件   SelectionKey.OP_READ</li>
-<li>写事件   SelectionKey.OP_WRITE<br>如果你对不止一种事件感兴趣，那么可以用“位或”操作符将常量连接起来如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SelectionKey key = channel.register(selector,Selectionkey.OP_READ|SelectionKey.OP_WRITE);</div></pre></td></tr></table></figure>
-</li>
+<li>写事件   SelectionKey.OP_WRITE</li>
 </ul>
+<p>如果你对不止一种事件感兴趣，那么可以用“位或”操作符将常量连接起来如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SelectionKey key = channel.register(selector,Selectionkey.OP_READ|SelectionKey.OP_WRITE);</div></pre></td></tr></table></figure></p>
 <p>当向Selector注册Channel时，registor()方法会返回一个SelectorKey对象。这个对象包含了一些你感兴趣的属性。</p>
 <p>interest集合<br>ready集合<br>Channel<br>Selector<br>附加的对象(可选)</p>
 <h6 id="interest集合"><a href="#interest集合" class="headerlink" title="interest集合"></a>interest集合</h6><p>就像向Selector注册通道一节中所描述的，interest集合是你所选择的感兴趣的事件集合。可以通过SelectionKey读写interest集合，像这样:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">int interestSet = selectionKey.interestOps();</div><div class="line">boolean isInterestedInAccept  = interestSet &amp; SelectionKey.OP_ACCEPT;  </div><div class="line"> boolean isInterestedInConnect = interestSet &amp; SelectionKey.OP_CONNECT;  </div><div class="line">boolean isInterestedInRead    = interestSet &amp; SelectionKey.OP_READ;  </div><div class="line">boolean isInterestedInWrite   = interestSet &amp; SelectionKey.OP_WRITE;</div></pre></td></tr></table></figure></p>
