@@ -53,7 +53,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="NIO," />
 
 
 
@@ -71,12 +71,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="5IYXX">
-<meta property="og:url" content="http://yoursite.com/categories/Redis/index.html">
+<meta name="description" content="Buffer是一个对象，它包含一些要写入或者要读出的数据。在NIO类库中加入Buffer对象，体现了新库与原I/O的一个重要区别。在面向流的I/O中，可以将数据直接写入或者将数据直接读到Stream对象中。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Buffer缓冲区">
+<meta property="og:url" content="http://yoursite.com/2017/09/11/Buffer缓冲区/index.html">
 <meta property="og:site_name" content="5IYXX">
+<meta property="og:description" content="Buffer是一个对象，它包含一些要写入或者要读出的数据。在NIO类库中加入Buffer对象，体现了新库与原I/O的一个重要区别。在面向流的I/O中，可以将数据直接写入或者将数据直接读到Stream对象中。">
+<meta property="og:image" content="http://yoursite.com/images/NIO/1.jpg">
+<meta property="og:updated_time" content="2017-09-29T03:01:35.080Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="5IYXX">
+<meta name="twitter:title" content="Buffer缓冲区">
+<meta name="twitter:description" content="Buffer是一个对象，它包含一些要写入或者要读出的数据。在NIO类库中加入Buffer对象，体现了新库与原I/O的一个重要区别。在面向流的I/O中，可以将数据直接写入或者将数据直接读到Stream对象中。">
+<meta name="twitter:image" content="http://yoursite.com/images/NIO/1.jpg">
 
 
 
@@ -106,13 +112,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/Redis/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/09/11/Buffer缓冲区/"/>
 
 
 
 
 
-  <title>Category: Redis | 5IYXX</title>
+  <title>Buffer缓冲区 | 5IYXX</title>
   
 
 
@@ -131,7 +137,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -239,167 +245,213 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block category">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>Redis<small>Category</small>
-        </h1>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/11/Buffer缓冲区/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eric Chen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/psbe.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="5IYXX">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2017/03/06/Redis数据类型--SortedSet（有序集合）/" itemprop="url">
-              
-                <span itemprop="name">Redis数据类型--SortedSet（有序集合）</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Buffer缓冲区</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-03-06T21:02:25+08:00"
-              content="2017-03-06" >
-          03-06
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-11T09:43:50+08:00">
+                2017-09-11
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NIO/" itemprop="url" rel="index">
+                    <span itemprop="name">NIO</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/09/11/Buffer缓冲区/" class="leancloud_visitors" data-flag-title="Buffer缓冲区">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/03/06/Redis数据类型--Set（集合）/" itemprop="url">
-              
-                <span itemprop="name">Redis数据类型--Set（集合）</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-03-06T21:02:25+08:00"
-              content="2017-03-06" >
-          03-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
+        <p>Buffer是一个对象，它包含一些要写入或者要读出的数据。在NIO类库中加入Buffer对象，体现了新库与原I/O的一个重要区别。在面向流的I/O中，可以将数据直接写入或者将数据直接读到Stream对象中。<br><a id="more"></a></p>
+<h3 id="Buffer缓冲区类型"><a href="#Buffer缓冲区类型" class="headerlink" title="Buffer缓冲区类型"></a>Buffer缓冲区类型</h3><p>在NIO库中，所有数据都是用缓冲区处理的。在读写数据时，它是直接读到缓冲区中的。<br>缓冲区实质就是一个数组，通常它是一个字节数组（ByteBuffer）,但是也有其他种类数组，类型及继承关系如图1所示。缓冲区还提供了对数据的结构化访问以及维护读写位置（limit）等信息。</p>
+<div align="center"><br><img src="/images/NIO/1.jpg" alt=""><br>图1 缓冲区类型及继承关系</div>
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/03/06/Redis数据类型--String（字符串）/" itemprop="url">
-              
-                <span itemprop="name">Redis数据类型--String（字符串）</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-03-06T21:02:25+08:00"
-              content="2017-03-06" >
-          03-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/01/07/Redis数据类型--Hash（哈希表）/" itemprop="url">
-              
-                <span itemprop="name">Redis数据类型--Hash（哈希表）</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-01-07T21:02:25+08:00"
-              content="2017-01-07" >
-          01-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/01/07/Redis数据类型--List（列表）/" itemprop="url">
-              
-                <span itemprop="name">Redis数据类型--List（列表）</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-01-07T21:02:25+08:00"
-              content="2017-01-07" >
-          01-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+<p>事实上，每一种Java基本类型（除了Boolean类型）都对应一种缓冲区，每一个Buffer类都是Buffer接口的一个子实例。除了ByteBuffer，每个Buffer类都有完全一样的操作。大多数标准I/O操作都使用ByteBuffer，所以它在具有一般缓冲区的操作之外还提供了一些特有的操作，以方便网络读写。</p>
+<h3 id="Buffer的功能"><a href="#Buffer的功能" class="headerlink" title="Buffer的功能"></a>Buffer的功能</h3>
       
     </div>
+    
+    
+    
 
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div><p style="color:225,225,225;font-weight:bold;font-size:10px;">Adhere to the original technology to share, your support will encourage me to continue to create!</p></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/pay/wx.png" alt="Eric Chen WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/pay/zfb.png" alt="Eric Chen Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/NIO/" rel="tag"># NIO</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/22/Red Hat 7 环境配置/" rel="next" title="Red Hat 7 安装后环境配置">
+                <i class="fa fa-chevron-left"></i> Red Hat 7 安装后环境配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -407,6 +459,17 @@
 
 
           
+  <div class="comments" id="comments">
+    
+       
+         <div onclick="ShowGitment()" id="gitment-display-button">Show comments from Gitment</div>
+         <div id="gitment-container" style="display:none"></div>
+       
+	  
+	  
+    
+  </div>
+
 
         </div>
         
@@ -427,8 +490,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           
             <img class="site-author-image" itemprop="image"
@@ -508,6 +580,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Buffer缓冲区类型"><span class="nav-number">1.</span> <span class="nav-text">Buffer缓冲区类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Buffer的功能"><span class="nav-number">2.</span> <span class="nav-text">Buffer的功能</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
