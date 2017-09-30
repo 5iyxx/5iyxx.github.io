@@ -53,7 +53,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Netty," />
 
 
 
@@ -71,12 +71,16 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="5IYXX">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+<meta name="description" content="一个简单的NIO服务端程序，如果我们直接使用JDK的NIO类库进行开发，竟然需要经过烦琐的十多步操作才能完成最基本的信息读取和发送，这也是我们要选择Netty等NIO框架的原因了。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Netty应用入门">
+<meta property="og:url" content="http://yoursite.com/2014/12/01/Netty应用入门/index.html">
 <meta property="og:site_name" content="5IYXX">
+<meta property="og:description" content="一个简单的NIO服务端程序，如果我们直接使用JDK的NIO类库进行开发，竟然需要经过烦琐的十多步操作才能完成最基本的信息读取和发送，这也是我们要选择Netty等NIO框架的原因了。">
+<meta property="og:updated_time" content="2017-09-30T17:15:55.255Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="5IYXX">
+<meta name="twitter:title" content="Netty应用入门">
+<meta name="twitter:description" content="一个简单的NIO服务端程序，如果我们直接使用JDK的NIO类库进行开发，竟然需要经过烦琐的十多步操作才能完成最基本的信息读取和发送，这也是我们要选择Netty等NIO框架的原因了。">
 
 
 
@@ -106,13 +110,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/"/>
+  <link rel="canonical" href="http://yoursite.com/2014/12/01/Netty应用入门/"/>
 
 
 
 
 
-  <title>Archive | 5IYXX</title>
+  <title>Netty应用入门 | 5IYXX</title>
   
 
 
@@ -131,7 +135,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -239,411 +243,215 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/12/01/Netty应用入门/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eric Chen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/psbe.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="5IYXX">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">Netty应用入门</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-12-01T09:43:50+08:00">
+                2014-12-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        Um..! 27 posts in total. Keep on posting.
-      </span>
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NIO/" itemprop="url" rel="index">
+                    <span itemprop="name">NIO</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2017">2017</h1>
-          </div>
-        
-        
 
-        
+          
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
+             <span id="/2014/12/01/Netty应用入门/" class="leancloud_visitors" data-flag-title="Netty应用入门">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/06/22/Red Hat 7 环境配置/" itemprop="url">
-              
-                <span itemprop="name">Red Hat 7 安装后环境配置</span>
-              
-            </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-06-22T20:04:50+08:00"
-              content="2017-06-22" >
-          06-22
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+          
 
+        </div>
+      </header>
+    
 
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/05/11/在maven中Tomcat热部署/" itemprop="url">
-              
-                <span itemprop="name">在Maven中Tomcat热部署</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-05-11T09:43:50+08:00"
-              content="2017-05-11" >
-          05-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/05/10/为什么要使用SocketAddress来管理网络地址/" itemprop="url">
-              
-                <span itemprop="name">为什么要使用SocketAddress来管理网络地址</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-05-10T09:43:50+08:00"
-              content="2017-05-10" >
-          05-10
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/03/10/Spring中每个jar包的作用/" itemprop="url">
-              
-                <span itemprop="name">Spring中每个jar包的作用</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-03-10T09:43:50+08:00"
-              content="2017-03-10" >
-          03-10
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <p>一个简单的NIO服务端程序，如果我们直接使用JDK的NIO类库进行开发，竟然需要经过烦琐的十多步操作才能完成最基本的信息读取和发送，这也是我们要选择Netty等NIO框架的原因了。</p>
+<a id="more"></a>
+<h5 id="Netty服务端开发"><a href="#Netty服务端开发" class="headerlink" title="Netty服务端开发"></a>Netty服务端开发</h5><p>Netty时间服务器服务端<br>代码清单1 Netty时间服务器服务端 TimeServer<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">public class TimeServer &#123;</div><div class="line"></div><div class="line">    public void bind(int port) throws Exception &#123;</div><div class="line">	// 配置服务端的NIO线程组,实际就是他们就是Reactor线程组</div><div class="line">    //一个用于服务端接受客户端的连接，另外一个用于进行SocketChannel的网络读写</div><div class="line">	EventLoopGroup bossGroup = new NioEventLoopGroup();</div><div class="line">	EventLoopGroup workerGroup = new NioEventLoopGroup();</div><div class="line">	try &#123;</div><div class="line">	    ServerBootstrap b = new ServerBootstrap();</div><div class="line">	    b.group(bossGroup, workerGroup)</div><div class="line">		    .channel(NioServerSocketChannel.class)</div><div class="line">		    .option(ChannelOption.SO_BACKLOG, 1024)</div><div class="line">		    .childHandler(new ChildChannelHandler());</div><div class="line">	    // 绑定端口，同步等待成功</div><div class="line">	    ChannelFuture f = b.bind(port).sync();</div><div class="line"></div><div class="line">	    // 等待服务端监听端口关闭</div><div class="line">	    f.channel().closeFuture().sync();</div><div class="line">	&#125; finally &#123;</div><div class="line">	    // 优雅退出，释放线程池资源</div><div class="line">	    bossGroup.shutdownGracefully();</div><div class="line">	    workerGroup.shutdownGracefully();</div><div class="line">	&#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private class ChildChannelHandler extends ChannelInitializer&lt;SocketChannel&gt; &#123;</div><div class="line">	@Override</div><div class="line">	protected void initChannel(SocketChannel arg0) throws Exception &#123;</div><div class="line">	    arg0.pipeline().addLast(new TimeServerHandler());</div><div class="line">	&#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * @param args</div><div class="line">     * @throws Exception</div><div class="line">     */</div><div class="line">    public static void main(String[] args) throws Exception &#123;</div><div class="line">	int port = 8080;</div><div class="line">	if (args != null &amp;&amp; args.length &gt; 0) &#123;</div><div class="line">	    try &#123;</div><div class="line">		port = Integer.valueOf(args[0]);</div><div class="line">	    &#125; catch (NumberFormatException e) &#123;</div><div class="line">		// 采用默认值</div><div class="line">	    &#125;</div><div class="line">	&#125;</div><div class="line">	new TimeServer().bind(port);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/03/08/Maven中pom标签详解/" itemprop="url">
-              
-                <span itemprop="name">Maven中pom标签详解</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-03-08T23:02:25+08:00"
-              content="2017-03-08" >
-          03-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/03/07/Jar包添加到maven本地仓库/" itemprop="url">
-              
-                <span itemprop="name">Jar包添加到maven本地仓库</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-03-07T21:02:25+08:00"
-              content="2017-03-07" >
-          03-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/03/06/Redis数据类型--String（字符串）/" itemprop="url">
-              
-                <span itemprop="name">Redis数据类型--String（字符串）</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-03-06T21:02:25+08:00"
-              content="2017-03-06" >
-          03-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/03/06/Redis数据类型--SortedSet（有序集合）/" itemprop="url">
-              
-                <span itemprop="name">Redis数据类型--SortedSet（有序集合）</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-03-06T21:02:25+08:00"
-              content="2017-03-06" >
-          03-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/03/06/Redis数据类型--Set（集合）/" itemprop="url">
-              
-                <span itemprop="name">Redis数据类型--Set（集合）</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-03-06T21:02:25+08:00"
-              content="2017-03-06" >
-          03-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/03/01/精通hibernate/" itemprop="url">
-              
-                <span itemprop="name">精通Hibernate</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-03-01T21:02:25+08:00"
-              content="2017-03-01" >
-          03-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div><p style="color:225,225,225;font-weight:bold;font-size:10px;">Adhere to the original technology to share, your support will encourage me to continue to create!</p></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/pay/wx.png" alt="Eric Chen WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/pay/zfb.png" alt="Eric Chen Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Netty/" rel="tag"># Netty</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/11/11/Selector全面深入理解/" rel="next" title="Selector全面深入理解">
+                <i class="fa fa-chevron-left"></i> Selector全面深入理解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/12/11/AIO编程示例/" rel="prev" title="AIO编程示例">
+                AIO编程示例 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -651,6 +459,17 @@
 
 
           
+  <div class="comments" id="comments">
+    
+       
+         <div onclick="ShowGitment()" id="gitment-display-button">Show comments from Gitment</div>
+         <div id="gitment-container" style="display:none"></div>
+       
+	  
+	  
+    
+  </div>
+
 
         </div>
         
@@ -671,8 +490,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           
             <img class="site-author-image" itemprop="image"
@@ -752,6 +580,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#Netty服务端开发"><span class="nav-number">1.</span> <span class="nav-text">Netty服务端开发</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
