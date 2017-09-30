@@ -77,7 +77,7 @@
 <meta property="og:url" content="http://yoursite.com/2014/12/11/AIO编程示例/index.html">
 <meta property="og:site_name" content="5IYXX">
 <meta property="og:description" content="NIO 2.0的异步套接字通道是真正的异步非阻塞I/O，对应于UNIX网络编程中的事件驱动I/O（AIO）。它不需要通过多路复用器（Seletor)对注册的通道进行轮询操作即可实现异步读写，从而简化了NIO的编程模型。">
-<meta property="og:updated_time" content="2017-09-30T00:28:55.348Z">
+<meta property="og:updated_time" content="2017-09-30T01:49:21.183Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AIO编程示例">
 <meta name="twitter:description" content="NIO 2.0的异步套接字通道是真正的异步非阻塞I/O，对应于UNIX网络编程中的事件驱动I/O（AIO）。它不需要通过多路复用器（Seletor)对注册的通道进行轮询操作即可实现异步读写，从而简化了NIO的编程模型。">
@@ -365,7 +365,8 @@
 <li>在执行异步操作的时候传入一个java.nio.channels。</li>
 </ul>
 <p>CompletionHandler接口的实现类作为操作完成的回调。</p>
-<h4 id="AIO服务端源码分析"><a href="#AIO服务端源码分析" class="headerlink" title="AIO服务端源码分析"></a>AIO服务端源码分析</h4><h5 id="AIO服务端-TimeClientHandle"><a href="#AIO服务端-TimeClientHandle" class="headerlink" title="AIO服务端 TimeClientHandle"></a>AIO服务端 TimeClientHandle</h5>
+<h4 id="AIO服务端源码分析"><a href="#AIO服务端源码分析" class="headerlink" title="AIO服务端源码分析"></a>AIO服务端源码分析</h4><h5 id="AIO服务端"><a href="#AIO服务端" class="headerlink" title="AIO服务端"></a>AIO服务端</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">public class TimeServer &#123;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * @param args</div><div class="line">     * @throws IOException</div><div class="line">     */</div><div class="line">    public static void main(String[] args) throws IOException &#123;</div><div class="line">	int port = 8080;</div><div class="line">	if (args != null &amp;&amp; args.length &gt; 0) &#123;</div><div class="line">	    try &#123;</div><div class="line">		port = Integer.valueOf(args[0]);</div><div class="line">	    &#125; catch (NumberFormatException e) &#123;</div><div class="line">		// 采用默认值</div><div class="line">	    &#125;</div><div class="line">	&#125;</div><div class="line">	AsyncTimeServerHandler timeServer = new AsyncTimeServerHandler(port);</div><div class="line">	new Thread(timeServer, &quot;AIO-AsyncTimeServerHandler-001&quot;).start();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -595,7 +596,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#AIO服务端源码分析"><span class="nav-number">1.</span> <span class="nav-text">AIO服务端源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#AIO服务端-TimeClientHandle"><span class="nav-number">1.1.</span> <span class="nav-text">AIO服务端 TimeClientHandle</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#AIO服务端源码分析"><span class="nav-number">1.</span> <span class="nav-text">AIO服务端源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#AIO服务端"><span class="nav-number">1.1.</span> <span class="nav-text">AIO服务端</span></a></li></ol></li></ol></div>
             
 
           </div>
