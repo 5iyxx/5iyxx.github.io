@@ -514,12 +514,7 @@
 
       
         
-          <p>NIO 2.0引进了新的异步通道的概念，并提升了<strong>异步文件通道</strong>和<strong>异步套接字通道</strong>的实现。异步通道提供了以下两种方式获取操作结果。</p>
-<ul>
-<li>通过java.util.concurrent.Future类来表示异步操作的结果。</li>
-<li>在执行异步操作的时候传入一个java.nio.channels。</li>
-<li>CompletionHandler接口的实现类作为操作完成的回调。<br>NIO 2.0的异步套接字通道是真正的异步非阻塞I/O，对应于UNIX网络编程中的事件驱动I/O（AIO）。它不需要通过多路复用器（Seletor)对注册的通道进行轮询操作即可实现异步读写，从而简化了NIO的编程模型。</li>
-</ul>
+          <p>NIO 2.0的异步套接字通道是真正的异步非阻塞I/O，对应于UNIX网络编程中的事件驱动I/O（AIO）。它不需要通过多路复用器（Seletor)对注册的通道进行轮询操作即可实现异步读写，从而简化了NIO的编程模型。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2014/12/11/AIO编程示例/#more" rel="contents">
