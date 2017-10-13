@@ -208,35 +208,35 @@
         <category>The Operations OF CentOS</category>
       </categories>
       <tags>
-        <tag>MySQL</tag>
         <tag>Linux</tag>
         <tag>CentOS</tag>
+        <tag>MySQL</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[CentOS中数据库开启3306端口及远程链接]]></title>
-    <url>%2F2016%2F09%2F11%2FCentOS%E5%BC%80%E5%90%AF%E8%BF%9C%E7%A8%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E9%93%BE%E6%8E%A53306%E7%AB%AF%E5%8F%A3%2F</url>
-    <content type="text"><![CDATA[CentOS中数据库开启3306端口及远程链接 $ firewall-cmd –zone=public –add-port=3306/tcp –permanent success $ firewall-cmd –reload systemctl stop firewalld.service #停止 systemctl disable firewalld.service #禁用 mysql安装后还要允许远程连接，其他服务器才能连接到本地的数据库。 mysql账户是否不允许远程连接。如果无法连接可以尝试以下方法： mysql -u root -p //登录MySQL mysql&gt; GRANT ALL PRIVILEGES ON . TO ‘root’@’%’WITH GRANT OPTION; //任何远程主机都可以访问数据库 mysql&gt; FLUSH PRIVILEGES; //需要输入次命令使修改生效 mysql&gt; EXIT //退出]]></content>
+    <title><![CDATA[CentOS开放MySQL远程连接及开启3306端口]]></title>
+    <url>%2F2016%2F09%2F11%2FCentOS%E5%BC%80%E6%94%BEMySQL%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E5%8F%8A%E5%BC%80%E5%90%AF3306%E7%AB%AF%E5%8F%A3%2F</url>
+    <content type="text"><![CDATA[报错:1130-host … is not allowed to connect to this MySql server。 这是远程链接数据库出现的错误，解决方案如下。 改表法。可能是你的帐号不允许从远程登陆，只能在localhost。这个时候只要在localhost的那台电脑，登入mysql后，更改 “mysql” 数据库里的 “user” 表里的 “host” 项，从”localhost”改称”%” mysql -u root -pvmwaremysql&gt;use mysql; mysql&gt;update user set host = ‘%’ where user = ‘root’; mysql&gt;select host, user from user; 授权法。例如，你想myuser使用mypassword从任何主机连接到mysql服务器的话。 GRANT ALL PRIVILEGES ON . TO ‘myuser’@’%’ IDENTIFIED BY ‘mypassword’ WITH GRANT OPTION; FLUSH PRIVILEGES; 如果你想允许用户myuser从ip为192.168.1.6的主机连接到mysql服务器，并使用mypassword作为密码 GRANT ALL PRIVILEGES ON . TO ‘myuser’@’192.168.1.3’ IDENTIFIED BY ‘mypassword’ WITH GRANT OPTION; FLUSH PRIVILEGES; 如果你想允许用户myuser从ip为192.168.1.6的主机连接到mysql服务器的dk数据库，并使用mypassword作为密码 GRANT ALL PRIVILEGES ON dk.* TO ‘myuser’@’192.168.1.3’ IDENTIFIED BY ‘mypassword’ WITH GRANT OPTION; FLUSH PRIVILEGES; 我用的第一个方法,刚开始发现不行,在网上查了一下,少执行一个语句 mysql&gt;FLUSH RIVILEGES 使修改生效.就可以了 另外一种方法,不过我没有亲自试过的,在csdn.net上找的,可以看一下. 在安装mysql的机器上运行： 1、d:\mysql\bin>mysql -h localhost -u root //这样应该可以进入MySQL服务器 2、mysql&gt;GRANT ALL PRIVILEGES ON . TO ‘root’@’%’ WITH GRANT OPTION //赋予任何主机访问数据的权限 3、mysql&gt;FLUSH PRIVILEGES //修改生效 4、mysql&gt;EXIT //退出MySQL服务器 这样就可以在其它任何的主机上以root身份登录啦！ CentOS中数据库开启3306端口$ firewall-cmd –zone=public –add-port=3306/tcp –permanent success $ firewall-cmd –reload systemctl stop firewalld.service #停止 systemctl disable firewalld.service #禁用]]></content>
       <categories>
         <category>The Operations OF CentOS</category>
       </categories>
       <tags>
-        <tag>MySQL</tag>
         <tag>Linux</tag>
         <tag>CentOS</tag>
+        <tag>MySQL</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[centos下完全卸载mysql]]></title>
-    <url>%2F2016%2F09%2F11%2Fcentos%E4%B8%8B%E5%AE%8C%E5%85%A8%E5%8D%B8%E8%BD%BDmysql%2F</url>
+    <title><![CDATA[Centos下完全卸载MySQL]]></title>
+    <url>%2F2016%2F09%2F11%2FCentos%E4%B8%8B%E5%AE%8C%E5%85%A8%E5%8D%B8%E8%BD%BDMySQL%2F</url>
     <content type="text"><![CDATA[CentOS中两种安装(yum与rmp)MySQL方式对应的卸载方法。 yum方式1、yum remove mysql mysql-server mysql-libs compat-mysql512、rm -rf /var/lib/mysql3、rm /etc/my.cnf 查看是否还有mysql软件：rpm -qa|grep mysql如果存在的话，继续删除即可。 rpm方式a）查看系统中是否以rpm包安装的mysql：[root@localhost opt]# rpm -qa | grep -i mysqlMySQL-server-5.6.17-1.el6.i686MySQL-client-5.6.17-1.el6.i686b)卸载mysql[root@localhost local]# rpm -e MySQL-server-5.6.17-1.el6.i686[root@localhost local]# rpm -e MySQL-client-5.6.17-1.el6.i686c)删除mysql服务[root@localhost local]# chkconfig –list | grep -i mysql[root@localhost local]# chkconfig –del mysqld)删除分散mysql文件夹[root@localhost local]# whereis mysql 或者 find / -name mysql mysql: /usr/lib/mysql /usr/share/mysql清空相关mysql的所有目录以及文件rm -rf /usr/lib/mysqlrm -rf /usr/share/mysqlrm -rf /usr/my.cnf 通过以上几步，mysql应该已经完全卸载干净了]]></content>
       <categories>
         <category>The Operations OF CentOS</category>
       </categories>
       <tags>
-        <tag>MySQL</tag>
         <tag>Linux</tag>
         <tag>CentOS</tag>
+        <tag>MySQL</tag>
       </tags>
   </entry>
   <entry>
@@ -317,17 +317,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[通道Channel]]></title>
-    <url>%2F2014%2F10%2F11%2F%E9%80%9A%E9%81%93Channel%2F</url>
-    <content type="text"><![CDATA[Channel 是一个对象，可以通过它读取和写入数据。 Channel概述Channel就是一个通道，它就像自来水管一样，网络数据通过Channel读取和写入。通道与流的不同之处在于通道是双向的，流只是一个方向上移动（一个流必须是InputStream或者OutPutStream的子类），而通道可以用于读、写或者二者同时进行。因为Channel是双向工的，所以它可以比流更好地映射底层操作系统的API。特别是UNIX网络编程模型中，底层操作系统的通道都是全双工的，同时支持读写操作。 Channel的类继承关系Channel的类图继承关系如图1所示。 图1 Channel的类图继承关系 自顶向下看，前三层主要是Channel接口，用于定义它的功能，后面是一些具体的功能类（抽象类）。从类图可以看出，实际上Channel可以分为两大类：用于网络读写SelectableChannel和用于文件操作的FileChannel。ServerSocketChannel和SocketChannel都是SelectableChannel的子类。 Channel的方法通道可处于打开或关闭状态。创建通道时它处于打开状态，一旦将其关闭，则保持关闭状态。一旦关闭了某个通道，试图对其调用 I/O 操作就会导致 ClosedChannelException 被抛出。通过调用通道的 isOpen 方法可测试通道是否处于打开状态。 方法 描述 void close() 关闭此通道。 boolean isOpen() 判断此通道是否处于打开状态。]]></content>
-      <categories>
-        <category>Netty:The Definitive Guide</category>
-      </categories>
-      <tags>
-        <tag>NIO</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[ByteBuf工作原理]]></title>
     <url>%2F2014%2F10%2F11%2FByteBuf%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%2F</url>
     <content type="text"><![CDATA[ByteBuf依然是个Byte数组的缓冲区，它的基本功能与JDK的ByteBuffer一致。 功能分析ByteBuffer完全可以满足NIO编程的需要，但是由于NIO编程的复杂性，ByteBuffer也有其局限性，它的主要缺点如下。 ByteBuffer长度固定，一旦分配完成，它的容量不能动态扩展和收缩，当需要编码的POJO对象大于ByteBuffer的容量时，会发生索引越界异常； ByteBuffer只有一个标识位置的指针position，读写的时候需要手工调用flip()和rewind()等，使用者必须小心谨慎地处理这些API，否则很容易导致程序处理失败； ByteBuffer的API功能有限，一些高级和实用的特性它不支持，需要使用者自己编程实现。 为弥补这些不足，Netty提供了自己的ByteBuffer实现——ByteBuf。ByteBuf依然是个Byte数组的缓冲区，它的基本功能应该与JDK的ByteBuffer一致，提供以下几类基本功能： 7种Java基础类型、byte数组、ByteBuffer等的读写； 缓冲区自身的copy和slice等； 设置网络字节序； 构造缓冲区实例； 操作位置指针等方法。 由于JDK的ByteBuffer已经提供了这些基础能力的实现，因此，Netty ByteBuf的实现可以有两种策略。 参考JDK ByteBuffer的实现，增加额外的功能，解决原ByteBuffer的缺点。 聚合JDK ByteBuffer，通过Facade模式对其进行包装，可以减少自身的代码量，减低实现的成本。 缓冲区工作过程JDK ByteBuffer由于只有一个位置指针用于处理读写操作，因此每次进行读写的时候都需要额外调用filp()和clear()等方法，否则功能将出错，他的典型用法如下。 1234567ByteBuffer buffer=ByteBuffer.allocate(88);String value =&quot;Netty 权威指南&quot;;buffer.put(value.getByte());buffer.filp();byte[] vArray=new byte[buffer.remaining];buffer.get(vArray);String decodeValue=new String(vArray); 我们看下调用filp()操作前后的对比。 图1 ByteBuffer filp()操作之前 如图2 所示，如果不做filp操作，读取到的将是position到capacity之间的错误内容。当执行filp()操作之后，他的limit被设置为position,position设置为0，capacity不变。由于读取的内容是从position到limit之间，因此，他能够正确地读到之前写入缓冲区的内容。如图3所示 图2 ByteBuffer filp()操作之后 ByteBuf通过两个位置指针来协助缓冲区的读写操作，读操作使用readerIndex，写操作使用writeIndex。 readerIndex和writeIndex的取值一开始都是0，随着数据的写入writeIndex会增加，读取数据会使readIndex增加，但是它不会超过writeIndex。在读取之后，0~readerIndex被视为discard的，调用discardReadBytes方法，可以释放这部分空间，它的作用类似ByteBuffer的compact方法。ReaderIndex与writeIndex之间的数据是可读取的，等价于ByteBuffer position 和limit之间的数据。writeIndex与capacity之间的空间是可写的，等价于ByteBuffer limit和capacity之间的可用空间**。由于写操作不修改readerIndex指针，读操作不修改writeIndex指针，因此读写之间不再需要调整位置指针，这极大低简化了缓冲区的读写操作，避免了由于遗漏或者，不熟悉filp()操作导致的功能异常。初始分配的ByteBuf如图4所示。 图3 初始分配的ByteBuf 写入N个字节之后ByteBuf如图5所示。 图4 写入N个字节后的ByteBuf 读取M(&lt; N)个字节之后的ByteBuf如图6所示。 图5 读取M个字节后的ByteBuf 调用disacardReadBytes操作之后的ByteBuf如图7所示。 图6 discardReadByte操作之后的ByteBuf 调用clear操作之后的ByteBuf如图8所示。 图7 clear操作之后的ByteBuf]]></content>
@@ -337,6 +326,17 @@
       <tags>
         <tag>NIO</tag>
         <tag>Netty</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[通道Channel]]></title>
+    <url>%2F2014%2F10%2F11%2F%E9%80%9A%E9%81%93Channel%2F</url>
+    <content type="text"><![CDATA[Channel 是一个对象，可以通过它读取和写入数据。 Channel概述Channel就是一个通道，它就像自来水管一样，网络数据通过Channel读取和写入。通道与流的不同之处在于通道是双向的，流只是一个方向上移动（一个流必须是InputStream或者OutPutStream的子类），而通道可以用于读、写或者二者同时进行。因为Channel是双向工的，所以它可以比流更好地映射底层操作系统的API。特别是UNIX网络编程模型中，底层操作系统的通道都是全双工的，同时支持读写操作。 Channel的类继承关系Channel的类图继承关系如图1所示。 图1 Channel的类图继承关系 自顶向下看，前三层主要是Channel接口，用于定义它的功能，后面是一些具体的功能类（抽象类）。从类图可以看出，实际上Channel可以分为两大类：用于网络读写SelectableChannel和用于文件操作的FileChannel。ServerSocketChannel和SocketChannel都是SelectableChannel的子类。 Channel的方法通道可处于打开或关闭状态。创建通道时它处于打开状态，一旦将其关闭，则保持关闭状态。一旦关闭了某个通道，试图对其调用 I/O 操作就会导致 ClosedChannelException 被抛出。通过调用通道的 isOpen 方法可测试通道是否处于打开状态。 方法 描述 void close() 关闭此通道。 boolean isOpen() 判断此通道是否处于打开状态。]]></content>
+      <categories>
+        <category>Netty:The Definitive Guide</category>
+      </categories>
+      <tags>
+        <tag>NIO</tag>
       </tags>
   </entry>
   <entry>
