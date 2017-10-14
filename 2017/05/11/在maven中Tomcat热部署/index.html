@@ -82,7 +82,7 @@
 <meta property="og:image" content="http://yoursite.com/images/Operations/t5.jpg">
 <meta property="og:image" content="http://yoursite.com/images/Operations/t2.jpg">
 <meta property="og:image" content="http://yoursite.com/images/Operations/t3.jpg">
-<meta property="og:updated_time" content="2017-10-14T02:37:10.747Z">
+<meta property="og:updated_time" content="2017-10-14T02:41:25.135Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在Maven中Tomcat热部署">
 <meta name="twitter:description" content="在Maven中Tomcat热部署，下面为一个简单做法流程，一共有三步。">
@@ -368,10 +368,10 @@
 <div align="center"><br><img src="/images/Operations/t1.jpg" alt=""><br>图1 后台页面</div>
 
 <p>第二步：修改ip访问权限<br>对于IP访问权限在设置在/tomcat/webapps/manager/META-INF/context.xml中。<br>早期版本Tomcat默认是没有限制的，如图2所示。</p>
-<div align="center"><br><img src="/images/Operations/t4.jpg" alt=""><br>图2 后台页面</div>
+<div align="center"><br><img src="/images/Operations/t4.jpg" alt=""><br>图2 早期IP限制默认配置</div>
 
 <p>现在Tomcat对于默认是对IP进行限制的，如果不需要进行限制可以模仿早期Tomcat默认配置，去掉IP限制，<br>默认如图3所示。</p>
-<div align="center"><br><img src="/images/Operations/t5.jpg" alt=""><br>图3 后台页面</div>
+<div align="center"><br><img src="/images/Operations/t5.jpg" alt=""><br>图3 现在IP限制默认配置</div>
 
 <p>第三步：在pom文件中配置tomcat插件。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 配置Tomcat插件 --&gt;</div><div class="line">			&lt;plugin&gt;</div><div class="line">				&lt;groupId&gt;org.apache.tomcat.maven&lt;/groupId&gt;</div><div class="line">				&lt;artifactId&gt;tomcat7-maven-plugin&lt;/artifactId&gt;</div><div class="line">				&lt;version&gt;2.2&lt;/version&gt;</div><div class="line">				&lt;configuration&gt;</div><div class="line">					&lt;port&gt;8080&lt;/port&gt;</div><div class="line">					&lt;path&gt;/&lt;/path&gt;</div><div class="line">					&lt;url&gt;http://119.29.160.64/manager/text&lt;/url&gt;</div><div class="line">					&lt;username&gt;tomcat&lt;/username&gt;</div><div class="line">					&lt;password&gt;tomcat20170928&lt;/password&gt;</div><div class="line">				&lt;/configuration&gt;</div><div class="line">			&lt;/plugin&gt;</div></pre></td></tr></table></figure></p>
 <p>第四步：部署<br>初次部署可以使用 “tomcat7:deploy” 命令<br>如果已经部署过使用 “tomcat7:redeploy” 命令<br>启动过程如图4、图5.</p>
