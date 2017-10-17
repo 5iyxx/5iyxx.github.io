@@ -83,7 +83,7 @@
 <meta property="og:image" content="http://yoursite.com/images/NIO/26.jpg">
 <meta property="og:image" content="http://yoursite.com/images/NIO/27.jpg">
 <meta property="og:image" content="http://yoursite.com/images/NIO/28.jpg">
-<meta property="og:updated_time" content="2017-10-17T03:10:35.826Z">
+<meta property="og:updated_time" content="2017-10-17T03:15:42.190Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP粘包/拆包问题的解决之道">
 <meta name="twitter:description" content="熟悉TCP编程的读者可能都知道，无论是服务端还是客户端，当我们读取或者发送消息的时候，都需要考虑TCP底层的粘包/拆包机制。">
@@ -421,7 +421,7 @@
 
 <p>程序的运行结果完全符合预期，说明通过使用LineBasedFrameDecoder和StringDecoder成功解决了TCP粘包导致的读半包问题。</p>
 <h5 id="LineBasedFrameDecoder和StringDecoder的原理分析"><a href="#LineBasedFrameDecoder和StringDecoder的原理分析" class="headerlink" title="LineBasedFrameDecoder和StringDecoder的原理分析"></a>LineBasedFrameDecoder和StringDecoder的原理分析</h5><p>LineBasedFrameDecoder的工作原理是它依次遍历ByteBuf中的可读字节，判断看是否有“\n”或者“\r\n”,如果有就以此位置结束，从可读索引到结束位置区间的字节就组成了一行。它是以换行符为结束标志的解码器，支持携带结束符或者不携带结束符两种解码方式。同时支持配置单行的最大长度。如果连续读取最大长度后任然没有发现换行符，就会抛出异常，同时忽略掉之前读到的异常码流。</p>
-<p>StringDecoder的功能非常简单，就是将接受到的对象转换成字符串，然后继续调用后面的handler。<br>LineBasedFrameDecoder和StringDecoder组合就是按行切换的文本解码器，它被设计用来支持<br>TCP的粘包和拆包。</p>
+<p>StringDecoder的功能非常简单，就是将接受到的对象转换成字符串，然后继续调用后面的handler。LineBasedFrameDecoder和StringDecoder组合就是按行切换的文本解码器，它被设计用来支持<br>TCP的粘包和拆包。</p>
 
       
     </div>
@@ -491,8 +491,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/03/08/Nginx的一些基本功能/" rel="prev" title="Nginx的一些基本功能">
-                Nginx的一些基本功能 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/01/01/分隔符和定长解码器的应用/" rel="prev" title="分隔符和定长解码器的应用">
+                分隔符和定长解码器的应用 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -575,7 +575,7 @@
             
               <a href="/archives">
             
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
