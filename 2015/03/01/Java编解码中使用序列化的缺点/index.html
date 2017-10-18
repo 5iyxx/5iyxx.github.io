@@ -80,7 +80,7 @@
 <meta property="og:image" content="http://yoursite.com/images/NIO/35.jpg">
 <meta property="og:image" content="http://yoursite.com/images/NIO/36.jpg">
 <meta property="og:image" content="http://yoursite.com/images/NIO/37.jpg">
-<meta property="og:updated_time" content="2017-10-18T01:32:24.570Z">
+<meta property="og:updated_time" content="2017-10-18T10:10:20.705Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java编解码中使用序列化的缺点">
 <meta name="twitter:description" content="Java 序列化的主要目的有两个，网络传输和对象持久化。Java序列化从JDK1.1版本就已经提供，它不需要添加额外的类库，只需实现java.io.Serializable并生产系列ID即可，因此，它从诞生之初就得到广泛的应用。但是在远程服务调用（RPC）时，很少直接使用Java序列化进行消息的编解码和传输，这又是什么原因呢？下面通过分析Java序列化的缺点找出答案。">
@@ -390,7 +390,7 @@
 <p>这个结果也非常令人惊讶：Java序列化的性能只有二进制编码的6.17%左右，可见Java原生序列化的性能实在太差。<br>下面我们结合编码速度，综合对比一下Java序列化和二进制编码的性能差异，如图3所示。</p>
 <div align="center"><br><img src="/images/NIO/37.jpg" alt=""><br>图3 序列化性能对比图</div>
 
-<p>从图3可以看出，无论是序列化后的码流大小，还是序列化的性能，JDK默认的序列化机制表现得都很差。因此，我们边常不会选择Java序列化作为远程跨节点调用的编解码框架。<br>但是不使用JDK提供的默认序列化框架，自己开发编解码框架又是个非常复杂的工作，怎么办呢？不用着急，业界有很多优秀的编解码框架，它们在克服了JDK默认序列化框架缺点的基础上，还增加了很多亮点，下面让我们继续了解并学习业界流行的几款编解码框架，如<a href="https://5iyxx.github.io/2015/04/01/%E4%B8%9A%E7%95%8C%E4%B8%BB%E6%B5%81%E7%9A%84%E7%BC%96%E8%A7%A3%E7%A0%81%E6%A1%86%E6%9E%B6/" target="_blank" rel="external">MessagePack编解码</a>。</p>
+<p>从图3可以看出，无论是序列化后的码流大小，还是序列化的性能，JDK默认的序列化机制表现得都很差。因此，我们边常不会选择Java序列化作为远程跨节点调用的编解码框架。<br>但是不使用JDK提供的默认序列化框架，自己开发编解码框架又是个非常复杂的工作，怎么办呢？不用着急，业界有很多优秀的编解码框架，它们在克服了JDK默认序列化框架缺点的基础上，还增加了很多亮点，下面让我们继续了解并学习业界流行的几款编解码框架，如<a href="https://5iyxx.github.io/2015/04/01/%E4%B8%9A%E7%95%8C%E4%B8%BB%E6%B5%81%E7%9A%84%E7%BC%96%E8%A7%A3%E7%A0%81%E6%A1%86%E6%9E%B6/" target="_blank" rel="external">MessagePack编解码</a>、<a href="https://5iyxx.github.io/2015/06/01/GoogleProtobuf%E7%BC%96%E8%A7%A3%E7%A0%81/" target="_blank" rel="external">GoogleProtobuf编解码</a>和<a href="https://5iyxx.github.io/2015/07/01/JBossMarshalling%E7%BC%96%E8%A7%A3%E7%A0%81/" target="_blank" rel="external">JBossMarshalling编解码</a>。</p>
 
       
     </div>
