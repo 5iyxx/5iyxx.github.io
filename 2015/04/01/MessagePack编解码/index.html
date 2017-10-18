@@ -53,7 +53,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Netty," />
 
 
 
@@ -71,13 +71,18 @@
 
 
 
+<meta name="description" content="MessagePack是一个高效的二进制序列化框架，它像JSON一样支持不同语言间的数据交互，但是它的性能更快，序列化之后的码流也更小。由于MessagePack在业界得到了非常广泛的应用，将介绍如何利用Netty的CodeC框架新增对MessagePack的支持。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="5IYXX">
-<meta property="og:url" content="http://yoursite.com/2017/10/17/新建文本文档/index.html">
+<meta property="og:title" content="MessagePack编解码">
+<meta property="og:url" content="http://yoursite.com/2015/04/01/MessagePack编解码/index.html">
 <meta property="og:site_name" content="5IYXX">
-<meta property="og:updated_time" content="2017-10-17T10:16:12.034Z">
+<meta property="og:description" content="MessagePack是一个高效的二进制序列化框架，它像JSON一样支持不同语言间的数据交互，但是它的性能更快，序列化之后的码流也更小。由于MessagePack在业界得到了非常广泛的应用，将介绍如何利用Netty的CodeC框架新增对MessagePack的支持。">
+<meta property="og:image" content="http://yoursite.com/images/NIO/36.jpg">
+<meta property="og:updated_time" content="2017-10-18T01:57:36.873Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="5IYXX">
+<meta name="twitter:title" content="MessagePack编解码">
+<meta name="twitter:description" content="MessagePack是一个高效的二进制序列化框架，它像JSON一样支持不同语言间的数据交互，但是它的性能更快，序列化之后的码流也更小。由于MessagePack在业界得到了非常广泛的应用，将介绍如何利用Netty的CodeC框架新增对MessagePack的支持。">
+<meta name="twitter:image" content="http://yoursite.com/images/NIO/36.jpg">
 
 
 
@@ -107,13 +112,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/10/17/新建文本文档/"/>
+  <link rel="canonical" href="http://yoursite.com/2015/04/01/MessagePack编解码/"/>
 
 
 
 
 
-  <title> | 5IYXX</title>
+  <title>MessagePack编解码 | 5IYXX</title>
   
 
 
@@ -254,7 +259,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/17/新建文本文档/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/04/01/MessagePack编解码/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Eric Chen">
@@ -271,7 +276,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">MessagePack编解码</h1>
         
 
         <div class="post-meta">
@@ -283,8 +288,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-17T18:16:12+08:00">
-                2017-10-17
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-04-01T09:43:50+08:00">
+                2015-04-01
               </time>
             
 
@@ -294,6 +299,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Netty-The-Definitive-Guide/" itemprop="url" rel="index">
+                    <span itemprop="name">Netty:The Definitive Guide</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -301,7 +328,7 @@
 
           
           
-             <span id="/2017/10/17/新建文本文档/" class="leancloud_visitors" data-flag-title="">
+             <span id="/2015/04/01/MessagePack编解码/" class="leancloud_visitors" data-flag-title="MessagePack编解码">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -332,7 +359,20 @@
       
 
       
-        
+        <p>MessagePack是一个高效的二进制序列化框架，它像JSON一样支持不同语言间的数据交互，但是它的性能更快，序列化之后的码流也更小。<br>由于MessagePack在业界得到了非常广泛的应用，将介绍如何利用Netty的CodeC框架新增对MessagePack的支持。</p>
+<a id="more"></a>
+<h4 id="MessagePack介绍"><a href="#MessagePack介绍" class="headerlink" title="MessagePack介绍"></a>MessagePack介绍</h4><p>MessagePack的特点如下：</p>
+<ul>
+<li>编解码高效，性能高；</li>
+<li>序列化之后码流小；</li>
+<li>支持跨语言。</li>
+</ul>
+<p>衡量序列化框架通用性的一个重要指标就是对多语言的支持，因为数据交换的双方很难保证一定采用相同的语言开发，如果序列化框架和某种语言绑定，他就很难跨语言，如Java的序列化机制。<br>MessagePack提供了多种语言支持：Java、Python、Ruby、Haskell、C#、OCaml、Lua、Go、C、C++等。</p>
+<p><a href="http://msgpack.org/" target="_blank" rel="external">官网地址</a>：<a href="http://msgpack.org/" target="_blank" rel="external">http://msgpack.org/</a><br><a href="https://github.com/msgpack/msgpack-java" target="_blank" rel="external">Git地址</a>：<a href="https://github.com/msgpack/msgpack-java" target="_blank" rel="external">https://github.com/msgpack/msgpack-java</a></p>
+<h4 id="MessagePack-Java-API-介绍"><a href="#MessagePack-Java-API-介绍" class="headerlink" title="MessagePack Java API 介绍"></a>MessagePack Java API 介绍</h4><div align="center"><br><img src="/images/NIO/36.jpg" alt=""><br>图2 UserInfo编码性能测试结果</div>
+
+
+
       
     </div>
     
@@ -376,6 +416,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Netty/" rel="tag"># Netty</a>
+          
+        </div>
+      
 
       
       
@@ -385,8 +431,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/22/Red Hat 7 环境配置/" rel="next" title="Red Hat 7 安装后环境配置">
-                <i class="fa fa-chevron-left"></i> Red Hat 7 安装后环境配置
+              <a href="/2015/03/01/Java编解码中使用序列化的缺点/" rel="next" title="Java编解码中使用序列化的缺点">
+                <i class="fa fa-chevron-left"></i> Java编解码中使用序列化的缺点
               </a>
             
           </div>
@@ -394,6 +440,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/12/01/TCP粘包拆包问题的解决之道/" rel="prev" title="TCP粘包/拆包问题的解决之道">
+                TCP粘包/拆包问题的解决之道 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -447,8 +497,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           
             <img class="site-author-image" itemprop="image"
@@ -466,7 +525,7 @@
             
               <a href="/archives">
             
-                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -528,6 +587,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#MessagePack介绍"><span class="nav-number">1.</span> <span class="nav-text">MessagePack介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MessagePack-Java-API-介绍"><span class="nav-number">2.</span> <span class="nav-text">MessagePack Java API 介绍</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
