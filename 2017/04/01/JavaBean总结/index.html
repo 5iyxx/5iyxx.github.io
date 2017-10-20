@@ -53,7 +53,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="NIO," />
+  <meta name="keywords" content="Java," />
 
 
 
@@ -71,16 +71,16 @@
 
 
 
-<meta name="description" content="要获取java虚拟机可用的处理器个数，可以通过Runtime类的availableProcessors()方法得到，即Runtime.getRuntime().availableProcessors()。">
+<meta name="description" content="符合一定规范编写的Java类，不是一种技术，而是一种规范。大家针对这种规范，总结了很多开发技巧、工具函数。符合这种规范的类，可以被其它的程序员或者框架使用。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java获得可用的处理器个数">
-<meta property="og:url" content="http://yoursite.com/2014/12/02/Java获得可用的处理器个数/index.html">
+<meta property="og:title" content="JavaBean总结">
+<meta property="og:url" content="http://yoursite.com/2017/04/01/JavaBean总结/index.html">
 <meta property="og:site_name" content="5IYXX">
-<meta property="og:description" content="要获取java虚拟机可用的处理器个数，可以通过Runtime类的availableProcessors()方法得到，即Runtime.getRuntime().availableProcessors()。">
-<meta property="og:updated_time" content="2017-10-09T08:54:51.756Z">
+<meta property="og:description" content="符合一定规范编写的Java类，不是一种技术，而是一种规范。大家针对这种规范，总结了很多开发技巧、工具函数。符合这种规范的类，可以被其它的程序员或者框架使用。">
+<meta property="og:updated_time" content="2017-10-20T02:01:59.202Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java获得可用的处理器个数">
-<meta name="twitter:description" content="要获取java虚拟机可用的处理器个数，可以通过Runtime类的availableProcessors()方法得到，即Runtime.getRuntime().availableProcessors()。">
+<meta name="twitter:title" content="JavaBean总结">
+<meta name="twitter:description" content="符合一定规范编写的Java类，不是一种技术，而是一种规范。大家针对这种规范，总结了很多开发技巧、工具函数。符合这种规范的类，可以被其它的程序员或者框架使用。">
 
 
 
@@ -110,13 +110,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2014/12/02/Java获得可用的处理器个数/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/04/01/JavaBean总结/"/>
 
 
 
 
 
-  <title>Java获得可用的处理器个数 | 5IYXX</title>
+  <title>JavaBean总结 | 5IYXX</title>
   
 
 
@@ -257,7 +257,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/12/02/Java获得可用的处理器个数/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/01/JavaBean总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Eric Chen">
@@ -274,7 +274,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Java获得可用的处理器个数</h1>
+          <h1 class="post-title" itemprop="name headline">JavaBean总结</h1>
         
 
         <div class="post-meta">
@@ -286,8 +286,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-12-02T09:43:50+08:00">
-                2014-12-02
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-01T09:43:50+08:00">
+                2017-04-01
               </time>
             
 
@@ -309,8 +309,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Netty-The-Definitive-Guide/" itemprop="url" rel="index">
-                    <span itemprop="name">Netty:The Definitive Guide</span>
+                  <a href="/categories/TheBasicOfJava/" itemprop="url" rel="index">
+                    <span itemprop="name">TheBasicOfJava</span>
                   </a>
                 </span>
 
@@ -326,7 +326,7 @@
 
           
           
-             <span id="/2014/12/02/Java获得可用的处理器个数/" class="leancloud_visitors" data-flag-title="Java获得可用的处理器个数">
+             <span id="/2017/04/01/JavaBean总结/" class="leancloud_visitors" data-flag-title="JavaBean总结">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -357,12 +357,31 @@
       
 
       
-        <p>要获取java虚拟机可用的处理器个数，可以通过Runtime类的availableProcessors()方法得到，即Runtime.getRuntime().availableProcessors()。</p>
+        <p>符合一定规范编写的Java类，不是一种技术，而是一种规范。大家针对这种规范，总结了很多开发技巧、工具函数。符合这种规范的类，可以被其它的程序员或者框架使用。</p>
 <a id="more"></a>
-<h6 id="获取处理器数"><a href="#获取处理器数" class="headerlink" title="获取处理器数"></a>获取处理器数</h6><p>Runtime.getRuntime().availableProcessors()并非都能返回你所期望的数值。比如说，在我的双核1-2-1机器上，它返回的是2，这是对的。不过在我的1-4-2机器 上，也就是一个CPU插槽，4核，每个核2个超线程，这样的话会返回8。不过我其实只有4个核，如果代码的瓶颈是在CPU这块的话，我会有7个线程在同时 竞争CPU周期，而不是更合理的4个线程。如果我的瓶颈是在内存这的话，那这个测试我可以获得7倍的性能提升。</p>
-<p>不过这还没完！Java Champions上的一个哥们发现了一种情况，他有一台16-4-2的机器 （也就是16个CPU插槽，每个CPU4个核，每核两个超线程，返回的值居然是16！从我的i7 Macbook pro上的结果来看，我觉得应该返回的是1642=128。在这台机器上运行Java 8的话，它只会将通用的FJ池的并发数设置成15。正如 Brian Goetz所指出的，“虚拟机其实不清楚什么是处理器，它只是去请求操作系统返回一个值。同样的，操作系统也不知道怎么回事，它是去问的硬件设备。硬件会告诉它一个值，通常来说是硬件线程数。操作系统相信硬件说的，而虚拟机又相信操作系统说的。”</p>
-<h6 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h6><p>要获得Runtime类的实例，需要调用其静态方法getRuntime(),如下例所示</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">public class Main &#123;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Displays the number of processors available in the Java Virtual Machine</div><div class="line">     */</div><div class="line">    public void displayAvailableProcessors() &#123;</div><div class="line"></div><div class="line">        Runtime runtime = Runtime.getRuntime();</div><div class="line"></div><div class="line">        int nrOfProcessors = runtime.availableProcessors();</div><div class="line"></div><div class="line">        System.out.println(&quot;Number of processors available to the Java Virtual Machine: &quot; + nrOfProcessors);</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Starts the program</div><div class="line">     *</div><div class="line">     * @param args the command line arguments</div><div class="line">     */</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        new Main().displayAvailableProcessors(); </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="javabean-是什么？"><a href="#javabean-是什么？" class="headerlink" title="javabean 是什么？"></a>javabean 是什么？</h4><p>Bean的中文含义是“豆子”，顾名思义，JavaBean是指一段特殊的Java类，<br>就是有默然构造方法,只有get,set的方法的java类的对象.</p>
+<p>专业点解释是：</p>
+<p>JavaBean定义了一组规则<br>JavaBean就是遵循此规则的平常的Java对象 </p>
+<p>满足这三个条件:<br>1.实现序列化接口<br>2.提供无参数的构造器<br>3.提供getter 和 setter方法访问它的属性.</p>
+<p>简单地说，JavaBean是用Java语言描述的软件组件模型，其实际上是一个类。这些类遵循一个接口格式，以便于使函数命名、底层行为以及继承或实现的行为，可以把类看作标准的JavaBean组件进行构造和应用。<br>JavaBean一般分为可视化组件和非可视化组件两种。可视化组件可以是简单的GUI元素，如按钮或文本框，也可以是复杂的，如报表组件；非可视化组件没有GUI表现形式，用于封装业务逻辑、数据库操作等。其最大的优点在于可以实现代码的可重用性。JavaBean又同时具有以下特性。</p>
+<ul>
+<li>易于维护、使用、编写。</li>
+<li>可实现代码的重用性。</li>
+<li>可移植性强，但仅限于Java工作平台。</li>
+<li>便于传输，不限于本地还是网络。</li>
+<li>可以以其他部件的模式进行工作。</li>
+</ul>
+<p>对于有过其他语言编程经验的读者，可以将其看作类似微软的ActiveX的编程组件。但是区别在于JavaBean是跨平台的，而ActiveX组件则仅局限于Windows系统。总之，JavaBean比较适合于那些需要跨平台的、并具有可视化操作和定制特性的软件组件。</p>
+<p>JavaBean组件与EJB（Enterprise JavaBean，企业级JavaBean）组件完全不同。EJB 是J2EE的核心，是一个用来创建分布式应用、服务器端以及基于Java应用的功能强大的组件模型。JavaBean组件主要用于存储状态信息，而EJB组件可以存储业务逻辑。</p>
+<h4 id="使用JavaBean的原因"><a href="#使用JavaBean的原因" class="headerlink" title="使用JavaBean的原因"></a>使用JavaBean的原因</h4><p>程序中往往有重复使用的段落，JavaBean就是为了能够重复使用而设计的程序段落，而且这些段落并不只服务于某一个程序，而且每个JavaBean都具有特定功能，当需要这个功能的时候就可以调用相应的JavaBean。从这个意义上来讲，JavaBean大大简化了程序的设计过程，也方便了其他程序的重复使用。<br>JavaBean传统应用于可视化领域，如AWT（窗口工具集）下的应用。而现在，JavaBean更多地应用于非可视化领域，同时，JavaBean在服务器端的应用也表现出强大的优势。非可视化的JavaBean可以很好地实现业务逻辑、控制逻辑和显示页面的分离，现在多用于后台处理，使得系统具有更好的健壮性和灵活性。JSP + JavaBean和JSP + JavaBean + Servlet成为当前开发Web应用的主流模式。</p>
+<h4 id="JavaBean的开发"><a href="#JavaBean的开发" class="headerlink" title="JavaBean的开发"></a>JavaBean的开发</h4><p>在程序设计的过程中，JavaBean不是独立的。为了能够更好地封装事务逻辑、数据库操作而便于实现业务逻辑和前台程序的分离，操作的过程往往是先开发需要的JavaBean，再在适当的时候进行调用。但一个完整有效的JavaBean必然会包含一个属性，伴随若干个get/set（只读/只写）函数的变量来设计和运行的。JavaBean作为一个特殊的类，具有自己独有的特性。应该注意以下3个方面。</p>
+<ul>
+<li>JavaBean类必须有一个没有参数的构造函数。</li>
+<li>JavaBean类所有的属性最好定义为私有的。</li>
+<li>JavaBean类中定义函数setXxx() 和getXxx()来对属性进行操作。其中Xxx是首字母大写的私有变量名称。</li>
+</ul>
+<p>转载于：<a href="http://blog.csdn.net/zdwzzu2006/article/details/5151788/" target="_blank" rel="external">http://blog.csdn.net/zdwzzu2006/article/details/5151788/</a></p>
+
       
     </div>
     
@@ -408,7 +427,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/NIO/" rel="tag"># NIO</a>
+            <a href="/tags/Java/" rel="tag"># Java</a>
           
         </div>
       
@@ -421,8 +440,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2014/12/01/Netty应用入门/" rel="next" title="Netty应用入门">
-                <i class="fa fa-chevron-left"></i> Netty应用入门
+              <a href="/2017/03/10/Spring中每个jar包的作用/" rel="next" title="Spring中每个jar包的作用">
+                <i class="fa fa-chevron-left"></i> Spring中每个jar包的作用
               </a>
             
           </div>
@@ -431,8 +450,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2014/12/11/AIO编程示例/" rel="prev" title="AIO编程示例">
-                AIO编程示例 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/05/10/为什么要使用SocketAddress来管理网络地址/" rel="prev" title="为什么要使用SocketAddress来管理网络地址">
+                为什么要使用SocketAddress来管理网络地址 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -587,7 +606,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#获取处理器数"><span class="nav-number">1.</span> <span class="nav-text">获取处理器数</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#实现过程"><span class="nav-number">2.</span> <span class="nav-text">实现过程</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#javabean-是什么？"><span class="nav-number">1.</span> <span class="nav-text">javabean 是什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用JavaBean的原因"><span class="nav-number">2.</span> <span class="nav-text">使用JavaBean的原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JavaBean的开发"><span class="nav-number">3.</span> <span class="nav-text">JavaBean的开发</span></a></li></ol></div>
             
 
           </div>
