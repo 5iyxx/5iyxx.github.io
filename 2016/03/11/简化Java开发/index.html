@@ -78,7 +78,7 @@
 <meta property="og:site_name" content="5IYXX">
 <meta property="og:description" content="Spring是为了解决企业级应用开发的复杂性而创建的，使用Spring可以让简单的JavaBean实现之前只有EJB才能完成的事情。但Spring不仅仅局限于服务器端开发，任何Java应用都能在简单性、可测试性和松耦合等方面从Spring中获益。虽然Spring用bean或者JavaBean来表示应用组件，但并不意味着Spring组件必须要遵循JavaBean规范。一个Spring组件可以是任何形">
 <meta property="og:image" content="http://yoursite.com/images/Spring/1.jpg">
-<meta property="og:updated_time" content="2017-10-20T08:47:41.373Z">
+<meta property="og:updated_time" content="2017-10-20T09:01:22.714Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="简化Java开发">
 <meta name="twitter:description" content="Spring是为了解决企业级应用开发的复杂性而创建的，使用Spring可以让简单的JavaBean实现之前只有EJB才能完成的事情。但Spring不仅仅局限于服务器端开发，任何Java应用都能在简单性、可测试性和松耦合等方面从Spring中获益。虽然Spring用bean或者JavaBean来表示应用组件，但并不意味着Spring组件必须要遵循JavaBean规范。一个Spring组件可以是任何形">
@@ -381,7 +381,8 @@
 <p>更重要的是，传入的任务类型是Quest，一个所有的任务都必须实现的接口。所以，Braveknight能够响应RescueDamselQuest、SlayDragonQuest、MakeRoundTableRounderQuest等任意的Query实现。</p>
 <p>这里的要点是BraveKnight没有与任何特定的Quest实现发生耦合。对它来说，只要能使Quest接口实现，那么具体哪种类型实现就无关紧要了。这就是DI所带来的最大收益————<strong>松耦合</strong>。如果一个对象只通过接口（而不是具体实现或者初始过程）来表名依赖关系，那么这种依赖就能够在对象本身毫不知情的情况下，用不同的具体实现进行替换。<br>对依赖进行替换的一个最常用方法就是在测试的时候使用mock实现。我们无法充分地测试DamselRescuingKnight,因为它是紧耦合的；但是可以轻松地测试BraveKnight，只需给它一个Quest的mock实现即可，如程序4所示。<br><strong>代码清单4 注入一个mock Quest，测试BraveKnight</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public class BraveKnightTest &#123;</div><div class="line"></div><div class="line">	@Test</div><div class="line">	public void KnightShouldEmbarkOnQuest() &#123;</div><div class="line"></div><div class="line">		Quest mockQuest=mock(Quest.class);      //创建mock Quest</div><div class="line">		BraveKnight knight=new BraveKnight(mockQuest); //注入mock Quest</div><div class="line">		knight.embarkOnQuest();</div><div class="line">		verify(mockQuest,times(1)).embark();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>可以使用mock框架Mockito去创建一个Quest接口的mock实现。通过这个mock对象，就可以创建一个新的BraveKnight实例，并通过构造器注入这个mock Quest。当调用embarkOnQuest()方法时，你可以要求Mockito框架验证Quest的mock实现的embark（）方法仅仅被调用了一次。</p>
-<h4 id="将Query注入到Knight中"><a href="#将Query注入到Knight中" class="headerlink" title="将Query注入到Knight中"></a>将Query注入到Knight中</h4><p><a href="https://github.com/5iyxx/SpringInAction-4th-" target="_blank" rel="external">SpringInAction第4版源代码</a>。</p>
+<h4 id="将Query注入到Knight中"><a href="#将Query注入到Knight中" class="headerlink" title="将Query注入到Knight中"></a>将Query注入到Knight中</h4><p>现在BraveKnight类可以接受你传递给它的任一一种Quest的实现，但该怎样把特定的Query实现传递给它呢？如代码清单5所示，SlayDragonQuest是要注入到BraveKnight中的Quest实现。<br><strong>代码清单5 SlayDragonQuest</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public class SlayDragonQuest implements Quest &#123;</div><div class="line">	private PrintStream stream;</div><div class="line"></div><div class="line">	public SlayDragonQuest(PrintStream stream) &#123;</div><div class="line">		this.stream = stream;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public void embark() &#123;</div><div class="line">		stream.println(&quot;Embarking on quest to slay the dragon!&quot;);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><a href="https://github.com/5iyxx/SpringInAction-4th-" target="_blank" rel="external">SpringInAction第4版源代码</a>。</p>
 
       
     </div>
@@ -441,8 +442,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/10/Spring之旅/" rel="next" title="Spring之旅--Java程序员的美好时代">
-                <i class="fa fa-chevron-left"></i> Spring之旅--Java程序员的美好时代
+              <a href="/2016/03/10/容纳你的Bean/" rel="next" title="容纳你的Bean">
+                <i class="fa fa-chevron-left"></i> 容纳你的Bean
               </a>
             
           </div>
