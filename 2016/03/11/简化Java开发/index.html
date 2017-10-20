@@ -78,7 +78,7 @@
 <meta property="og:site_name" content="5IYXX">
 <meta property="og:description" content="Spring是为了解决企业级应用开发的复杂性而创建的，使用Spring可以让简单的JavaBean实现之前只有EJB才能完成的事情。但Spring不仅仅局限于服务器端开发，任何Java应用都能在简单性、可测试性和松耦合等方面从Spring中获益。虽然Spring用bean或者JavaBean来表示应用组件，但并不意味着Spring组件必须要遵循JavaBean规范。一个Spring组件可以是任何形">
 <meta property="og:image" content="http://yoursite.com/images/Spring/1.jpg">
-<meta property="og:updated_time" content="2017-10-20T10:52:21.764Z">
+<meta property="og:updated_time" content="2017-10-20T11:15:09.932Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="简化Java开发">
 <meta name="twitter:description" content="Spring是为了解决企业级应用开发的复杂性而创建的，使用Spring可以让简单的JavaBean实现之前只有EJB才能完成的事情。但Spring不仅仅局限于服务器端开发，任何Java应用都能在简单性、可测试性和松耦合等方面从Spring中获益。虽然Spring用bean或者JavaBean来表示应用组件，但并不意味着Spring组件必须要遵循JavaBean规范。一个Spring组件可以是任何形">
@@ -390,6 +390,10 @@
 <h4 id="观察它如何工作"><a href="#观察它如何工作" class="headerlink" title="观察它如何工作"></a>观察它如何工作</h4><p>Spring通过应用上下文（Application Context）装载bean的定义并把它们组装起来。Spring应用上下文全权负责对象的创建和组装。Spring自带了多种应用上下文的实现，<strong>它们之间主要的区别仅仅在于如何加载配置</strong>。</p>
 <p>因为Knights.xml中的bean是使用xml文件进行配置，所以选择ClassPathXMLApplicationContext作为应用上下文相对是比较合适的。该类加载位于应用程序类路径下的一个或多个XML配置文件。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">public class KnightMain &#123;</div><div class="line">	public static void main(String[] args) throws Exception &#123;</div><div class="line">        //调用ClassPathXmlApplicationContext加载knights.xml,获得Knight对象的引用</div><div class="line">		ClassPathXmlApplicationContext context = new               ClassPathXmlApplicationContext(&quot;/Springing/Simplifying/config/knights.xml&quot;);</div><div class="line">		Knight knight = context.getBean(Knight.class);   //获取knight bean</div><div class="line">		knight.embarkOnQuest();  // 使用knight</div><div class="line">		context.close();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>mian()方法基于knight.xml文件创建了Spring应用上下文。随后它调用该应用上下文获取一个ID为knight的bean。得到knight对象的引用后，只需简单调用embarkOnQuest（）方法就可以获取运行结果。</p>
+<h3 id="应用切面"><a href="#应用切面" class="headerlink" title="应用切面"></a>应用切面</h3><p>DI能够让相互协作的软件组件保持松散耦合，而面向切面编程（aspect-oriented programming，AOP）允许你把遍布应用各处的功能分离出来形成可重用的组件。</p>
+<p>面向切面编程往往被定义为促使软件系统实现关注点分离的一项技术。系统由许多不同的组件组成，每一个组件各负责一块特定功能。除了实现自身核心的功能之外，这些组件还经常承担着额外的职责。诸如日志、事务管理和安全这样的系统服务经常融入到自身具有核心业务逻辑的组件中去，这些系统服务通常被称为横切关注点，因为它们会跨越系统的多个组件。</p>
+<p>如果将这些关注点分散到多个组件中去，你的代码将会带来双重的复杂性。</p>
+<p>实现系统关注点功能的代码将会重复出现在多个组件中。这意味着如果你要改变这些关注点的逻辑，必须修改各个模块中的相关实现。即使你把这些关注点抽象为一个独立的模块，其他模块只是调用它的方法，但方法的调用还是会重复出现在各个模块中。<br>组件会因为那些与自身核心业务无关的代码而变得混乱。一个向地址簿增加地址条目的方法应该只关注如何添加地址，而不应该关注它是不是安全的或者是否需要支持事务。</p>
 <p><a href="https://github.com/5iyxx/SpringInAction-4th-" target="_blank" rel="external">SpringInAction第4版源代码</a>。</p>
 
       
@@ -616,7 +620,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#激发POJO的潜能"><span class="nav-number">1.</span> <span class="nav-text">激发POJO的潜能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖注入"><span class="nav-number">2.</span> <span class="nav-text">依赖注入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DI功能如何实现"><span class="nav-number">2.1.</span> <span class="nav-text">DI功能如何实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#将Query注入到Knight中"><span class="nav-number">2.2.</span> <span class="nav-text">将Query注入到Knight中</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#观察它如何工作"><span class="nav-number">2.3.</span> <span class="nav-text">观察它如何工作</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#激发POJO的潜能"><span class="nav-number">1.</span> <span class="nav-text">激发POJO的潜能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖注入"><span class="nav-number">2.</span> <span class="nav-text">依赖注入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DI功能如何实现"><span class="nav-number">2.1.</span> <span class="nav-text">DI功能如何实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#将Query注入到Knight中"><span class="nav-number">2.2.</span> <span class="nav-text">将Query注入到Knight中</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#观察它如何工作"><span class="nav-number">2.3.</span> <span class="nav-text">观察它如何工作</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用切面"><span class="nav-number">3.</span> <span class="nav-text">应用切面</span></a></li></ol></div>
             
 
           </div>
