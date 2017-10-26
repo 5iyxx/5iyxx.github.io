@@ -78,9 +78,8 @@
 <meta property="og:site_name" content="5IYXX">
 <meta property="og:description" content="一个进程正在运行时至少会有1个线程的运行，这种情况在Java中也是存在的。">
 <meta property="og:image" content="http://yoursite.com/images/Thread/1.jpg">
-<meta property="og:image" content="http://yoursite.com/images/NIO/53.jpg">
-<meta property="og:image" content="http://yoursite.com/images/NIO/54.jpg">
-<meta property="og:updated_time" content="2017-10-26T02:33:48.278Z">
+<meta property="og:image" content="http://yoursite.com/images/Thread/2.jpg">
+<meta property="og:updated_time" content="2017-10-26T03:22:44.370Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用多线程">
 <meta name="twitter:description" content="一个进程正在运行时至少会有1个线程的运行，这种情况在Java中也是存在的。">
@@ -368,15 +367,13 @@
 <div align="center"><br><img src="/images/Thread/1.jpg" alt=""><br>图1 运行结果</div>
 
 <p>控制台输出线程名为main，但是main与mian方法仅仅是名字相同而言。</p>
-<p>常见实现多线程编程的方式主要有两种，一种是继承Thread类，另一个是实现Runnable接口。</p>
-<h3 id="继承Thread类"><a href="#继承Thread类" class="headerlink" title="继承Thread类"></a>继承Thread类</h3><h3 id="Netty-Http文件服务器例程运行结果"><a href="#Netty-Http文件服务器例程运行结果" class="headerlink" title="Netty Http文件服务器例程运行结果"></a>Netty Http文件服务器例程运行结果</h3><p>运行结果如图1所示.</p>
-<div align="center"><br><img src="/images/NIO/53.jpg" alt=""><br>图2 运行结果</div>
+<p>常见实现多线程编程的方式主要有两种，一种是继承Thread类，另一个是实现Runnable接口。<br>Thread类的结构如下：<br><code>public class Thread implements Runnable</code><br>从上面的源代码中可以发现，Thread类实现了Runnable接口，它们之间具有多态关系。<br><strong>使用继承Thread类的方式创建新线程时，最大的局限就是不支持多继承。因为Java语言的特点就是单根继承，所以为了支持多继承，完全可以实现Runnable接口的方式，一边实现一边继承。但用着两种方式创建的线程在工作时的性质是一样的，没有本质区别。</strong></p>
+<h3 id="继承Thread类"><a href="#继承Thread类" class="headerlink" title="继承Thread类"></a>继承Thread类</h3><p>继承自Thread，重写run方法。<br><strong>代码清单2 继承Thread类</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">public class MyThread extends Thread &#123;</div><div class="line">	@Override</div><div class="line">	public void run()&#123;</div><div class="line">		super.run();</div><div class="line">		System.out.println(&quot;MyThread&quot;);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public class MyThreadRun &#123;</div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		// TODO Auto-generated method stub</div><div class="line">        MyThread myThread=new MyThread();</div><div class="line">        myThread.start();</div><div class="line">        System.out.println(&quot;运行结束!&quot;);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>运行结果如图2所示。</p>
+<div align="center"><br><img src="/images/Thread/2.jpg" alt=""><br>图2 myThread运行结果</div>
 
-<p>在浏览器打开网址：<br><code>http://127.0.0.1:8031/src/com/eric/netty/</code></p>
-<p>看到浏览器上显示的是文件目录地址，如图2所示.</p>
-<div align="center"><br><img src="/images/NIO/54.jpg" alt=""><br>图3 文件目录地址</div>
-
-<p><a href="https://github.com/5iyxx/NettyTheDefinitiveGuide-2nd-.git" target="_blank" rel="external">Netty权威指南第二版源代码</a>。</p>
+<p>从运行结果来看，MyThread.java类中的run方法执行时间比较晚，这也说明在使用多线程技术时，代码的运行结果与代码执行顺序或调用顺序无关。</p>
+<p><a href="https://github.com/5iyxx/JavaMulti-threadProgramming.git" target="_blank" rel="external">Java多线程编程核心技术</a>。</p>
 
       
     </div>
@@ -602,7 +599,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#继承Thread类"><span class="nav-number">1.</span> <span class="nav-text">继承Thread类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Netty-Http文件服务器例程运行结果"><span class="nav-number">2.</span> <span class="nav-text">Netty Http文件服务器例程运行结果</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#继承Thread类"><span class="nav-number">1.</span> <span class="nav-text">继承Thread类</span></a></li></ol></div>
             
 
           </div>
