@@ -71,12 +71,12 @@
 
 
 
-<meta name="description" content="线程中常用的几个方法：currentThread()方法、isAlive()方法、sleep()方法和getId()方法。">
+<meta name="description" content="线程中常用的几个方法：currentThread()方法、isAlive()方法、sleep()方法、getId()方法和yield()方法。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="线程常用的方法">
 <meta property="og:url" content="http://yoursite.com/2016/09/01/线程常用的方法/index.html">
 <meta property="og:site_name" content="5IYXX">
-<meta property="og:description" content="线程中常用的几个方法：currentThread()方法、isAlive()方法、sleep()方法和getId()方法。">
+<meta property="og:description" content="线程中常用的几个方法：currentThread()方法、isAlive()方法、sleep()方法、getId()方法和yield()方法。">
 <meta property="og:image" content="http://yoursite.com/images/Thread/cu1.jpg">
 <meta property="og:image" content="http://yoursite.com/images/Thread/cu2.jpg">
 <meta property="og:image" content="http://yoursite.com/images/Thread/cu3.jpg">
@@ -86,10 +86,12 @@
 <meta property="og:image" content="http://yoursite.com/images/Thread/cu7.jpg">
 <meta property="og:image" content="http://yoursite.com/images/Thread/cu8.jpg">
 <meta property="og:image" content="http://yoursite.com/images/Thread/cu9.jpg">
-<meta property="og:updated_time" content="2017-11-01T10:15:54.541Z">
+<meta property="og:image" content="http://yoursite.com/images/Thread/cu10.jpg">
+<meta property="og:image" content="http://yoursite.com/images/Thread/cu11.jpg">
+<meta property="og:updated_time" content="2017-11-01T10:33:43.964Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="线程常用的方法">
-<meta name="twitter:description" content="线程中常用的几个方法：currentThread()方法、isAlive()方法、sleep()方法和getId()方法。">
+<meta name="twitter:description" content="线程中常用的几个方法：currentThread()方法、isAlive()方法、sleep()方法、getId()方法和yield()方法。">
 <meta name="twitter:image" content="http://yoursite.com/images/Thread/cu1.jpg">
 
 
@@ -367,7 +369,7 @@
       
 
       
-        <p>线程中常用的几个方法：currentThread()方法、isAlive()方法、sleep()方法和getId()方法。</p>
+        <p>线程中常用的几个方法：currentThread()方法、isAlive()方法、sleep()方法、getId()方法和yield()方法。</p>
 <a id="more"></a>
 <h3 id="currentThread-方法"><a href="#currentThread-方法" class="headerlink" title="currentThread()方法"></a>currentThread()方法</h3><ol>
 <li>currentThread()方法可返回代码段正在被哪个线程调用的信息。如代码清单1所示。</li>
@@ -422,6 +424,13 @@
 <h3 id="getId-方法"><a href="#getId-方法" class="headerlink" title="getId()方法"></a>getId()方法</h3><p>getId()方法的作用是取得线程的唯一标识。<br><strong>代码清单7 获取id值</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public class getIdThread &#123;</div><div class="line"></div><div class="line">	public static void main(String[] args) &#123;</div><div class="line"></div><div class="line">		Thread runThread=Thread.currentThread();</div><div class="line">		System.out.println(runThread.getName()+&quot; &quot;+runThread.getId());</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>从运行结果看线程名为mian,id为1.</p>
 <div align="center"><br><img src="/images/Thread/cu9.jpg" alt=""><br>图9 获取id</div>
+
+<h3 id="yield-方法"><a href="#yield-方法" class="headerlink" title="yield()方法"></a>yield()方法</h3><p>yield()方法的作用是放弃当前的CPU资源，将它让给其他的任务去占用CPU执行时间。但放弃的时间不确定，有可能刚刚放弃，马上又获得CPU时间片。<br><strong>代码清单8 取得运行时间，测试yield方法的使用效果</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">public class YieldThread extends Thread &#123;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	public void run() &#123;</div><div class="line">	long beginTime =System.currentTimeMillis();</div><div class="line">	int count=0;</div><div class="line">	for(int i=0;i&lt;50000000;i++)&#123;</div><div class="line">		//Thread.yield();</div><div class="line">		count=count+(i+1);</div><div class="line">	&#125;</div><div class="line">	long endTime=System.currentTimeMillis();</div><div class="line">	System.out.println(&quot;用时：&quot;+(endTime-beginTime)+&quot;毫秒！&quot;);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public class YieldRun &#123;</div><div class="line"></div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		YieldThread thread=new YieldThread();</div><div class="line">		thread.start();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>运行结果如题10 所示。</p>
+<div align="center"><br><img src="/images/Thread/cu10.jpg" alt=""><br>图10 CPU独占时间</div>
+
+<p>去掉<code>//Thread.yield();</code>注释,再次运行，如图11所示。</p>
+<div align="center"><br><img src="/images/Thread/cu11.jpg" alt=""><br>图11 将CPU让给其他资源导致速度变慢</div>
 
 <p><a href="https://github.com/5iyxx/JavaMulti-threadProgramming.git" target="_blank" rel="external">Java多线程编程核心技术源代码及PDF</a>。</p>
 
@@ -649,7 +658,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#currentThread-方法"><span class="nav-number">1.</span> <span class="nav-text">currentThread()方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#isAlive-方法"><span class="nav-number">2.</span> <span class="nav-text">isAlive()方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sleep-方法"><span class="nav-number">3.</span> <span class="nav-text">sleep()方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getId-方法"><span class="nav-number">4.</span> <span class="nav-text">getId()方法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#currentThread-方法"><span class="nav-number">1.</span> <span class="nav-text">currentThread()方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#isAlive-方法"><span class="nav-number">2.</span> <span class="nav-text">isAlive()方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sleep-方法"><span class="nav-number">3.</span> <span class="nav-text">sleep()方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getId-方法"><span class="nav-number">4.</span> <span class="nav-text">getId()方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#yield-方法"><span class="nav-number">5.</span> <span class="nav-text">yield()方法</span></a></li></ol></div>
             
 
           </div>
