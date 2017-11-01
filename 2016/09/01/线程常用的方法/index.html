@@ -78,9 +78,15 @@
 <meta property="og:site_name" content="5IYXX">
 <meta property="og:description" content="线程中常用的几个方法：currentThread()方法、isAlive()方法、sleep()方法和getId()方法。">
 <meta property="og:image" content="http://yoursite.com/images/Thread/cu1.jpg">
-<meta property="og:image" content="http://yoursite.com/images/Thread/cu1.jpg">
-<meta property="og:image" content="http://yoursite.com/images/Thread/15.jpg">
-<meta property="og:updated_time" content="2017-10-31T07:24:12.247Z">
+<meta property="og:image" content="http://yoursite.com/images/Thread/cu2.jpg">
+<meta property="og:image" content="http://yoursite.com/images/Thread/cu3.jpg">
+<meta property="og:image" content="http://yoursite.com/images/Thread/cu4.jpg">
+<meta property="og:image" content="http://yoursite.com/images/Thread/cu5.jpg">
+<meta property="og:image" content="http://yoursite.com/images/Thread/cu6.jpg">
+<meta property="og:image" content="http://yoursite.com/images/Thread/cu7.jpg">
+<meta property="og:image" content="http://yoursite.com/images/Thread/cu8.jpg">
+<meta property="og:image" content="http://yoursite.com/images/Thread/cu9.jpg">
+<meta property="og:updated_time" content="2017-11-01T10:15:54.541Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="线程常用的方法">
 <meta name="twitter:description" content="线程中常用的几个方法：currentThread()方法、isAlive()方法、sleep()方法和getId()方法。">
@@ -363,28 +369,61 @@
       
         <p>线程中常用的几个方法：currentThread()方法、isAlive()方法、sleep()方法和getId()方法。</p>
 <a id="more"></a>
-<p>currentThread()方法可返回代码段正在被哪个线程调用的信息。如代码清单1所示。<br>代码清单1 返回线程调用信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">public class CurrentThread extends Thread &#123;</div><div class="line"></div><div class="line">	public CurrentThread()&#123;</div><div class="line">		System.out.println(&quot;构造方法的打印:&quot;+Thread.currentThread().getName());</div><div class="line">	&#125;</div><div class="line">	public void run()&#123;</div><div class="line">		System.out.println(&quot;Run方法的打印:&quot;+Thread.currentThread().getName());</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public class Run&#123;</div><div class="line"></div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		// TODO Auto-generated method stub</div><div class="line"></div><div class="line">		CurrentThread myCurrentThread=new CurrentThread();</div><div class="line">		myCurrentThread.start();</div><div class="line">		//myCurrentThread.run();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>运行结果如图1所示，构造方法被mian线程调用，而run方法被名称为Thread-0的线程调用。<div align="center"><br><img src="/images/Thread/cu1.jpg" alt=""><br>图1 调用start()返回线程结果</div></p>
-<p>当注释掉start()方法，启用<code>myCurrentThread.run();</code>运行结果如图2所示。<br>align=center&gt;<br><img src="/images/Thread/cu1.jpg" alt=""><br>图2 直接调用run()返回线程结果</p>
-<p><div align="center"><br><img src="/images/Thread/15.jpg" alt=""><br>图15 println内部同步</div><br>public class CountOperate extends Thread {</p>
-<pre><code>public CountOperate(){
-    System.out.println(&quot;CountOpera---begin&quot;);
-    System.out.println(&quot;Thread.currentThread.getName()=&quot; + Thread.currentThread().getName());
-    System.out.println(&quot;this.getName()=&quot; + this.getName());
-    System.out.println(&quot;CountOpera---end&quot;);
-}
+<h3 id="currentThread-方法"><a href="#currentThread-方法" class="headerlink" title="currentThread()方法"></a>currentThread()方法</h3><ol>
+<li>currentThread()方法可返回代码段正在被哪个线程调用的信息。如代码清单1所示。</li>
+</ol>
+<p><strong>代码清单1 返回线程调用信息</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">public class CurrentThread extends Thread &#123;</div><div class="line"></div><div class="line">	public CurrentThread()&#123;</div><div class="line">		System.out.println(&quot;构造方法的打印:&quot;+Thread.currentThread().getName());</div><div class="line">	&#125;</div><div class="line">	public void run()&#123;</div><div class="line">		System.out.println(&quot;Run方法的打印:&quot;+Thread.currentThread().getName());</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public class Run&#123;</div><div class="line"></div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		// TODO Auto-generated method stub</div><div class="line"></div><div class="line">		CurrentThread myCurrentThread=new CurrentThread();</div><div class="line">		myCurrentThread.start();</div><div class="line">		//myCurrentThread.run();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>运行结果如图1所示，构造方法被mian线程调用，而run方法被名称为Thread-0的线程调用。</p>
+<div align="center"><br><img src="/images/Thread/cu1.jpg" alt=""><br>图1 调用start()返回线程结果</div>
 
-@Override
-public void run() {
-    System.out.println(&quot;run---begin&quot;);
-    System.out.println(&quot;Thread.currentThread.getName()=&quot; + Thread.currentThread().getName());
-    System.out.println(&quot;this.getName()=&quot; + this.getName());
-    System.out.println(&quot;run---end&quot;);
-}
-</code></pre><p>}</p>
-<p>///////////////////////<br>输出结果：<br>CountOpera—begin<br>Thread.currentThread.getName()=main<br>this.getName()=Thread-0<br>CountOpera—end<br>run—begin<br>Thread.currentThread.getName()=A<br>this.getName()=Thread-0<br>run—end<br>//////////////////////////</p>
-<p>至于这里为什么两次this.getName都是Thread-0,我当时就很郁闷，为什么会出现这样的情况呢，，死活想不通，那是因为由于惯<br>性思维的原因，一直是以为它也是某个线程的名字，然而相同之后却很简单<br>因为this代表的是CountOpera这个对象，this.getName()其实就是最简单的方法调用，然而当前对象里面没有这个方法，<br>又因为继承了Thread方法，所以它执行的就是Thread父类的方法，父类方法如下：<br>public final String getName() {<br>    return String.valueOf(name);<br>}<br>public Thread() {<br>    init(null, null, “Thread-“ + nextThreadNum(), 0);<br>}<br>到这里你应该明白了吧，，Thread-0就是上面init（）方法将name的值设置进去。。。</p>
-<p><a href="https://github.com/5iyxx/JavaMulti-threadProgramming.git" target="_blank" rel="external">Java多线程编程核心技术源代码</a>。</p>
+<p>当注释掉start()方法，启用<code>myCurrentThread.run();</code>运行结果如图2所示。</p>
+<div align="center"><br><img src="/images/Thread/cu2.jpg" alt=""><br>图2 直接调用run()返回线程结果</div>
+
+<ol>
+<li>在比较复杂的情况下，对currentThread()应用，如代码清单2所示。</li>
+</ol>
+<p><strong>代码清单2 复杂的情况下currentThread()应用</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">public class CountOperate extends Thread &#123;</div><div class="line"></div><div class="line">    public CountOperate()&#123;</div><div class="line">        System.out.println(&quot;CountOpera---begin&quot;);</div><div class="line">        System.out.println(&quot;Thread.currentThread.getName()=&quot; + Thread.currentThread().getName());</div><div class="line">        System.out.println(&quot;this.getName()=&quot; + this.getName());</div><div class="line">        System.out.println(&quot;CountOpera---end&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void run() &#123;</div><div class="line">        System.out.println(&quot;run---begin&quot;);</div><div class="line">        System.out.println(&quot;Thread.currentThread.getName()=&quot; + Thread.currentThread().getName());</div><div class="line">        System.out.println(&quot;this.getName()=&quot; + this.getName());</div><div class="line">        System.out.println(&quot;run---end&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public class CountOperateRun &#123;</div><div class="line"></div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		CountOperate c=new CountOperate();</div><div class="line">		Thread t1=new Thread(c);</div><div class="line">		t1.setName(&quot;A&quot;);</div><div class="line">        t1.start();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>输出结果如图3所示。</p>
+<div align="center"><br><img src="/images/Thread/cu3.jpg" alt=""><br>图3 返回结果</div>
+
+<p>在自定义线程类时，如果线程类是继承java.lang.Thread的话，那么线程类就可以使用this关键字去调用继承自父类Thread的方法，this就是当前的对象。<br>另一方面，Thread.currentThread()可以获取当前线程的引用，一般都是在没有线程对象又需要获得线程信息时通过Thread.currentThread()获取当前代码段所在线程的引用。<br>至于这里为什么两次this.getName都是Thread-0,因为this代表的是CountOpera这个对象，this.getName()其实就是最简单的方法调用，然而当前对象里面没有这个方法，又因为继承了Thread方法，所以它执行的就是Thread父类的方法，父类方法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">public final String getName() &#123;</div><div class="line">    return String.valueOf(name);</div><div class="line">&#125;</div><div class="line">public Thread() &#123;</div><div class="line">    init(null, null, &quot;Thread-&quot; + nextThreadNum(), 0);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>Thread-0就是上面init（）方法将name的值设置进去。</p>
+<h3 id="isAlive-方法"><a href="#isAlive-方法" class="headerlink" title="isAlive()方法"></a>isAlive()方法</h3><ol>
+<li>方法isAlive()的功能是判断当前的线程是否处于活动状态。</li>
+</ol>
+<p><strong>代码清单3 isAlive()应用</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">public class MyIsAlive extends Thread &#123;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	public void run() &#123;</div><div class="line">		System.out.println(&quot;run=&quot; + this.isAlive());</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public class IsAliveRun &#123;</div><div class="line"></div><div class="line">	public static void main(String[] args) throws InterruptedException &#123;</div><div class="line">		MyIsAlive myIsAlive=new MyIsAlive();</div><div class="line">        System.out.println(&quot;begin==&quot;+myIsAlive.isAlive());</div><div class="line">        myIsAlive.start();</div><div class="line">        //Thread.sleep(1000);</div><div class="line">        System.out.println(&quot;end==&quot;+myIsAlive.isAlive());</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>运行结果如图4所示，<code>&quot;end==&quot;+myIsAlive.isAlive()</code>的运行结果是true，但此值是不确定的。打印true值是因为myIsAlive线程还没有执行完毕，所以输出为true。</p>
+<div align="center"><br><img src="/images/Thread/cu4.jpg" alt=""><br>图4 返回结果</div>
+
+<p>去掉代码中注释，开启sleep()方法，运行结果如图5所示。<code>&quot;end==&quot;+myIsAlive.isAlive()</code>输出的结果为false，因为myIsAlive对象已经在1秒之内执行完毕。</p>
+<div align="center"><br><img src="/images/Thread/cu5.jpg" alt=""><br>图5 开启sleep()返回结果</div>
+
+<ol>
+<li>在使用isAlive()方法时，如果<strong>将线程对象以构造参数的方式</strong>传递给Thread对象进行start()启动时，运行的结果和前面示例是有差异的。造成这样的差异的原因还是来之于Thread.currentThread()和this的差异。</li>
+</ol>
+<p><strong>代码清单4 测试一下上面结果</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">public class IsAliveOperate extends Thread &#123;</div><div class="line"></div><div class="line">	public IsAliveOperate()&#123;</div><div class="line">		System.out.println(&quot;IsAliveOperate---begin&quot;);</div><div class="line">		System.out.println(&quot;Thread.currentThread().getName()=&quot;+Thread.currentThread().getName());</div><div class="line">		System.out.println(&quot;Thread.currentThread().isAlive()=&quot;+Thread.currentThread().isAlive());</div><div class="line">		System.out.println(&quot;this.getName()=&quot;+ this.getName());</div><div class="line">		System.out.println(&quot;this.isAlive()=&quot;+ this.isAlive());</div><div class="line">		System.out.println(&quot;IsAliveOperate---end&quot;);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	public void run() &#123;</div><div class="line">		System.out.println(&quot;run---begin&quot;);</div><div class="line">		System.out.println(&quot;Thread.currentThread().getName()=&quot;+Thread.currentThread().getName());</div><div class="line">		System.out.println(&quot;Thread.currentThread().isAlive()=&quot;+Thread.currentThread().isAlive());</div><div class="line">		System.out.println(&quot;this.getName()=&quot;+ this.getName());</div><div class="line">		System.out.println(&quot;this.isAlive()=&quot;+ this.isAlive());</div><div class="line">		System.out.println(&quot;run---end&quot;);</div><div class="line">	&#125;	</div><div class="line">&#125;</div><div class="line"></div><div class="line">public class IsAliveOperateRun &#123;</div><div class="line"></div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		IsAliveOperate c=new IsAliveOperate();</div><div class="line">		Thread t=new Thread(c);</div><div class="line">		System.out.println(&quot;main begin t isAlive = &quot;+t.isAlive());</div><div class="line">		t.setName(&quot;A&quot;);</div><div class="line">       t.start();</div><div class="line">       System.out.println(&quot;main end t isAlive = &quot;+t.isAlive());</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>尽管this与Thread.currentThread() 都可以获取到Thread的引用，但是在某种情况下获取到的引用是有差别的。</p>
+<div align="center"><br><img src="/images/Thread/cu6.jpg" alt=""><br>图6 运行结果</div>
+
+<h3 id="sleep-方法"><a href="#sleep-方法" class="headerlink" title="sleep()方法"></a>sleep()方法</h3><ol>
+<li>方法sleep（）的作用是在指定的毫秒数内让当前“正在执行的线程”休眠（暂停执行）。这个“正在执行的线程”是指this.currentThread()返回的线程。</li>
+</ol>
+<p><strong>代码清单5 sleep()休眠线程</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">public class SleepThread extends Thread &#123;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	public void run() &#123;</div><div class="line"></div><div class="line">		try &#123;</div><div class="line">			System.out.println(&quot;run threadName=&quot;+this.currentThread().getName()+&quot; begin&quot;);</div><div class="line">			Thread.sleep(2000);</div><div class="line">			System.out.println(&quot;run threadName=&quot;+this.currentThread().getName()+&quot; end&quot;);</div><div class="line"></div><div class="line">		&#125; catch (InterruptedException e) &#123;</div><div class="line">			// TODO Auto-generated catch block</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public class SleepRun1 &#123;</div><div class="line"></div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		SleepThread t=new SleepThread();</div><div class="line">		System.out.println(&quot;begin =&quot;+System.currentTimeMillis());</div><div class="line">        t.run();</div><div class="line">        System.out.println(&quot;end=&quot;+System.currentTimeMillis());</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>直接调用run()方法，运行结果如图7所示。</p>
+<div align="center"><br><img src="/images/Thread/cu7.jpg" alt=""><br>图7 直接调用run()方法</div>
+
+<ol>
+<li>使用start()启动线程。</li>
+</ol>
+<p><strong>代码清单6 start()启动线程</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">public class SleepThread2 extends Thread &#123;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	public void run() &#123;</div><div class="line">		try &#123;</div><div class="line">			System.out.println(&quot;run threadName=&quot;+this.currentThread().getName()+&quot; begin=&quot;+System.currentTimeMillis());</div><div class="line">			Thread.sleep(2000);</div><div class="line">			System.out.println(&quot;run threadName=&quot;+this.currentThread().getName()+&quot; end=&quot;+System.currentTimeMillis());</div><div class="line">		&#125; catch (InterruptedException e) &#123;</div><div class="line">			// TODO Auto-generated catch block</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public class SleepRun2 &#123;</div><div class="line"></div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		SleepThread2 t=new SleepThread2();</div><div class="line">		System.out.println(&quot;begin =&quot;+System.currentTimeMillis());</div><div class="line">        t.start();</div><div class="line">        System.out.println(&quot;end=&quot;+System.currentTimeMillis());</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>由于mian线程与t线程时异步执行的，所以首先打印的信息为begin和end。而t线程时随后运行的，在最后两行打印run begin 和run end相关的信息。</p>
+<div align="center"><br><img src="/images/Thread/cu8.jpg" alt=""><br>图8 用start()启动线程</div>
+
+<h3 id="getId-方法"><a href="#getId-方法" class="headerlink" title="getId()方法"></a>getId()方法</h3><p>getId()方法的作用是取得线程的唯一标识。<br><strong>代码清单7 获取id值</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public class getIdThread &#123;</div><div class="line"></div><div class="line">	public static void main(String[] args) &#123;</div><div class="line"></div><div class="line">		Thread runThread=Thread.currentThread();</div><div class="line">		System.out.println(runThread.getName()+&quot; &quot;+runThread.getId());</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>从运行结果看线程名为mian,id为1.</p>
+<div align="center"><br><img src="/images/Thread/cu9.jpg" alt=""><br>图9 获取id</div>
+
+<p><a href="https://github.com/5iyxx/JavaMulti-threadProgramming.git" target="_blank" rel="external">Java多线程编程核心技术源代码及PDF</a>。</p>
 
       
     </div>
@@ -510,8 +549,17 @@ public void run() {
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           
             <img class="site-author-image" itemprop="image"
@@ -591,6 +639,22 @@ public void run() {
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#currentThread-方法"><span class="nav-number">1.</span> <span class="nav-text">currentThread()方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#isAlive-方法"><span class="nav-number">2.</span> <span class="nav-text">isAlive()方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sleep-方法"><span class="nav-number">3.</span> <span class="nav-text">sleep()方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getId-方法"><span class="nav-number">4.</span> <span class="nav-text">getId()方法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
