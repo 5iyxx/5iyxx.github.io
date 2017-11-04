@@ -73,15 +73,15 @@
 
 <meta name="description" content="暂停线程意味着此线程还可以恢复运行。在Java多线程中，可以使用suspend()方法暂停线程，使用resume()方法恢复线程。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="停止线程">
-<meta property="og:url" content="http://yoursite.com/2016/09/01/停止线程/index.html">
+<meta property="og:title" content="暂停线程">
+<meta property="og:url" content="http://yoursite.com/2016/09/01/暂停线程/index.html">
 <meta property="og:site_name" content="5IYXX">
 <meta property="og:description" content="暂停线程意味着此线程还可以恢复运行。在Java多线程中，可以使用suspend()方法暂停线程，使用resume()方法恢复线程。">
 <meta property="og:image" content="http://yoursite.com/images/Thread/su1.jpg">
 <meta property="og:image" content="http://yoursite.com/images/Thread/su2.jpg">
-<meta property="og:updated_time" content="2017-11-04T08:02:07.322Z">
+<meta property="og:updated_time" content="2017-11-04T08:14:05.928Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="停止线程">
+<meta name="twitter:title" content="暂停线程">
 <meta name="twitter:description" content="暂停线程意味着此线程还可以恢复运行。在Java多线程中，可以使用suspend()方法暂停线程，使用resume()方法恢复线程。">
 <meta name="twitter:image" content="http://yoursite.com/images/Thread/su1.jpg">
 
@@ -113,13 +113,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/09/01/停止线程/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/09/01/暂停线程/"/>
 
 
 
 
 
-  <title>停止线程 | 5IYXX</title>
+  <title>暂停线程 | 5IYXX</title>
   
 
 
@@ -260,7 +260,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/01/停止线程/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/01/暂停线程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Eric Chen">
@@ -277,7 +277,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">停止线程</h1>
+          <h1 class="post-title" itemprop="name headline">暂停线程</h1>
         
 
         <div class="post-meta">
@@ -329,7 +329,7 @@
 
           
           
-             <span id="/2016/09/01/停止线程/" class="leancloud_visitors" data-flag-title="停止线程">
+             <span id="/2016/09/01/暂停线程/" class="leancloud_visitors" data-flag-title="暂停线程">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -366,12 +366,10 @@
 <p>从控制台打印的时间上看，线程的确被暂停了，而且还可以恢复成运行的状态。</p>
 <div align="center"><br><img src="/images/Thread/su1.jpg" alt=""><br>图1 暂停与恢复线程</div>
 
-<h3 id="suspend与resume方法的缺点–独占"><a href="#suspend与resume方法的缺点–独占" class="headerlink" title="suspend与resume方法的缺点–独占"></a>suspend与resume方法的缺点–独占</h3><p>在使用suspend与resume方法时，如果使用不当，极易造成公共的同步对象的独占，使得其他线程无法访问公共同步对象。<br><strong>代码清单2 suspend与resume独占</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">public class SuspendResumeSynchronizedObject &#123;</div><div class="line"></div><div class="line">	synchronized public void printString()&#123;</div><div class="line">		System.out.println(&quot;begin&quot;);</div><div class="line">		if(Thread.currentThread().getName().equals(&quot;a&quot;))&#123;</div><div class="line">			System.out.println(&quot;a线程永远suspend了！&quot;);</div><div class="line">			Thread.currentThread().suspend();</div><div class="line">		&#125;</div><div class="line">		System.out.println(&quot;end&quot;);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">public class SuspendResumeSynchronizedRun &#123;</div><div class="line"></div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		try &#123;</div><div class="line">		 final SuspendResumeSynchronizedObject object = new SuspendResumeSynchronizedObject();</div><div class="line">			Thread thread1 = new Thread() &#123;</div><div class="line">				@Override</div><div class="line">				public void run() &#123;</div><div class="line">					object.printString();</div><div class="line">				&#125;</div><div class="line">			&#125;;</div><div class="line">			thread1.setName(&quot;a&quot;);</div><div class="line">			thread1.start();</div><div class="line">			Thread.sleep(1000);</div><div class="line">			Thread thread2 = new Thread() &#123;</div><div class="line">				@Override</div><div class="line">				public void run() &#123;</div><div class="line">					System.out.println(&quot;thread2启动了，但进入不了printString()方法！只打印一个begin&quot;);</div><div class="line">					System.out.println(&quot;因为printString()方法被a线程锁定并且永远suspend暂停了！&quot;);</div><div class="line">					object.printString();</div><div class="line">				&#125;</div><div class="line">			&#125;;</div><div class="line">			thread2.start();</div><div class="line">		&#125; catch (InterruptedException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="suspend与resume方法的缺点–独占"><a href="#suspend与resume方法的缺点–独占" class="headerlink" title="suspend与resume方法的缺点–独占"></a>suspend与resume方法的缺点–独占</h3><p>1) 在使用suspend与resume方法时，如果使用不当，极易造成公共的同步对象的独占，使得其他线程无法访问公共同步对象。<br><strong>代码清单2 suspend与resume独占</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">public class SuspendResumeSynchronizedObject &#123;</div><div class="line"></div><div class="line">	synchronized public void printString()&#123;</div><div class="line">		System.out.println(&quot;begin&quot;);</div><div class="line">		if(Thread.currentThread().getName().equals(&quot;a&quot;))&#123;</div><div class="line">			System.out.println(&quot;a线程永远suspend了！&quot;);</div><div class="line">			Thread.currentThread().suspend();</div><div class="line">		&#125;</div><div class="line">		System.out.println(&quot;end&quot;);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">public class SuspendResumeSynchronizedRun &#123;</div><div class="line"></div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		try &#123;</div><div class="line">		 final SuspendResumeSynchronizedObject object = new SuspendResumeSynchronizedObject();</div><div class="line">			Thread thread1 = new Thread() &#123;</div><div class="line">				@Override</div><div class="line">				public void run() &#123;</div><div class="line">					object.printString();</div><div class="line">				&#125;</div><div class="line">			&#125;;</div><div class="line">			thread1.setName(&quot;a&quot;);</div><div class="line">			thread1.start();</div><div class="line">			Thread.sleep(1000);</div><div class="line">			Thread thread2 = new Thread() &#123;</div><div class="line">				@Override</div><div class="line">				public void run() &#123;</div><div class="line">					System.out.println(&quot;thread2启动了，但进入不了printString()方法！只打印一个begin&quot;);</div><div class="line">					System.out.println(&quot;因为printString()方法被a线程锁定并且永远suspend暂停了！&quot;);</div><div class="line">					object.printString();</div><div class="line">				&#125;</div><div class="line">			&#125;;</div><div class="line">			thread2.start();</div><div class="line">		&#125; catch (InterruptedException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <div align="center"><br><img src="/images/Thread/su2.jpg" alt=""><br>图2 独占并锁死了printString方法</div>
 
-
-
-
+<p>2) 还有另外一种独占锁的情况也要格外注意，稍有不慎，就会掉进“坑”里。</p>
 <p><a href="https://github.com/5iyxx/JavaMulti-threadProgramming.git" target="_blank" rel="external">Java多线程编程核心技术源代码</a>。</p>
 
       
@@ -432,8 +430,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/08/01/暂停线程/" rel="next" title="停止线程">
-                <i class="fa fa-chevron-left"></i> 停止线程
+              <a href="/2016/09/01/线程常用的方法/" rel="next" title="线程常用的方法">
+                <i class="fa fa-chevron-left"></i> 线程常用的方法
               </a>
             
           </div>
@@ -442,8 +440,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/09/01/线程常用的方法/" rel="prev" title="线程常用的方法">
-                线程常用的方法 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/09/11/Centos下完全卸载MySQL/" rel="prev" title="Centos下完全卸载MySQL">
+                Centos下完全卸载MySQL <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
