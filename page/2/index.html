@@ -254,7 +254,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/06/Redis数据类型--SortedSet（有序集合）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/06/Redis数据类型--String（字符串）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Eric Chen">
@@ -273,7 +273,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/03/06/Redis数据类型--SortedSet（有序集合）/" itemprop="url">Redis数据类型--SortedSet（有序集合）</a></h1>
+                <a class="post-title-link" href="/2017/03/06/Redis数据类型--String（字符串）/" itemprop="url">Redis数据类型--String（字符串）</a></h1>
         
 
         <div class="post-meta">
@@ -325,7 +325,7 @@
 
           
           
-             <span id="/2017/03/06/Redis数据类型--SortedSet（有序集合）/" class="leancloud_visitors" data-flag-title="Redis数据类型--SortedSet（有序集合）">
+             <span id="/2017/03/06/Redis数据类型--String（字符串）/" class="leancloud_visitors" data-flag-title="Redis数据类型--String（字符串）">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -357,10 +357,10 @@
 
       
         
-          <p>有序集合和散列一样，都用于存储键值对：有序集合的键被称为成员（member），每个成员都是各不相同；而有序集合的值则被称为分值（score），分值必须为浮点数。有序集合是Redis里面唯一一个既可以根据成员访问元素（这一点和散列一样），又可以根据分值以及分值的排列顺序来访问元素的结构。字符串成员（member）与浮点数分值（score）之间的有序映射，元素的排列顺序由分值的大小决定。<br>结构的读写：<br> 添加、获取、删除单个元素<br> 根据分值范围（range）或者成员来获取元素<br>
+          <p>Redis的字符串和其他编程语言或者其他键值存储提供的字符串非常相似。一个key对应一个value。<br>string类型是二进制安全的，可以包含任何数据，比如jpg图片或者序列化的对象。从内部实现来看其实string可以看作byte数组，最大上限1G字节。<br>另外string类型可以被部分命令按int处理，比如incr等命令。<br>文档目前描述的内容以 Redis 2.8 版本为准。<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/03/06/Redis数据类型--SortedSet（有序集合）/#more" rel="contents">
+            <a class="btn" href="/2017/03/06/Redis数据类型--String（字符串）/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1353,163 +1353,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/07/Redis数据类型--Hash（哈希表）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eric Chen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/psbe.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="5IYXX">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/01/07/Redis数据类型--Hash（哈希表）/" itemprop="url">Redis数据类型--Hash（哈希表）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-07T21:02:25+08:00">
-                2017-01-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Redis/" itemprop="url" rel="index">
-                    <span itemprop="name">Redis</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/01/07/Redis数据类型--Hash（哈希表）/" class="leancloud_visitors" data-flag-title="Redis数据类型--Hash（哈希表）">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Redis的散列可以存储多个键值对之间的映射。和字符串一样，散列存储的值既可以是字符串又可以是数字值，并且用户同样子可以对散列存储的数字执行自增操作或者自减操作。<br>结构的读写：<br> 添加、获取、移除单个键值对<br> 获取所有的键值对<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/01/07/Redis数据类型--Hash（哈希表）/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/07/Redis数据类型--List（列表）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1617,6 +1460,163 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/01/07/Redis数据类型--List（列表）/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/07/Redis数据类型--Hash（哈希表）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eric Chen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/psbe.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="5IYXX">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/01/07/Redis数据类型--Hash（哈希表）/" itemprop="url">Redis数据类型--Hash（哈希表）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-07T21:02:25+08:00">
+                2017-01-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/01/07/Redis数据类型--Hash（哈希表）/" class="leancloud_visitors" data-flag-title="Redis数据类型--Hash（哈希表）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>Redis的散列可以存储多个键值对之间的映射。和字符串一样，散列存储的值既可以是字符串又可以是数字值，并且用户同样子可以对散列存储的数字执行自增操作或者自减操作。<br>结构的读写：<br> 添加、获取、移除单个键值对<br> 获取所有的键值对<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/01/07/Redis数据类型--Hash（哈希表）/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
