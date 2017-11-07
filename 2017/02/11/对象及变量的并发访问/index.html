@@ -79,7 +79,8 @@
 <meta property="og:description" content="Java多线程中的同步，也就是如何在Java语言中写出线程安全的程序，如何在Java语言中解决非线程安全的相关问题。多线程中的同步问题是学习多线程的重中值重，这个技术在其他的编程语言中也涉及，如C++或C#.">
 <meta property="og:image" content="http://yoursite.com/images/Thread/b1.jpg">
 <meta property="og:image" content="http://yoursite.com/images/Thread/b2.jpg">
-<meta property="og:updated_time" content="2017-11-07T14:09:36.246Z">
+<meta property="og:image" content="http://yoursite.com/images/Thread/b3.jpg">
+<meta property="og:updated_time" content="2017-11-07T14:22:50.748Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="对象及变量的并发访问">
 <meta name="twitter:description" content="Java多线程中的同步，也就是如何在Java语言中写出线程安全的程序，如何在Java语言中解决非线程安全的相关问题。多线程中的同步问题是学习多线程的重中值重，这个技术在其他的编程语言中也涉及，如C++或C#.">
@@ -370,9 +371,12 @@
 <p><strong>可见，方法中的变量不存在非线程安全问题，永远都是线程安全的。这是方法内部的变量是私有的特性造成的。</strong></p>
 <h3 id="实例变量非线程安全"><a href="#实例变量非线程安全" class="headerlink" title="实例变量非线程安全"></a>实例变量非线程安全</h3><p>如果多个线程共同访问一个对象中的实例变量，则有可能出现“非线程安全”问题。<br>1)用线程访问的对象中如果有多个实例变量，则运行的结果有可能出现交叉的情况，此情况见<a href="https://5iyxx.github.io/2016/07/01/%E4%BD%BF%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B/" target="_blank" rel="external">使用多线程————实例变量与线程安全</a>。</p>
 <p>2)如果对象仅有1个实例变量，则有可能出现覆盖的情况。<br>将代码清单1中第二行<code>// int num = 0;</code>中的注释去掉，给第5行加上注释。<br>运行结果如图所示。</p>
-<div align="center"><br><img src="/images/Thread/b2.jpg" alt=""><br>图2 实例变量出现覆盖</div>
+<div align="center"><br><img src="/images/Thread/b2.jpg" alt=""><br>图2 单例模式中的实例变量呈非线程安全状态</div>
 
+<p>本实验是是两个线程同时访问一个没哟同步的方法，如果两个线程同时操作业务对象中的实例变量，则可能出现“非线性安全”问题。<br>只需在<code>public void addI(String username)</code>方法前面加关键字synchronized即可。<br>运行结果如图3所示。</p>
+<div align="center"><br><img src="/images/Thread/b3.jpg" alt=""><br>图3 同步后线程安全了</div>
 
+<p>结论：在两个线程访问同一个对象中的同步方法时，一定是线程安全的。由于是同步访问，所以先打印a,然后打印出b。</p>
 <p><a href="https://github.com/5iyxx/JavaMulti-threadProgramming.git" target="_blank" rel="external">Java多线程编程核心技术源代码</a>。</p>
 
       
