@@ -53,7 +53,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Thread," />
 
 
 
@@ -71,12 +71,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="5IYXX">
-<meta property="og:url" content="http://yoursite.com/archives/2016/10/index.html">
+<meta name="description" content="Java多线程中的同步，也就是如何在Java语言中写出线程安全的程序，如何在Java语言中解决非线程安全的相关问题。多线程中的同步问题是学习多线程的重中值重，这个技术在其他的编程语言中也涉及，如C++或C#.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="对象及变量的并发访问">
+<meta property="og:url" content="http://yoursite.com/2017/02/11/对象及变量的并发访问/index.html">
 <meta property="og:site_name" content="5IYXX">
+<meta property="og:description" content="Java多线程中的同步，也就是如何在Java语言中写出线程安全的程序，如何在Java语言中解决非线程安全的相关问题。多线程中的同步问题是学习多线程的重中值重，这个技术在其他的编程语言中也涉及，如C++或C#.">
+<meta property="og:image" content="http://yoursite.com/images/Thread/b1.jpg">
+<meta property="og:updated_time" content="2017-11-07T13:34:38.311Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="5IYXX">
+<meta name="twitter:title" content="对象及变量的并发访问">
+<meta name="twitter:description" content="Java多线程中的同步，也就是如何在Java语言中写出线程安全的程序，如何在Java语言中解决非线程安全的相关问题。多线程中的同步问题是学习多线程的重中值重，这个技术在其他的编程语言中也涉及，如C++或C#.">
+<meta name="twitter:image" content="http://yoursite.com/images/Thread/b1.jpg">
 
 
 
@@ -106,13 +112,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2016/10/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/02/11/对象及变量的并发访问/"/>
 
 
 
 
 
-  <title>Archive | 5IYXX</title>
+  <title>对象及变量的并发访问 | 5IYXX</title>
   
 
 
@@ -131,7 +137,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -239,73 +245,222 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
-
-      <span class="archive-page-counter">
-        
-        
-         
-          
-        Nice! 53 posts in total. Keep on posting.
-      </span>
-
-      
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2016">2016</h1>
-          </div>
-        
-        
-
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/11/对象及变量的并发访问/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eric Chen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/psbe.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="5IYXX">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2016/10/01/对象及变量的并发访问/" itemprop="url">
-              
-                <span itemprop="name">对象及变量的并发访问</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">对象及变量的并发访问</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-10-01T09:43:50+08:00"
-              content="2016-10-01" >
-          10-01
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-11T09:43:50+08:00">
+                2017-02-11
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaMulti-threadProgramming/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaMulti-threadProgramming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/02/11/对象及变量的并发访问/" class="leancloud_visitors" data-flag-title="对象及变量的并发访问">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
+      
 
+      
+        <p>Java多线程中的同步，也就是如何在Java语言中写出线程安全的程序，如何在Java语言中解决非线程安全的相关问题。多线程中的同步问题是学习多线程的重中值重，这个技术在其他的编程语言中也涉及，如C++或C#.</p>
+<a id="more"></a>
+<h2 id="synchronized同步方法"><a href="#synchronized同步方法" class="headerlink" title="synchronized同步方法"></a>synchronized同步方法</h2><p>“非线程安全”其实会在多个线程对同一个对象中的实例变量进行并发访问时发生，产生的后果就是“脏读”，也就是收到的数据其实是被更改过的。而“线程安全”就是以或得的实例变量的值是经过同步处理的，不会出现脏读的现象。</p>
+<h3 id="方法内的变量为线程安全"><a href="#方法内的变量为线程安全" class="headerlink" title="方法内的变量为线程安全"></a>方法内的变量为线程安全</h3><p>“非线程安全”问题存在于“实例变量中”，如果是方法内部的私有变量，则不存在“非线程安全”问题，所得结果也就是”线程安全“的了<br><strong>代码清单1 方法内部声明一个变量，不存在“非线程安全”</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line">public class HasSelfPrivateNum &#123;</div><div class="line">   // int num = 0;</div><div class="line">	public void addI(String username) &#123;</div><div class="line">		try &#123;</div><div class="line">			int num = 0;</div><div class="line">			if (username.equals(&quot;a&quot;)) &#123;</div><div class="line">				num = 100;</div><div class="line">				System.out.println(&quot;a set over!&quot;);</div><div class="line">				Thread.sleep(2000);</div><div class="line">			&#125; else &#123;</div><div class="line">				num = 200;</div><div class="line">				System.out.println(&quot;b set over!&quot;);</div><div class="line">			&#125;</div><div class="line">			System.out.println(username + &quot; num=&quot; + num);</div><div class="line">		&#125; catch (InterruptedException e) &#123;</div><div class="line">			// TODO Auto-generated catch block</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public class ThreadA extends Thread &#123;</div><div class="line">	private HasSelfPrivateNum numRef;</div><div class="line"></div><div class="line">	public ThreadA(HasSelfPrivateNum numRef) &#123;</div><div class="line">		super();</div><div class="line">		this.numRef = numRef;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	public void run() &#123;</div><div class="line">		super.run();</div><div class="line">		numRef.addI(&quot;a&quot;);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">public class ThreadB extends Thread &#123;</div><div class="line">	private HasSelfPrivateNum numRef; </div><div class="line">	public ThreadB(HasSelfPrivateNum numRef) &#123;</div><div class="line">		super();</div><div class="line">		this.numRef = numRef;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	public void run() &#123;</div><div class="line">		super.run();</div><div class="line">		numRef.addI(&quot;b&quot;);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public class HasSefPrivateNumRun &#123;</div><div class="line"></div><div class="line">	public static void main(String[] args) &#123;</div><div class="line"></div><div class="line">		HasSelfPrivateNum numRef=new HasSelfPrivateNum();</div><div class="line">		ThreadA athread=new ThreadA(numRef);</div><div class="line">		athread.start();</div><div class="line">		ThreadB bthread=new ThreadB(numRef);</div><div class="line">		bthread.start();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>程序运行后的效果如图1所示。</p>
+<div align="center"><br><img src="/images/Thread/b1.jpg" alt=""><br>图1 方法中的变量呈线程安全状态</div>
+
+<p><strong>可见，方法中的变量不存在非线程安全问题，永远都是线程安全的。这是方法内部的变量是私有的特性造成的。</strong></p>
+<h3 id="实例变量非线程安全"><a href="#实例变量非线程安全" class="headerlink" title="实例变量非线程安全"></a>实例变量非线程安全</h3><p>如果多个线程共同访问一个对象中的实例变量，则有可能出现“非线程安全”问题</p>
+<p><a href="https://github.com/5iyxx/JavaMulti-threadProgramming.git" target="_blank" rel="external">Java多线程编程核心技术源代码</a>。</p>
+
+      
     </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div><p style="color:225,225,225;font-weight:bold;font-size:10px;">Adhere to the original technology to share, your support will encourage me to continue to create!</p></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/pay/wx.png" alt="Eric Chen WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/pay/zfb.png" alt="Eric Chen Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Thread/" rel="tag"># Thread</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/11/Nginx安装过程/" rel="next" title="Nginx安装过程">
+                <i class="fa fa-chevron-left"></i> Nginx安装过程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/12/Mybatis入门/" rel="prev" title="Mybatis">
+                Mybatis <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -313,6 +468,12 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMTA0MC83NTg4"></div>
+    
+  </div>
+
 
         </div>
         
@@ -333,8 +494,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           
             <img class="site-author-image" itemprop="image"
@@ -414,6 +584,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#synchronized同步方法"><span class="nav-number">1.</span> <span class="nav-text">synchronized同步方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法内的变量为线程安全"><span class="nav-number">1.1.</span> <span class="nav-text">方法内的变量为线程安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例变量非线程安全"><span class="nav-number">1.2.</span> <span class="nav-text">实例变量非线程安全</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -594,6 +780,17 @@
 
 
 
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 
