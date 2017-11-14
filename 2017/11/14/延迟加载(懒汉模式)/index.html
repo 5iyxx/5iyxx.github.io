@@ -53,7 +53,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Thread," />
 
 
 
@@ -71,12 +71,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="5IYXX">
-<meta property="og:url" content="http://yoursite.com/tags/Maven/index.html">
+<meta name="description" content="如何使单例模式遇到多线程是安全的、正确的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="延迟加载(懒汉模式)">
+<meta property="og:url" content="http://yoursite.com/2017/11/14/延迟加载(懒汉模式)/index.html">
 <meta property="og:site_name" content="5IYXX">
+<meta property="og:description" content="如何使单例模式遇到多线程是安全的、正确的。">
+<meta property="og:image" content="http://yoursite.com/images/Thread/si1.jpg">
+<meta property="og:updated_time" content="2017-11-14T12:31:03.606Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="5IYXX">
+<meta name="twitter:title" content="延迟加载(懒汉模式)">
+<meta name="twitter:description" content="如何使单例模式遇到多线程是安全的、正确的。">
+<meta name="twitter:image" content="http://yoursite.com/images/Thread/si1.jpg">
 
 
 
@@ -106,13 +112,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/Maven/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/11/14/延迟加载(懒汉模式)/"/>
 
 
 
 
 
-  <title>Tag: Maven | 5IYXX</title>
+  <title>延迟加载(懒汉模式) | 5IYXX</title>
   
 
 
@@ -131,7 +137,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -239,110 +245,216 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block tag">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>Maven<small>Tag</small>
-        </h1>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/14/延迟加载(懒汉模式)/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eric Chen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/psbe.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="5IYXX">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2017/05/11/在maven中Tomcat热部署/" itemprop="url">
-              
-                <span itemprop="name">在Maven中Tomcat热部署</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">延迟加载(懒汉模式)</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-05-11T09:43:50+08:00"
-              content="2017-05-11" >
-          05-11
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-14T20:30:55+08:00">
+                2017-11-14
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaMulti-threadProgramming/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaMulti-threadProgramming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/11/14/延迟加载(懒汉模式)/" class="leancloud_visitors" data-flag-title="延迟加载(懒汉模式)">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/03/08/Maven中pom标签详解/" itemprop="url">
-              
-                <span itemprop="name">Maven中pom标签详解</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-03-08T23:02:25+08:00"
-              content="2017-03-08" >
-          03-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
+        <p>如何使单例模式遇到多线程是安全的、正确的。</p>
+<a id="more"></a>
+<h3 id="立即加载-“饿汗模式”"><a href="#立即加载-“饿汗模式”" class="headerlink" title="立即加载/“饿汗模式”"></a>立即加载/“饿汗模式”</h3><p>什么是立即加载？立即加载就是使用类的时候已经将对象创建完毕，常见的实现办法就是直接new实例化。而立即加载从中文的语境来看，有“着急”、”急迫”的含义，所以也称为“饿汉模式”。<br>立即加载/“饿汉模式”是在调用方法前，实例已经被创建了。<br><strong>代码清单1 饿汉模式</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">public class MyObject &#123;</div><div class="line">//立即加载方式==饿汉模式</div><div class="line">	private  static MyObject myObject=new MyObject();</div><div class="line">	private MyObject()&#123;</div><div class="line">		</div><div class="line">	&#125;</div><div class="line">	public static MyObject getInstance()&#123;</div><div class="line">		//此版本代码为立即加载</div><div class="line">		//此版本代码的缺点是不能有其他实例变量</div><div class="line">		//因为getInstance()方法没有同步</div><div class="line">		//所以有可能出现非线性安全问题</div><div class="line">		return myObject;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">public class MyThread extends Thread &#123;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	public void run() &#123;</div><div class="line">		System.out.println(MyObject.getInstance().hashCode());</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public class Run &#123;</div><div class="line"></div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		MyThread t1 = new MyThread();</div><div class="line">		MyThread t2 = new MyThread();</div><div class="line">		MyThread t3= new MyThread();</div><div class="line">		t1.start();</div><div class="line">		t2.start();</div><div class="line">		t3.start();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>运行结果如图1所示，打印的hashCode是同一个值，说明对象是同一个，也就实现了立即加载型单例设计模式。</p>
+<div align="center"><br><img src="/images/Thread/si1.jpg" alt=""><br>图1 “饿汉模式”的运行结果</div>
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/03/07/Jar包添加到maven本地仓库/" itemprop="url">
-              
-                <span itemprop="name">Jar包添加到maven本地仓库</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-03-07T21:02:25+08:00"
-              content="2017-03-07" >
-          03-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+<h3 id="延迟加载-“懒汉模式”"><a href="#延迟加载-“懒汉模式”" class="headerlink" title="延迟加载/“懒汉模式”"></a>延迟加载/“懒汉模式”</h3><p>什么是延迟加载？延迟加载就是字啊调用get()方法时实例才被创建，常见的实现方法就是在get()方法中进行new实例化。而延迟加载从中文的语境来看，是“缓慢”、“不急迫”的含义，所以也称为“懒汉模式”。</p>
+<p><a href="https://github.com/5iyxx/JavaMulti-threadProgramming.git" target="_blank" rel="external">Java多线程编程核心技术源代码</a>。</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div><p style="color:225,225,225;font-weight:bold;font-size:10px;">Adhere to the original technology to share, your support will encourage me to continue to create!</p></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/pay/wx.png" alt="Eric Chen WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/pay/zfb.png" alt="Eric Chen Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Thread/" rel="tag"># Thread</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/14/单例模式与多线程/" rel="next" title="单例模式与多线程">
+                <i class="fa fa-chevron-left"></i> 单例模式与多线程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -350,6 +462,12 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMTA0MC83NTg4"></div>
+    
+  </div>
+
 
         </div>
         
@@ -370,8 +488,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           
             <img class="site-author-image" itemprop="image"
@@ -451,6 +578,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#立即加载-“饿汗模式”"><span class="nav-number">1.</span> <span class="nav-text">立即加载/“饿汗模式”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#延迟加载-“懒汉模式”"><span class="nav-number">2.</span> <span class="nav-text">延迟加载/“懒汉模式”</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -631,6 +774,17 @@
 
 
 
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 
