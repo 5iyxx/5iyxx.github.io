@@ -91,8 +91,14 @@
 <meta property="og:image" content="http://yoursite.com/images/Thread/ti12.jpg">
 <meta property="og:image" content="http://yoursite.com/images/Thread/ti13.jpg">
 <meta property="og:image" content="http://yoursite.com/images/Thread/ti14.jpg">
+<meta property="og:image" content="http://yoursite.com/images/Thread/ti15.jpg">
+<meta property="og:image" content="http://yoursite.com/images/Thread/ti16.jpg">
+<meta property="og:image" content="http://yoursite.com/images/Thread/ti17.jpg">
+<meta property="og:image" content="http://yoursite.com/images/Thread/ti18.jpg">
+<meta property="og:image" content="http://yoursite.com/images/Thread/ti19.jpg">
+<meta property="og:image" content="http://yoursite.com/images/Thread/ti20.jpg">
 <meta property="og:image" content="http://yoursite.com/images/Thread/ti21.jpg">
-<meta property="og:updated_time" content="2017-11-14T07:33:09.207Z">
+<meta property="og:updated_time" content="2017-11-14T07:35:45.692Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="定时器Timer">
 <meta name="twitter:description" content="定时计划任务功能在Java中主要使用的就是Timer对象，它在内部使用多线程的方式进行处理，所以它和其它线程技术上还是有非常大的关联的。">
@@ -458,204 +464,50 @@
 <p>任务task被延迟7秒执行，如图14所示。</p>
 <div align="center"><br><img src="/images/Thread/ti14.jpg" alt=""><br>图14 运行结果</div>
 
-<h3 id="方法schedule-TimerTask-task-long-delay，long-period-的测试"><a href="#方法schedule-TimerTask-task-long-delay，long-period-的测试" class="headerlink" title="方法schedule(TimerTask task,long delay，long period)的测试"></a>方法schedule(TimerTask task,long delay，long period)的测试</h3><p>该方法的作用是以执行schedule(TimerTask task,long delay,long period)方法当前的时间Wie参考时间，在此时间基础上延迟指定的毫秒数，再以某一间隔时间无限次数地执行某一任务。<br><strong>代码清单11  无限循环</strong><br>``<br>public class Run {<br>    static public class MyTask extends TimerTask {<br>        @Override<br>        public void run() {<br>            System.out.println(“运行了！时间为：” + new Date());<br>        }<br>    }</p>
-<pre><code>public static void main(String[] args) {
-        MyTask task = new MyTask();
-        Timer timer = new Timer();
-        System.out.println(&quot;当前时间&quot;+new Date().toLocaleString());
-        timer.schedule(task, 3000,5000);
-}
-</code></pre><p>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">凡是使用方法带有period参数的，都是无限循环执行TimerTask中的任务。</div><div class="line">&lt;div align=center&gt;</div><div class="line">![](/images/Thread/ti15.jpg)</div><div class="line">图15 循环运行&lt;/div&gt;</div><div class="line"></div><div class="line">### 方法scheduleAtFixedRate(TimerTask task,Date firstTime,long period)的测试</div><div class="line">方法schedule和方法scheduleAtFixedRate都会按顺序执行，所以不要考虑非线程安全的情况。</div><div class="line">方法schedule和scheduleAtFixedRate主要的区别只在于不延时的情况。</div><div class="line">使用schedule方法：如果执行任务的时间没有被延迟时，那么下一次任务的执行时间参考的是上一次任务的“开始”时的时间来计算。</div><div class="line">使用scheduleAtFixedRate方法：如果执行任务的时间没有被延迟时，那么下一次任务的执行时间参考的是上一次任务的“结束”时的时间来计算。</div><div class="line">延时的情况则没有区别，也就是使用schedule或scheduleAtFixedRate方法都是如果执行任务的时间被延迟时，那么下一次任务的执行时间参考的是上一次任务“结束”时的时间来计算。</div><div class="line">1. 测试schedule方法任务不延时</div><div class="line"></div><div class="line">**代码清单12 测试schedule方法任务不延时**</div></pre></td></tr></table></figure></p>
-<p>public class Run1 {</p>
-<pre><code>private static Timer timer = new Timer();
-private static int runCount = 0;
+<h3 id="方法schedule-TimerTask-task-long-delay，long-period-的测试"><a href="#方法schedule-TimerTask-task-long-delay，long-period-的测试" class="headerlink" title="方法schedule(TimerTask task,long delay，long period)的测试"></a>方法schedule(TimerTask task,long delay，long period)的测试</h3><p>该方法的作用是以执行schedule(TimerTask task,long delay,long period)方法当前的时间Wie参考时间，在此时间基础上延迟指定的毫秒数，再以某一间隔时间无限次数地执行某一任务。<br><strong>代码清单11  无限循环</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">public class Run &#123;</div><div class="line">	static public class MyTask extends TimerTask &#123;</div><div class="line">		@Override</div><div class="line">		public void run() &#123;</div><div class="line">			System.out.println(&quot;运行了！时间为：&quot; + new Date());</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">			MyTask task = new MyTask();</div><div class="line">			Timer timer = new Timer();</div><div class="line">			System.out.println(&quot;当前时间&quot;+new Date().toLocaleString());</div><div class="line">			timer.schedule(task, 3000,5000);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>凡是使用方法带有period参数的，都是无限循环执行TimerTask中的任务。</p>
+<div align="center"><br><img src="/images/Thread/ti15.jpg" alt=""><br>图15 循环运行</div>
 
-static public class MyTask1 extends TimerTask {
-    @Override
-    public void run() {
-        try {
-            System.out.println(&quot;1 begin 运行了！时间为：&quot; + new Date());
-            Thread.sleep(1000);
-            System.out.println(&quot;1   end 运行了！时间为：&quot; + new Date());
-            runCount++;
-            if (runCount == 5) {
-                timer.cancel();
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-}
+<h3 id="方法scheduleAtFixedRate-TimerTask-task-Date-firstTime-long-period-的测试"><a href="#方法scheduleAtFixedRate-TimerTask-task-Date-firstTime-long-period-的测试" class="headerlink" title="方法scheduleAtFixedRate(TimerTask task,Date firstTime,long period)的测试"></a>方法scheduleAtFixedRate(TimerTask task,Date firstTime,long period)的测试</h3><p>方法schedule和方法scheduleAtFixedRate都会按顺序执行，所以不要考虑非线程安全的情况。<br>方法schedule和scheduleAtFixedRate主要的区别只在于不延时的情况。<br>使用schedule方法：如果执行任务的时间没有被延迟时，那么下一次任务的执行时间参考的是上一次任务的“开始”时的时间来计算。<br>使用scheduleAtFixedRate方法：如果执行任务的时间没有被延迟时，那么下一次任务的执行时间参考的是上一次任务的“结束”时的时间来计算。<br>延时的情况则没有区别，也就是使用schedule或scheduleAtFixedRate方法都是如果执行任务的时间被延迟时，那么下一次任务的执行时间参考的是上一次任务“结束”时的时间来计算。</p>
+<ol>
+<li>测试schedule方法任务不延时</li>
+</ol>
+<p><strong>代码清单12 测试schedule方法任务不延时</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">public class Run1 &#123;</div><div class="line"></div><div class="line">	private static Timer timer = new Timer();</div><div class="line">	private static int runCount = 0;</div><div class="line"></div><div class="line">	static public class MyTask1 extends TimerTask &#123;</div><div class="line">		@Override</div><div class="line">		public void run() &#123;</div><div class="line">			try &#123;</div><div class="line">				System.out.println(&quot;1 begin 运行了！时间为：&quot; + new Date());</div><div class="line">				Thread.sleep(1000);</div><div class="line">				System.out.println(&quot;1   end 运行了！时间为：&quot; + new Date());</div><div class="line">				runCount++;</div><div class="line">				if (runCount == 5) &#123;</div><div class="line">					timer.cancel();</div><div class="line">				&#125;</div><div class="line">			&#125; catch (InterruptedException e) &#123;</div><div class="line">				e.printStackTrace();</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		try &#123;</div><div class="line">			MyTask1 task1 = new MyTask1();</div><div class="line">			SimpleDateFormat sdf1 = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);</div><div class="line">			String dateString1 = &quot;2017-11-14 13:43:16&quot;;</div><div class="line">			Date dateRef1 = sdf1.parse(dateString1);</div><div class="line">			System.out.println(&quot;字符串1时间：&quot; + dateRef1.toLocaleString() + &quot; 当前时间：&quot;</div><div class="line">					+ new Date().toLocaleString());</div><div class="line">			timer.schedule(task1, dateRef1, 3000);</div><div class="line">		&#125; catch (ParseException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>控制台打印的结果证明，在不延时的情况下，如果执行任务的时间没有被延迟时，则下一次执行任务的时间是上一次任务的开始时间加上delay时间。</p>
+<div align="center"><br><img src="/images/Thread/ti16.jpg" alt=""><br>图16 没有延时的运行效果</div>
 
-public static void main(String[] args) {
-    try {
-        MyTask1 task1 = new MyTask1();
-        SimpleDateFormat sdf1 = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);
-        String dateString1 = &quot;2017-11-14 13:43:16&quot;;
-        Date dateRef1 = sdf1.parse(dateString1);
-        System.out.println(&quot;字符串1时间：&quot; + dateRef1.toLocaleString() + &quot; 当前时间：&quot;
-                + new Date().toLocaleString());
-        timer.schedule(task1, dateRef1, 3000);
-    } catch (ParseException e) {
-        e.printStackTrace();
-    }
-}
-</code></pre><p>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">控制台打印的结果证明，在不延时的情况下，如果执行任务的时间没有被延迟时，则下一次执行任务的时间是上一次任务的开始时间加上delay时间。</div><div class="line">&lt;div align=center&gt;</div><div class="line">![](/images/Thread/ti16.jpg)</div><div class="line">图16 没有延时的运行效果&lt;/div&gt;</div><div class="line"></div><div class="line">2. 测试schedule方法任务超时</div><div class="line"></div><div class="line"></div><div class="line">**代码清单13 schedule方法任务超时**</div></pre></td></tr></table></figure></p>
-<p>public class Run2 {</p>
-<pre><code>private static Timer timer = new Timer();
-private static int runCount = 0;
+<ol>
+<li>测试schedule方法任务超时</li>
+</ol>
+<p><strong>代码清单13 schedule方法任务超时</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">public class Run2 &#123;</div><div class="line"></div><div class="line">	private static Timer timer = new Timer();</div><div class="line">	private static int runCount = 0;</div><div class="line"></div><div class="line">	static public class MyTask1 extends TimerTask &#123;</div><div class="line">		@Override</div><div class="line">		public void run() &#123;</div><div class="line">			try &#123;</div><div class="line">				System.out.println(&quot;1 begin 运行了！时间为：&quot; + new Date());</div><div class="line">				Thread.sleep(5000);</div><div class="line">				System.out.println(&quot;1   end 运行了！时间为：&quot; + new Date());</div><div class="line">				runCount++;</div><div class="line">				if (runCount == 5) &#123;</div><div class="line">					timer.cancel();</div><div class="line">				&#125;</div><div class="line">			&#125; catch (InterruptedException e) &#123;</div><div class="line">				e.printStackTrace();</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		try &#123;</div><div class="line">			MyTask1 task1 = new MyTask1();</div><div class="line">			SimpleDateFormat sdf1 = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);</div><div class="line">			String dateString1 = &quot;2017-11-14 14:42:10&quot;;</div><div class="line">			Date dateRef1 = sdf1.parse(dateString1);</div><div class="line">			System.out.println(&quot;字符串1时间：&quot; + dateRef1.toLocaleString() + &quot; 当前时间：&quot;</div><div class="line">					+ new Date().toLocaleString());</div><div class="line">			timer.schedule(task1, dateRef1, 2000);</div><div class="line">		&#125; catch (ParseException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>程序运行结果如图17所示，从控制台打印的结果来看，如果执行任务的时间被延迟时，那么下一次的执行时间以上一次“结束”时的时间为参数来计算。</p>
+<div align="center"><br><img src="/images/Thread/ti17.jpg" alt=""><br>图17 任务延时的效果</div>
 
-static public class MyTask1 extends TimerTask {
-    @Override
-    public void run() {
-        try {
-            System.out.println(&quot;1 begin 运行了！时间为：&quot; + new Date());
-            Thread.sleep(5000);
-            System.out.println(&quot;1   end 运行了！时间为：&quot; + new Date());
-            runCount++;
-            if (runCount == 5) {
-                timer.cancel();
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-}
+<ol>
+<li>测试scheduleAtFixedRate方法任务不延时</li>
+</ol>
+<p><strong>代码清单14 scheduleAtFixedRate方法任务不延时</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">public class Run3 &#123;</div><div class="line"></div><div class="line">	private static Timer timer = new Timer();</div><div class="line">	private static int runCount = 0;</div><div class="line"></div><div class="line">	static public class MyTask1 extends TimerTask &#123;</div><div class="line">		@Override</div><div class="line">		public void run() &#123;</div><div class="line">			try &#123;</div><div class="line">				System.out.println(&quot;1 begin 运行了！时间为：&quot; + new Date());</div><div class="line">				Thread.sleep(2000);</div><div class="line">				System.out.println(&quot;1   end 运行了！时间为：&quot; + new Date());</div><div class="line">				runCount++;</div><div class="line">				if (runCount == 5) &#123;</div><div class="line">					timer.cancel();</div><div class="line">				&#125;</div><div class="line">			&#125; catch (InterruptedException e) &#123;</div><div class="line">				e.printStackTrace();</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		try &#123;</div><div class="line">			MyTask1 task1 = new MyTask1();</div><div class="line">			SimpleDateFormat sdf1 = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);</div><div class="line">			String dateString1 = &quot;2017-11-14 14:48:21&quot;;</div><div class="line">			Date dateRef1 = sdf1.parse(dateString1);</div><div class="line">			System.out.println(&quot;字符串1时间：&quot; + dateRef1.toLocaleString() + &quot; 当前时间：&quot;</div><div class="line">					+ new Date().toLocaleString());</div><div class="line">			timer.scheduleAtFixedRate(task1, dateRef1, 3000);</div><div class="line">		&#125; catch (ParseException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>运行结果如图18所示，控制台打印的结果证明，如果执行任务的时间没有被延迟，则下一次执行任务的时间是上一次任务的开始时间加上delay时间。</p>
+<div align="center"><br><img src="/images/Thread/ti18.jpg" alt=""><br>图18 没有被延时的运行效果</div>
 
-public static void main(String[] args) {
-    try {
-        MyTask1 task1 = new MyTask1();
-        SimpleDateFormat sdf1 = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);
-        String dateString1 = &quot;2017-11-14 14:42:10&quot;;
-        Date dateRef1 = sdf1.parse(dateString1);
-        System.out.println(&quot;字符串1时间：&quot; + dateRef1.toLocaleString() + &quot; 当前时间：&quot;
-                + new Date().toLocaleString());
-        timer.schedule(task1, dateRef1, 2000);
-    } catch (ParseException e) {
-        e.printStackTrace();
-    }
-}
-</code></pre><p>}</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">程序运行结果如图17所示，从控制台打印的结果来看，如果执行任务的时间被延迟时，那么下一次的执行时间以上一次“结束”时的时间为参数来计算。</div><div class="line">&lt;div align=center&gt;</div><div class="line">![](/images/Thread/ti17.jpg)</div><div class="line">图17 任务延时的效果&lt;/div&gt;</div><div class="line"></div><div class="line">3. 测试scheduleAtFixedRate方法任务不延时</div><div class="line"></div><div class="line">**代码清单14 scheduleAtFixedRate方法任务不延时**</div></pre></td></tr></table></figure>
-<p>public class Run3 {</p>
-<pre><code>private static Timer timer = new Timer();
-private static int runCount = 0;
+<ol>
+<li>测试scheduleAtFixedRate方法任务超时</li>
+</ol>
+<p><strong>代码清单15 scheduleAtFixedRate方法任务超时</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">public class Run4 &#123;</div><div class="line"></div><div class="line">	private static Timer timer = new Timer();</div><div class="line">	private static int runCount = 0;</div><div class="line"></div><div class="line">	static public class MyTask1 extends TimerTask &#123;</div><div class="line">		@Override</div><div class="line">		public void run() &#123;</div><div class="line">			try &#123;</div><div class="line">				System.out.println(&quot;1 begin 运行了！时间为：&quot; + new Date());</div><div class="line">				Thread.sleep(5000);</div><div class="line">				System.out.println(&quot;1   end 运行了！时间为：&quot; + new Date());</div><div class="line">				runCount++;</div><div class="line">				if (runCount == 5) &#123;</div><div class="line">					timer.cancel();</div><div class="line">				&#125;</div><div class="line">			&#125; catch (InterruptedException e) &#123;</div><div class="line">				e.printStackTrace();</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		try &#123;</div><div class="line">			MyTask1 task1 = new MyTask1();</div><div class="line">			SimpleDateFormat sdf1 = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);</div><div class="line">			String dateString1 = &quot;2017-11-14 15:01:06&quot;;</div><div class="line">			Date dateRef1 = sdf1.parse(dateString1);</div><div class="line">			System.out.println(&quot;字符串1时间：&quot; + dateRef1.toLocaleString() + &quot; 当前时间：&quot;</div><div class="line">					+ new Date().toLocaleString());</div><div class="line">			timer.scheduleAtFixedRate(task1, dateRef1, 2000);</div><div class="line">		&#125; catch (ParseException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>运行结果如图19所示，如果执行任务的时间被延迟，那么下一次任务的执行时间以上一次任务“结束”时的时间为参考来计算。</p>
+<div align="center"><br><img src="/images/Thread/ti19.jpg" alt=""><br>图19 任务延时的运行效果</div>
 
-static public class MyTask1 extends TimerTask {
-    @Override
-    public void run() {
-        try {
-            System.out.println(&quot;1 begin 运行了！时间为：&quot; + new Date());
-            Thread.sleep(2000);
-            System.out.println(&quot;1   end 运行了！时间为：&quot; + new Date());
-            runCount++;
-            if (runCount == 5) {
-                timer.cancel();
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-}
+<ol>
+<li>验证schedule方法不具有追赶执行性</li>
+</ol>
+<p><strong>代码清单16 schedule方法不具有追赶执行性</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">public class Run5 &#123;</div><div class="line"></div><div class="line">	private static Timer timer = new Timer();</div><div class="line"></div><div class="line">	static public class MyTask1 extends TimerTask &#123;</div><div class="line">		@Override</div><div class="line">		public void run() &#123;</div><div class="line">				System.out.println(&quot;1 begin 运行了！时间为：&quot; + new Date());</div><div class="line">				System.out.println(&quot;1   end 运行了！时间为：&quot; + new Date());</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		try &#123;</div><div class="line">			MyTask1 task1 = new MyTask1();</div><div class="line">			SimpleDateFormat sdf1 = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);</div><div class="line">			String dateString1 = &quot;2017-11-14 15:13:43&quot;;</div><div class="line">			Date dateRef1 = sdf1.parse(dateString1);</div><div class="line">			System.out.println(&quot;字符串1时间：&quot; + dateRef1.toLocaleString() + &quot; 当前时间：&quot;</div><div class="line">					+ new Date().toLocaleString());</div><div class="line">			timer.schedule(task1, dateRef1, 5000);</div><div class="line">		&#125; catch (ParseException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>运行结果如图20所示，时间“2017-11-14 15:13:43”到“2017-11-14 15:16:06”之间的时间所对应的Task任务被取消了，不执行了。这就是Task不追赶的情况。</p>
+<div align="center"><br><img src="/images/Thread/ti20.jpg" alt=""><br>图20 不追赶的情况</div>
 
-public static void main(String[] args) {
-    try {
-        MyTask1 task1 = new MyTask1();
-        SimpleDateFormat sdf1 = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);
-        String dateString1 = &quot;2017-11-14 14:48:21&quot;;
-        Date dateRef1 = sdf1.parse(dateString1);
-        System.out.println(&quot;字符串1时间：&quot; + dateRef1.toLocaleString() + &quot; 当前时间：&quot;
-                + new Date().toLocaleString());
-        timer.scheduleAtFixedRate(task1, dateRef1, 3000);
-    } catch (ParseException e) {
-        e.printStackTrace();
-    }
-}
-</code></pre><p>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">运行结果如图18所示，控制台打印的结果证明，如果执行任务的时间没有被延迟，则下一次执行任务的时间是上一次任务的开始时间加上delay时间。</div><div class="line">&lt;div align=center&gt;</div><div class="line">![](/images/Thread/ti18.jpg)</div><div class="line">图18 没有被延时的运行效果&lt;/div&gt;</div><div class="line"></div><div class="line">4. 测试scheduleAtFixedRate方法任务超时</div><div class="line"></div><div class="line">**代码清单15 scheduleAtFixedRate方法任务超时**</div></pre></td></tr></table></figure></p>
-<p>public class Run4 {</p>
-<pre><code>private static Timer timer = new Timer();
-private static int runCount = 0;
-
-static public class MyTask1 extends TimerTask {
-    @Override
-    public void run() {
-        try {
-            System.out.println(&quot;1 begin 运行了！时间为：&quot; + new Date());
-            Thread.sleep(5000);
-            System.out.println(&quot;1   end 运行了！时间为：&quot; + new Date());
-            runCount++;
-            if (runCount == 5) {
-                timer.cancel();
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-}
-
-public static void main(String[] args) {
-    try {
-        MyTask1 task1 = new MyTask1();
-        SimpleDateFormat sdf1 = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);
-        String dateString1 = &quot;2017-11-14 15:01:06&quot;;
-        Date dateRef1 = sdf1.parse(dateString1);
-        System.out.println(&quot;字符串1时间：&quot; + dateRef1.toLocaleString() + &quot; 当前时间：&quot;
-                + new Date().toLocaleString());
-        timer.scheduleAtFixedRate(task1, dateRef1, 2000);
-    } catch (ParseException e) {
-        e.printStackTrace();
-    }
-}
-</code></pre><p>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">运行结果如图19所示，如果执行任务的时间被延迟，那么下一次任务的执行时间以上一次任务“结束”时的时间为参考来计算。</div><div class="line">&lt;div align=center&gt;</div><div class="line">![](/images/Thread/ti19.jpg)</div><div class="line">图19 任务延时的运行效果&lt;/div&gt;</div><div class="line"></div><div class="line">5. 验证schedule方法不具有追赶执行性</div><div class="line"></div><div class="line">**代码清单16 schedule方法不具有追赶执行性**</div></pre></td></tr></table></figure></p>
-<p>public class Run5 {</p>
-<pre><code>private static Timer timer = new Timer();
-
-static public class MyTask1 extends TimerTask {
-    @Override
-    public void run() {
-            System.out.println(&quot;1 begin 运行了！时间为：&quot; + new Date());
-            System.out.println(&quot;1   end 运行了！时间为：&quot; + new Date());
-    }
-}
-
-public static void main(String[] args) {
-    try {
-        MyTask1 task1 = new MyTask1();
-        SimpleDateFormat sdf1 = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);
-        String dateString1 = &quot;2017-11-14 15:13:43&quot;;
-        Date dateRef1 = sdf1.parse(dateString1);
-        System.out.println(&quot;字符串1时间：&quot; + dateRef1.toLocaleString() + &quot; 当前时间：&quot;
-                + new Date().toLocaleString());
-        timer.schedule(task1, dateRef1, 5000);
-    } catch (ParseException e) {
-        e.printStackTrace();
-    }
-}
-</code></pre><p>}</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">运行结果如图20所示，时间“2017-11-14 15:13:43”到“2017-11-14 15:16:06”之间的时间所对应的Task任务被取消了，不执行了。这就是Task不追赶的情况。</div><div class="line">&lt;div align=center&gt;</div><div class="line">![](/images/Thread/ti20.jpg)</div><div class="line">图20 不追赶的情况&lt;/div&gt;</div><div class="line"></div><div class="line">6. 验证scheduleAtFixedRate方法具有追赶执行性</div><div class="line">**代码清单17 scheduleAtFixedRate方法具有追赶执行性**</div></pre></td></tr></table></figure>
-<p>public class Run6 {<br>    private static Timer timer = new Timer();</p>
-<pre><code>static public class MyTask1 extends TimerTask {
-    @Override
-    public void run() {
-            System.out.println(&quot;1 begin 运行了！时间为：&quot; + new Date());
-            System.out.println(&quot;1   end 运行了！时间为：&quot; + new Date());
-    }
-}
-
-public static void main(String[] args) {
-    try {
-        MyTask1 task1 = new MyTask1();
-        SimpleDateFormat sdf1 = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);
-        String dateString1 = &quot;2017-11-14 15:20:59&quot;;
-        Date dateRef1 = sdf1.parse(dateString1);
-        System.out.println(&quot;字符串1时间：&quot; + dateRef1.toLocaleString() + &quot; 当前时间：&quot;
-                + new Date().toLocaleString());
-        timer.scheduleAtFixedRate(task1, dateRef1, 5000);
-    } catch (ParseException e) {
-        e.printStackTrace();
-    }
-}
-</code></pre><p>}<br>```</p>
+<ol>
+<li>验证scheduleAtFixedRate方法具有追赶执行性<br><strong>代码清单17 scheduleAtFixedRate方法具有追赶执行性</strong><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">public class Run6 &#123;</div><div class="line">	private static Timer timer = new Timer();</div><div class="line"></div><div class="line">	static public class MyTask1 extends TimerTask &#123;</div><div class="line">		@Override</div><div class="line">		public void run() &#123;</div><div class="line">				System.out.println(&quot;1 begin 运行了！时间为：&quot; + new Date());</div><div class="line">				System.out.println(&quot;1   end 运行了！时间为：&quot; + new Date());</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		try &#123;</div><div class="line">			MyTask1 task1 = new MyTask1();</div><div class="line">			SimpleDateFormat sdf1 = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);</div><div class="line">			String dateString1 = &quot;2017-11-14 15:20:59&quot;;</div><div class="line">			Date dateRef1 = sdf1.parse(dateString1);</div><div class="line">			System.out.println(&quot;字符串1时间：&quot; + dateRef1.toLocaleString() + &quot; 当前时间：&quot;</div><div class="line">					+ new Date().toLocaleString());</div><div class="line">			timer.scheduleAtFixedRate(task1, dateRef1, 5000);</div><div class="line">		&#125; catch (ParseException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
 <p>运行结果如图21所示，两个时间段内所对应的Task被“补充性”执行了，这就是Task任务追赶执行的特性。</p>
 <div align="center"><br><img src="/images/Thread/ti21.jpg" alt=""><br>图21 追赶的情况</div>
 
@@ -883,7 +735,7 @@ public static void main(String[] args) {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#定时器Timer的使用"><span class="nav-number">1.</span> <span class="nav-text">定时器Timer的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法schedule-TimerTask-task，Date-time-的测试"><span class="nav-number">2.</span> <span class="nav-text">方法schedule(TimerTask task，Date time)的测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法schedule-TimerTask-task，Date-time，long-period-的测试"><span class="nav-number">3.</span> <span class="nav-text">方法schedule(TimerTask task，Date time，long period)的测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法schedule-TimerTask-task-long-delay-的测试"><span class="nav-number">4.</span> <span class="nav-text">方法schedule(TimerTask task,long delay)的测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法schedule-TimerTask-task-long-delay，long-period-的测试"><span class="nav-number">5.</span> <span class="nav-text">方法schedule(TimerTask task,long delay，long period)的测试</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#定时器Timer的使用"><span class="nav-number">1.</span> <span class="nav-text">定时器Timer的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法schedule-TimerTask-task，Date-time-的测试"><span class="nav-number">2.</span> <span class="nav-text">方法schedule(TimerTask task，Date time)的测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法schedule-TimerTask-task，Date-time，long-period-的测试"><span class="nav-number">3.</span> <span class="nav-text">方法schedule(TimerTask task，Date time，long period)的测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法schedule-TimerTask-task-long-delay-的测试"><span class="nav-number">4.</span> <span class="nav-text">方法schedule(TimerTask task,long delay)的测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法schedule-TimerTask-task-long-delay，long-period-的测试"><span class="nav-number">5.</span> <span class="nav-text">方法schedule(TimerTask task,long delay，long period)的测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法scheduleAtFixedRate-TimerTask-task-Date-firstTime-long-period-的测试"><span class="nav-number">6.</span> <span class="nav-text">方法scheduleAtFixedRate(TimerTask task,Date firstTime,long period)的测试</span></a></li></ol></div>
             
 
           </div>
